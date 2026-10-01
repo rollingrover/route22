@@ -17,7 +17,11 @@ import {
   setListingSites,
   setListingCompany,
   setLeadStatus,
+  createListing,
+  importListings,
 } from "./actions";
+import { LISTING_CATEGORIES, LISTING_TIERS } from "@/lib/listing-input";
+import { categoryLabel } from "@/lib/data";
 import { T } from "@/lib/tables";
 import { SITE_ID } from "@/lib/site";
 
@@ -48,7 +52,11 @@ async function fetchAll(table: string, orderCol = "created_at") {
   return (data ?? []) as Row[];
 }
 
-export default async function AdminPage() {
+export default async function AdminPage({
+  searchParams,
+}: {
+  searchParams: { msg?: string; err?: string };
+}) {
   if (!isAdminAuthenticated()) redirect("/admin/login");
 
   const supabase = getServiceSupabase();
@@ -117,6 +125,19 @@ export default async function AdminPage() {
         </form>
       </div>
 
+      {(searchParams.msg || searchParams.err) && (
+        <div
+          role="status"
+          className={`mb-6 rounded-xl border px-4 py-3 text-[0.9rem] font-semibold ${
+            searchParams.err
+              ? "border-clay-dk bg-[#fff1ec] text-clay-dk"
+              : "border-bush bg-[#eef6ee] text-bush"
+          }`}
+        >
+          {searchParams.err ?? searchParams.msg}
+        </div>
+      )}
+
       {!configured && (
         <div className="mb-8 rounded-xl border border-dashed border-clay bg-[#fff6e9] px-4 py-3 text-[0.9rem] text-ink-soft">
           Supabase isn&apos;t configured yet (no <code>NEXT_PUBLIC_SUPABASE_URL</code> /{" "}
@@ -183,7 +204,17 @@ export default async function AdminPage() {
         </div>
       </Section>
 
-      <Section title="Listings" subtitle="Publish, change tier, set partner attribution, or remove.">
+      <Section
+        title="Add listings"
+        subtitle="Add one business by hand, or import many from a spreadsheet saved as CSV. Only use public business details."
+      >
+        <div id="add-listing" className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
+          <AddListingForm />
+          <ImportListingsForm />
+        </div>
+      </Section>
+
+      <Section title="Listings" subtitle="Publish, change tier, set which sites show it, link to OpDesk, or remove.">
         {listings.length === 0 && <Empty text="No listings yet." />}
         <RowTable
           rows={listingRows}
@@ -623,5 +654,142 @@ function LeadTable({ rows }: { rows: Row[] }) {
         </tbody>
       </table>
     </div>
+  );
+}
+
+const inputCls =
+  "rounded-[10px] border border-line bg-paper px-2.5 py-2 font-sans text-[0.88rem] text-ink focus:border-clay focus:outline focus:outline-2 focus:outline-clay";
+const labelCls = "flex flex-col gap-1 text-[0.8rem] font-semibold text-ink-soft";
+
+function AddListingForm() {
+  return (
+    <form action={createListing} className="rounded-xl2 border border-line bg-paper p-5">
+      <h3 className="mb-3 text-[1.05rem]">Add one listing</h3>
+      <div className="grid gap-3 sm:grid-cols-2">
+        <label className={labelCls}>
+          Business name *
+          <input name="name" required maxLength={150} className={inputCls} />
+        </label>
+        <label className={labelCls}>
+          Category *
+          <select name="category" required defaultValue="stay" className={inputCls}>
+            {LISTING_CATEGORIES.map((c) => (
+              <option key={c} value={c}>
+                {categoryLabel[c]}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className={labelCls}>
+          Town
+          <input name="town" placeholder="Hluhluwe" className={inputCls} />
+        </label>
+        <label className={labelCls}>
+          Province
+          <input name="province" defaultValue="KwaZulu-Natal" className={inputCls} />
+        </label>
+        <label className={`${labelCls} sm:col-span-2`}>
+          Short summary (one line for cards)
+          <input name="summary" maxLength={300} className={inputCls} />
+        </label>
+        <label className={`${labelCls} sm:col-span-2`}>
+          Description
+          <textarea name="description" rows={3} maxLength={4000} className={inputCls} />
+        </label>
+        <label className={labelCls}>
+          Phone
+          <input name="phone" className={inputCls} />
+        </label>
+        <label className={labelCls}>
+          WhatsApp
+          <input name="whatsapp" className={inputCls} />
+        </label>
+        <label className={labelCls}>
+          Business email (gets guest enquiries)
+          <input name="email" type="email" className={inputCls} />
+        </label>
+        <label className={labelCls}>
+          Website
+          <input name="website_url" placeholder="www.example.co.za" className={inputCls} />
+        </label>
+        <label className={labelCls}>
+          Photo URL
+          <input name="photo_url" placeholder="https://…" className={inputCls} />
+        </label>
+        <label className={labelCls}>
+          Price from (R)
+          <input name="price_from" inputMode="decimal" className={inputCls} />
+        </label>
+        <label className={labelCls}>
+          Latitude
+          <input name="lat" inputMode="decimal" placeholder="-28.03" className={inputCls} />
+        </label>
+        <label className={labelCls}>
+          Longitude
+          <input name="lng" inputMode="decimal" placeholder="32.27" className={inputCls} />
+        </label>
+        <label className={labelCls}>
+          Tier
+          <select name="tier" defaultValue="community" className={inputCls}>
+            {LISTING_TIERS.map((t) => (
+              <option key={t} value={t}>
+                {t}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className={labelCls}>
+          Show on
+          <select name="sites" defaultValue="both" className={inputCls}>
+            <option value="both">Both sites</option>
+            <option value="zatours">ZAtours only</option>
+            <option value="route22">Route22 only</option>
+          </select>
+        </label>
+      </div>
+      <label className="mt-3 flex items-center gap-2 text-[0.85rem] text-ink-soft">
+        <input type="checkbox" name="published" value="yes" defaultChecked className="h-4 w-4 accent-clay" />
+        Publish immediately
+      </label>
+      <button
+        type="submit"
+        className="mt-4 rounded-full bg-clay px-5 py-2.5 font-semibold text-white hover:bg-clay-dk"
+      >
+        Add listing
+      </button>
+    </form>
+  );
+}
+
+function ImportListingsForm() {
+  return (
+    <form action={importListings} className="rounded-xl2 border border-line bg-sand p-5">
+      <h3 className="mb-2 text-[1.05rem]">Import from CSV</h3>
+      <ol className="mb-4 list-decimal pl-5 text-[0.85rem] leading-relaxed text-ink-soft">
+        <li>
+          Download the{" "}
+          <a href="/listing-import-template.csv" download className="font-semibold text-clay underline">
+            CSV template
+          </a>{" "}
+          and fill it in (Excel or Google Sheets).
+        </li>
+        <li>Only name and category are required. Category is one of: {LISTING_CATEGORIES.join(", ")}.</li>
+        <li>Sites: both, zatours or route22. Tier defaults to community. Published defaults to yes.</li>
+        <li>Save as CSV and upload. Re-uploading the same sheet updates those listings rather than duplicating them.</li>
+      </ol>
+      <input
+        type="file"
+        name="file"
+        accept=".csv,text/csv"
+        required
+        className="mb-4 block w-full text-[0.85rem] text-ink-soft file:mr-3 file:rounded-full file:border-0 file:bg-bush file:px-4 file:py-2 file:font-semibold file:text-white"
+      />
+      <button
+        type="submit"
+        className="rounded-full bg-bush px-5 py-2.5 font-semibold text-white hover:bg-bush-dk"
+      >
+        Import listings
+      </button>
+    </form>
   );
 }

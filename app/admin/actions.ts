@@ -9,6 +9,7 @@ import { ADMIN_COOKIE_NAME, createSessionToken, isAdminAuthenticated } from "@/l
 import { generateToken } from "@/lib/tokens";
 import { absoluteUrl, SITE_ID } from "@/lib/site";
 import { T } from "@/lib/tables";
+import { baseSlug, parseCsv, parseListing, type ListingInsert } from "@/lib/listing-input";
 
 // Logical names used in the admin forms -> physical dir_* tables.
 const TABLE_MAP = {
@@ -339,4 +340,102 @@ export async function setLeadStatus(formData: FormData) {
   if (!supabase) return;
   await supabase.from(T.businessEnquiries).update({ status }).eq("id", id);
   revalidatePath("/admin");
+}
+
+// ---------- Adding listings ----------
+
+function back(kind: "msg" | "err", text: string): never {
+  redirect(`/admin?${kind}=${encodeURIComponent(text)}#add-listing`);
+}
+
+// Add one listing by hand. If the slug is taken, a numeric suffix is added
+// rather than overwriting the existing listing.
+export async function createListing(formData: FormData) {
+  requireAdmin();
+  const raw: Record<string, unknown> = Object.fromEntries(formData.entries());
+  // An unticked checkbox sends nothing, so read it explicitly.
+  raw.published = formData.get("published") ? "yes" : "no";
+  const parsed = parseListing(raw);
+  if (!parsed.ok) back("err", `Not saved: ${parsed.error}.`);
+
+  const supabase = getServiceSupabase();
+  if (!supabase) back("err", "Supabase isn't configured.");
+
+  const row = parsed.row;
+  const { data: taken } = await supabase
+    .from(T.listings)
+    .select("slug")
+    .like("slug", `${row.slug}%`);
+  const used = new Set((taken ?? []).map((t) => t.slug as string));
+  let slug = row.slug;
+  for (let n = 2; used.has(slug); n++) slug = `${row.slug}-${n}`;
+
+  const { error } = await supabase.from(T.listings).insert({ ...row, slug });
+  if (error) back("err", `Not saved: ${error.message}`);
+
+  revalidatePath("/admin");
+  revalidatePath("/");
+  back("msg", `Added "${row.name}" (/listings/${slug}).`);
+}
+
+// Bulk import from CSV. Rows are matched on slug (derived from the name when
+// the slug column is empty), so re-importing an edited sheet updates those
+// listings instead of duplicating them. OpDesk links, claims and billing are
+// never touched by an import.
+export async function importListings(formData: FormData) {
+  requireAdmin();
+  const file = formData.get("file");
+  if (!(file instanceof File) || file.size === 0) back("err", "Choose a CSV file first.");
+  if (file.size > 2_000_000) back("err", "That file is over 2 MB; split it into smaller files.");
+
+  const rows = parseCsv(await file.text());
+  if (rows.length < 2) back("err", "The CSV has no data rows.");
+
+  const header = rows[0].map((h) => h.trim().toLowerCase());
+  if (!header.includes("name") || !header.includes("category")) {
+    back("err", "The first row must be the header, including name and category columns.");
+  }
+  if (rows.length - 1 > 1000) back("err", "Max 1000 listings per import; split the file.");
+
+  const good: ListingInsert[] = [];
+  const problems: string[] = [];
+  const seen = new Map<string, number>();
+
+  rows.slice(1).forEach((cells, i) => {
+    const rec: Record<string, string> = {};
+    header.forEach((h, j) => (rec[h] = cells[j] ?? ""));
+    const parsed = parseListing(rec);
+    if (!parsed.ok) {
+      problems.push(`row ${i + 2}: ${parsed.error}`);
+      return;
+    }
+    // Two different businesses with the same name in one sheet: tell them
+    // apart by town so the second doesn't overwrite the first.
+    let slug = parsed.row.slug;
+    if (seen.has(slug) && !rec.slug?.trim()) {
+      slug = baseSlug(`${parsed.row.name} ${parsed.row.town ?? ""}`);
+      for (let n = 2; seen.has(slug); n++) slug = `${baseSlug(parsed.row.name)}-${n}`;
+    }
+    if (seen.has(slug)) {
+      problems.push(`row ${i + 2}: duplicate slug "${slug}" (same as row ${seen.get(slug)})`);
+      return;
+    }
+    seen.set(slug, i + 2);
+    good.push({ ...parsed.row, slug });
+  });
+
+  if (good.length === 0) back("err", `Nothing imported. ${problems.slice(0, 5).join("; ")}`);
+
+  const supabase = getServiceSupabase();
+  if (!supabase) back("err", "Supabase isn't configured.");
+
+  const { error } = await supabase.from(T.listings).upsert(good, { onConflict: "slug" });
+  if (error) back("err", `Import failed, nothing saved: ${error.message}`);
+
+  revalidatePath("/admin");
+  revalidatePath("/");
+  const skipped = problems.length
+    ? ` Skipped ${problems.length}: ${problems.slice(0, 5).join("; ")}${problems.length > 5 ? "…" : ""}`
+    : "";
+  back("msg", `Imported ${good.length} listing${good.length === 1 ? "" : "s"}.${skipped}`);
 }
