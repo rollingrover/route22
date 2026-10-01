@@ -29,24 +29,26 @@
   --heading-tracking: normal;
 }
 
-/* ZAtours: national directory — clean navy/green on cool white, sans headings. */
+/* ZAtours: national directory — "dusk savanna": deep dusk navy + sunset
+   ochre/amber taken from the original ZAtours artwork, warm off-white,
+   heavy sans headings. Distinct from Route22's bush green and Georgia serif. */
 html[data-site="zatours"] {
-  --c-ink: 15 27 45;
-  --c-ink-soft: 71 84 103;
-  --c-sand: 245 247 250;
-  --c-sand-2: 232 237 243;
+  --c-ink: 28 25 23;
+  --c-ink-soft: 87 83 78;
+  --c-sand: 250 247 242;
+  --c-sand-2: 241 235 225;
   --c-paper: 255 255 255;
-  --c-bush: 20 48 107;
-  --c-bush-dk: 12 33 80;
-  --c-clay: 10 122 82;
-  --c-clay-dk: 7 94 63;
+  --c-bush: 31 42 68;
+  --c-bush-dk: 20 28 48;
+  --c-clay: 194 65 12;
+  --c-clay-dk: 154 52 18;
   --c-ocean: 14 116 144;
-  --c-line: 221 227 234;
-  --c-gold: 242 183 5;
-  --c-foot: 10 20 38;
-  --c-foot-text: 196 207 222;
-  --c-foot-line: 30 44 68;
-  --shadow-rgb: 15, 27, 45;
+  --c-line: 231 223 210;
+  --c-gold: 245 158 11;
+  --c-foot: 17 22 36;
+  --c-foot-text: 214 206 194;
+  --c-foot-line: 42 48 66;
+  --shadow-rgb: 28, 25, 23;
   --font-heading: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
     Arial, sans-serif;
   --heading-weight: 800;
@@ -69,6 +71,15 @@ h1, h2, h3, h4 {
   font-weight: var(--heading-weight);
   letter-spacing: var(--heading-tracking);
   line-height: 1.15;
+}
+
+/* Default heading sizes (Tailwind's preflight resets them to body size, so
+   section <h2>s without a size class were rendering like bold body text).
+   In @layer base so any text-[…] class on a heading still wins. */
+@layer base {
+  h1 { font-size: clamp(2rem, 5vw, 3rem); }
+  h2 { font-size: clamp(1.55rem, 3.4vw, 2.15rem); margin-bottom: 0.4em; }
+  h3 { font-size: 1.2rem; }
 }
 
 /* Ensure Leaflet controls sit below the sticky header */

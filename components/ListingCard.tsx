@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { categoryHue, categoryLabel, isFreeTier, Listing, partnerBadge } from "@/lib/data";
 import OwnerLink from "./OwnerLink";
+import { IS_ZATOURS } from "@/lib/site";
+import { ZA_CATEGORY_ICON } from "@/lib/za-assets";
 
 // Card for listings that have their own page (basic / premium / featured).
 // Free (basic) cards get a quiet owner link under the card body — outside the
@@ -22,13 +24,27 @@ export function ListingCard({ l, showProvince = false }: { l: Listing; showProvi
     >
       <Link href={`/listings/${l.slug}`} className="flex flex-1 flex-col no-underline">
         <div
-          className={`relative h-[140px] bg-gradient-to-br ${categoryHue[l.category]}`}
+          className={`relative h-[140px] bg-gradient-to-br ${
+            IS_ZATOURS && !l.photoUrl ? "from-sand-2 to-[#e9dcc6]" : categoryHue[l.category]
+          }`}
           style={
             l.photoUrl
               ? { backgroundImage: `url(${l.photoUrl})`, backgroundSize: "cover", backgroundPosition: "center" }
               : undefined
           }
         >
+          {IS_ZATOURS && !l.photoUrl && ZA_CATEGORY_ICON[l.category] && (
+            // No photo yet: show the category artwork instead of a bare gradient.
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={ZA_CATEGORY_ICON[l.category]}
+              alt=""
+              width={96}
+              height={96}
+              loading="lazy"
+              className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 drop-shadow-lg"
+            />
+          )}
           {l.tier !== "basic" && (
             <span
               className={`absolute left-2.5 top-2.5 rounded-full px-2.5 py-1 text-[0.68rem] font-bold uppercase tracking-wide text-white ${

@@ -3,6 +3,7 @@ import ZaDirectory from "./ZaDirectory";
 import { ListingCard } from "./ListingCard";
 import { Listing } from "@/lib/data";
 import { ROUTE22_URL } from "@/lib/site";
+import { ZA_HERO } from "@/lib/za-assets";
 import { formatZAR, pricing } from "@/lib/pricing";
 
 // ZAtours home page — national directory. Shares data, cards and the lead
@@ -14,30 +15,31 @@ export default function ZaHome({ listings, isExample }: { listings: Listing[]; i
 
   return (
     <>
-      <section
-        className="relative overflow-hidden text-white"
-        style={{
-          background:
-            "radial-gradient(circle at 85% 15%, rgba(242,183,5,0.28), transparent 45%), linear-gradient(135deg, #14306b 0%, #0c2150 55%, #0a3a4a 100%)",
-        }}
-      >
-        <svg
+      <section className="relative isolate overflow-hidden bg-bush-dk text-white">
+        {/* Sunset Big Five artwork (original ZAtours brand art, text-free crop). */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={ZA_HERO}
+          alt=""
+          fetchPriority="high"
+          className="absolute inset-0 -z-10 h-full w-full object-cover object-bottom"
+        />
+        <div
           aria-hidden="true"
-          viewBox="0 0 1440 160"
-          preserveAspectRatio="none"
-          className="absolute bottom-0 left-0 h-[90px] w-full"
-        >
-          <path d="M0 110c180-50 360-70 560-40s420 50 620 0 260-40 260-40v130H0z" fill="rgb(var(--c-clay))" opacity="0.9" />
-          <path d="M0 130c220-30 420-30 640-10s420 30 600-10 200-20 200-20v70H0z" fill="rgb(var(--c-sand))" />
-        </svg>
-        <div className="relative mx-auto max-w-[1120px] px-5 pb-36 pt-20">
+          className="absolute inset-0 -z-10"
+          style={{
+            background:
+              "linear-gradient(90deg, rgba(20,28,48,0.88) 0%, rgba(20,28,48,0.55) 42%, rgba(20,28,48,0) 75%), linear-gradient(0deg, rgba(20,28,48,0.55) 0%, transparent 35%)",
+          }}
+        />
+        <div className="relative mx-auto max-w-[1120px] px-5 pb-16 pt-16 md:pb-24 md:pt-20">
           <p className="mb-3 text-[0.72rem] font-semibold uppercase tracking-[3px] text-gold">
             South Africa&apos;s tourism directory
           </p>
           <h1 className="mb-4 max-w-[17ch] text-[clamp(2.2rem,6vw,3.8rem)] text-white">
             Find where to stay and what to do across South Africa.
           </h1>
-          <p className="max-w-[58ch] text-[clamp(1rem,2.2vw,1.15rem)] text-white/85">
+          <p className="max-w-[56ch] text-[clamp(1rem,2.2vw,1.15rem)] text-white/85">
             Lodges, guesthouses, safaris, tours and transfers — listed by the businesses that run
             them. Enquire directly; ZAtours is a directory, not a tour operator.
           </p>
@@ -56,7 +58,7 @@ export default function ZaHome({ listings, isExample }: { listings: Listing[]; i
             </a>
           </div>
           {real.length > 0 && (
-            <p className="mt-8 text-[0.85rem] text-white/70">
+            <p className="mt-8 text-[0.85rem] text-white/75">
               {real.length} {real.length === 1 ? "business" : "businesses"} listed
               {provinces > 1 ? ` across ${provinces} provinces` : ""}
             </p>

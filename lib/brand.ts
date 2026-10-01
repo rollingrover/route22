@@ -120,8 +120,9 @@ const zatours: Brand = {
       .filter(Boolean)
       .join(" · ") + " · South Africa",
   moreHeading: "More nearby",
-  icon: "/zatours-icon.svg",
-  themeColor: "#14306b",
+  icon: "/zatours-icon.png",
+  appleIcon: "/zatours-apple-icon.png",
+  themeColor: "#1f2a44",
 };
 
 export const BRAND: Brand = SITE_ID === "zatours" ? zatours : route22;

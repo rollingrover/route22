@@ -7,7 +7,9 @@ import type { Config } from "tailwindcss";
 const v = (name: string) => `rgb(var(--c-${name}) / <alpha-value>)`;
 
 const config: Config = {
-  content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
+  // lib/ is included because lib/data.ts holds the categoryHue gradient classes
+  // (from-clay/70 …); without it some card/hero gradients were purged.
+  content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./lib/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {

@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { Category, categoryLabel, Listing } from "@/lib/data";
 import { CommunityCard, ListingCard } from "./ListingCard";
+import { ZA_CATEGORY_ICON } from "@/lib/za-assets";
 
 // ZAtours national directory: search + category + province filters, all
 // client-side over the server-rendered list (full list is in the HTML for SEO).
@@ -46,11 +47,6 @@ export default function ZaDirectory({
 
   const full = filtered.filter((l) => l.tier !== "community");
   const community = filtered.filter((l) => l.tier === "community");
-
-  const chip = (active: boolean) =>
-    `rounded-full border px-4 py-2 text-[0.88rem] font-medium transition ${
-      active ? "border-bush bg-bush text-white" : "border-line bg-paper text-ink-soft hover:border-bush"
-    }`;
 
   return (
     <section id="directory" className="scroll-mt-20 py-16">
@@ -107,16 +103,39 @@ export default function ZaDirectory({
           )}
         </div>
 
-        <div className="mb-6 flex flex-wrap gap-2.5">
-          <button onClick={() => setCat("all")} className={chip(cat === "all")}>
-            All
-          </button>
-          {categories.map((c) => (
-            <button key={c.key} onClick={() => setCat(c.key)} className={chip(cat === c.key)}>
-              {c.label} <span className="opacity-70">({c.count})</span>
-            </button>
-          ))}
+        <div className="mb-8 grid grid-cols-[repeat(auto-fill,minmax(120px,1fr))] gap-3">
+          {categories.map((c) => {
+            const on = cat === c.key;
+            const icon = ZA_CATEGORY_ICON[c.key];
+            return (
+              <button
+                key={c.key}
+                onClick={() => setCat(on ? "all" : c.key)}
+                aria-pressed={on}
+                className={`flex flex-col items-center gap-1.5 rounded-xl2 border p-3 text-center transition ${
+                  on
+                    ? "border-clay bg-paper shadow-card ring-2 ring-clay"
+                    : "border-line bg-paper hover:-translate-y-0.5 hover:border-clay hover:shadow-card"
+                }`}
+              >
+                {icon && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={icon} alt="" width={64} height={64} loading="lazy" className="h-16 w-16" />
+                )}
+                <span className="text-[0.85rem] font-semibold leading-tight text-ink">{c.label}</span>
+                <span className="text-[0.75rem] text-ink-soft">{c.count}</span>
+              </button>
+            );
+          })}
         </div>
+        {cat !== "all" && (
+          <p className="-mt-4 mb-6 text-[0.85rem] text-ink-soft">
+            Showing {categoryLabel[cat]} ·{" "}
+            <button onClick={() => setCat("all")} className="font-semibold text-clay underline">
+              show all
+            </button>
+          </p>
+        )}
 
         {filtered.length === 0 ? (
           <p className="rounded-xl2 border border-line bg-paper p-6 text-ink-soft">

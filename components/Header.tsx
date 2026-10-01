@@ -37,17 +37,22 @@ export default function Header() {
         )}
       </Link>
 
+      {/* Route22 has 8 nav links, so it collapses to the menu below xl;
+          ZAtours (3 links) only below md. Class strings are static so
+          Tailwind keeps them. */}
       <nav
-        className={`${
-          open ? "flex" : "hidden"
-        } absolute left-0 right-0 top-[60px] flex-col gap-4 border-b border-line bg-paper px-5 py-4 md:static md:flex md:flex-row md:items-center md:gap-6 md:border-0 md:bg-transparent md:p-0`}
+        className={`${open ? "flex" : "hidden"} absolute left-0 right-0 top-[60px] flex-col gap-4 border-b border-line bg-paper px-5 py-4 ${
+          IS_ZATOURS
+            ? "md:static md:flex md:flex-row md:items-center md:gap-6 md:border-0 md:bg-transparent md:p-0"
+            : "xl:static xl:flex xl:flex-row xl:items-center xl:gap-5 xl:border-0 xl:bg-transparent xl:p-0"
+        }`}
       >
         {BRAND.nav.map((l) =>
           l.external ? (
             <a
               key={l.href}
               href={l.href}
-              className="text-[0.92rem] font-medium text-ink-soft no-underline hover:text-clay"
+              className="whitespace-nowrap text-[0.92rem] font-medium text-ink-soft no-underline hover:text-clay"
             >
               {l.label}
             </a>
@@ -56,7 +61,7 @@ export default function Header() {
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="text-[0.92rem] font-medium text-ink-soft no-underline hover:text-clay"
+              className="whitespace-nowrap text-[0.92rem] font-medium text-ink-soft no-underline hover:text-clay"
             >
               {l.label}
             </Link>
@@ -67,8 +72,8 @@ export default function Header() {
           onClick={() => setOpen(false)}
           className={
             IS_ZATOURS
-              ? "rounded-full border-2 border-bush px-4 py-1.5 text-[0.9rem] font-semibold text-bush no-underline hover:bg-bush hover:text-white"
-              : "rounded-full bg-bush px-4 py-2 font-semibold text-white no-underline hover:bg-bush-dk"
+              ? "whitespace-nowrap rounded-full border-2 border-bush px-4 py-1.5 text-[0.9rem] font-semibold text-bush no-underline hover:bg-bush hover:text-white"
+              : "whitespace-nowrap rounded-full bg-bush px-4 py-2 font-semibold text-white no-underline hover:bg-bush-dk"
           }
         >
           List your business
@@ -76,7 +81,7 @@ export default function Header() {
       </nav>
 
       <button
-        className="cursor-pointer border-0 bg-transparent text-2xl text-ink md:hidden"
+        className={`cursor-pointer border-0 bg-transparent text-2xl text-ink ${IS_ZATOURS ? "md:hidden" : "xl:hidden"}`}
         aria-label="Menu"
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}

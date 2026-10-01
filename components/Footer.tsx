@@ -1,13 +1,14 @@
 import Image from "next/image";
 import { BRAND } from "@/lib/brand";
-import { IS_ZATOURS, ROUTE22_URL, ZATOURS_URL } from "@/lib/site";
+import { IS_ZATOURS, ZATOURS_URL } from "@/lib/site";
 import ZaLogo from "./ZaLogo";
 
 export default function Footer() {
   const year = new Date().getFullYear();
   // Cross-link the sister site (only when its URL is known).
+  // (ZAtours already links Route22 under "Explore".)
   const sister = IS_ZATOURS
-    ? { href: ROUTE22_URL, label: "Route22 — Elephant Coast route" }
+    ? null
     : ZATOURS_URL
       ? { href: ZATOURS_URL, label: "ZAtours — South Africa directory" }
       : null;
