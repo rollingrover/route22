@@ -11,11 +11,26 @@ import Partner from "@/components/Partner";
 import Footer from "@/components/Footer";
 import { getListings } from "@/lib/listings";
 import { getAmenities } from "@/lib/amenities";
+import ZaHome from "@/components/ZaHome";
+import { IS_ZATOURS } from "@/lib/site";
 
 // Revalidate listings periodically so new Supabase partners appear without a redeploy.
 export const revalidate = 300;
 
 export default async function Home() {
+  if (IS_ZATOURS) {
+    const { listings, isExample } = await getListings();
+    return (
+      <>
+        <Header />
+        <main>
+          <ZaHome listings={listings} isExample={isExample} />
+        </main>
+        <Footer />
+      </>
+    );
+  }
+
   const [{ listings, isExample }, { amenities }] = await Promise.all([
     getListings(),
     getAmenities(),

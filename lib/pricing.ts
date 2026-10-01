@@ -1,4 +1,4 @@
-// Route22 — indicative ZAR pricing for paid tiers.
+// Route22 + ZAtours — ZAR pricing for paid directory tiers (shared by both sites).
 //
 // Benchmarked against comparable South African directories/boards (Sept 2026
 // research): general business-directory featured/priority placements ran
@@ -39,3 +39,13 @@ export const pricing = {
 export function formatZAR(amount: number): string {
   return `R${amount.toLocaleString("en-ZA")}`;
 }
+
+// OpDesk bundle: any paid (or comped) OpDesk subscription linked to a listing
+// makes it "Verified & bookable" live (dir_public_listings.verified) with a
+// featured placement. Bundle pricing is still undecided, so the pricing page
+// shows "With any paid OpDesk plan" and links out rather than inventing a
+// number. Set `amount` once decided and the page shows it.
+export const opdeskBundle: { amount: number | null; url: string } = {
+  amount: null,
+  url: "https://opdesk.app",
+};

@@ -5,9 +5,10 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ShareButtons from "@/components/ShareButtons";
 import { industryPosts, getIndustryPost } from "@/lib/industry";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, IS_ZATOURS, route22Only } from "@/lib/site";
 
 export function generateStaticParams() {
+  if (IS_ZATOURS) return [];
   return industryPosts.map((p) => ({ slug: p.slug }));
 }
 
@@ -26,6 +27,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
 }
 
 export default function IndustryPostPage({ params }: { params: { slug: string } }) {
+  route22Only(); // Route22 corridor content — 404 on ZAtours
   const post = getIndustryPost(params.slug);
   if (!post) notFound();
 

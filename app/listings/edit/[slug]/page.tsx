@@ -5,9 +5,12 @@ import Footer from "@/components/Footer";
 import EditListingForm from "@/components/EditListingForm";
 import { getListingForClaim } from "@/lib/listings";
 import { getServiceSupabase } from "@/lib/supabase";
+import OwnerLink from "@/components/OwnerLink";
+import { BRAND } from "@/lib/brand";
+import { isFreeTier } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Edit your listing | Route22",
+  title: `Edit your listing | ${BRAND.name}`,
   robots: { index: false, follow: false },
 };
 
@@ -77,6 +80,12 @@ export default async function EditListingPage({
               Update your description, contact details, photo and map location. Changes save
               immediately.
             </p>
+            {isFreeTier(listing.tier) && (
+              <p className="-mt-5 mb-8 text-[0.9rem] text-ink-soft">
+                You&apos;re on a free listing.{" "}
+                <OwnerLink slug={listing.slug} claimed className="text-[0.9rem]" />
+              </p>
+            )}
             <EditListingForm slug={listing.slug} token={token} listing={listing} />
           </div>
         </section>

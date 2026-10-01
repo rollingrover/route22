@@ -10,6 +10,8 @@ import { generateToken } from "@/lib/tokens";
 import { absoluteUrl, SITE_ID } from "@/lib/site";
 import { T } from "@/lib/tables";
 import { baseSlug, parseCsv, parseListing, type ListingInsert } from "@/lib/listing-input";
+import { formatZAR, pricing } from "@/lib/pricing";
+import { isFreeTier } from "@/lib/data";
 
 // Logical names used in the admin forms -> physical dir_* tables.
 const TABLE_MAP = {
@@ -25,6 +27,16 @@ function isTable(v: FormDataEntryValue | null): v is Table {
 }
 
 const SITE_NAME = SITE_ID === "zatours" ? "ZAtours" : "Route22";
+
+// Appended to owner emails (claim approval, edit link) for FREE listings only.
+function upgradeLines(slug: string, tier: string | null | undefined): string[] {
+  if (!tier || !isFreeTier(tier)) return [];
+  return [
+    "",
+    `Want more enquiries? Upgrade to Premium (${formatZAR(pricing.listingsPremium.amount)}/month) for a full page with photos, your website and booking links, and an enquiry form to your inbox — or Featured (${formatZAR(pricing.listingsFeatured.amount)}/month) for home-page placement:`,
+    absoluteUrl(`/list-your-business?listing=${slug}`),
+  ];
+}
 
 function requireAdmin() {
   if (!isAdminAuthenticated()) redirect("/admin/login");
@@ -205,6 +217,12 @@ export async function sendEditLink(formData: FormData) {
     { onConflict: "entity_type,entity_id" }
   );
 
+  const { data: tierRow } = await supabase
+    .from(T.listings)
+    .select("tier")
+    .eq("id", entityId)
+    .maybeSingle();
+
   const editUrl = absoluteUrl(`/listings/edit/${slug}?token=${token}`);
   await sendMail(
     ownerEmail,
@@ -216,6 +234,7 @@ export async function sendEditLink(formData: FormData) {
       editUrl,
       "",
       "Keep this link private; anyone with it can edit the listing.",
+      ...upgradeLines(slug, tierRow?.tier as string | undefined),
     ].join("\n")
   );
   revalidatePath("/admin");
@@ -279,6 +298,7 @@ export async function approveClaim(formData: FormData) {
             editUrl,
             "",
             "Keep this link private; anyone with it can edit the listing.",
+            ...upgradeLines(listingSlug, nextTier),
           ].join("\n")
         );
       }

@@ -5,6 +5,54 @@
 /* Leaflet map styles */
 @import "leaflet/dist/leaflet.css";
 
+/* ---- Per-site theme (see tailwind.config.ts) ----
+   Route22: earthy R22 corridor — bush green, clay, sand, Georgia headings. */
+:root {
+  --c-ink: 28 26 23;
+  --c-ink-soft: 75 70 63;
+  --c-sand: 246 241 231;
+  --c-sand-2: 239 231 215;
+  --c-paper: 255 253 249;
+  --c-bush: 47 94 58;
+  --c-bush-dk: 35 74 44;
+  --c-clay: 193 98 45;
+  --c-clay-dk: 164 79 34;
+  --c-ocean: 31 111 122;
+  --c-line: 226 217 199;
+  --c-gold: 233 201 166;
+  --c-foot: 20 17 13;
+  --c-foot-text: 217 203 180;
+  --c-foot-line: 42 37 29;
+  --shadow-rgb: 40, 30, 15;
+  --font-heading: Georgia, "Times New Roman", serif;
+  --heading-weight: 700;
+  --heading-tracking: normal;
+}
+
+/* ZAtours: national directory — clean navy/green on cool white, sans headings. */
+html[data-site="zatours"] {
+  --c-ink: 15 27 45;
+  --c-ink-soft: 71 84 103;
+  --c-sand: 245 247 250;
+  --c-sand-2: 232 237 243;
+  --c-paper: 255 255 255;
+  --c-bush: 20 48 107;
+  --c-bush-dk: 12 33 80;
+  --c-clay: 10 122 82;
+  --c-clay-dk: 7 94 63;
+  --c-ocean: 14 116 144;
+  --c-line: 221 227 234;
+  --c-gold: 242 183 5;
+  --c-foot: 10 20 38;
+  --c-foot-text: 196 207 222;
+  --c-foot-line: 30 44 68;
+  --shadow-rgb: 15, 27, 45;
+  --font-heading: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  --heading-weight: 800;
+  --heading-tracking: -0.02em;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 72px;
@@ -17,7 +65,9 @@ body {
 }
 
 h1, h2, h3, h4 {
-  font-family: theme("fontFamily.serif");
+  font-family: var(--font-heading);
+  font-weight: var(--heading-weight);
+  letter-spacing: var(--heading-tracking);
   line-height: 1.15;
 }
 

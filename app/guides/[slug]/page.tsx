@@ -5,11 +5,12 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ShareButtons from "@/components/ShareButtons";
 import { getGuide, getGuides, getAllGuideSlugs } from "@/lib/guides";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, IS_ZATOURS, route22Only } from "@/lib/site";
 
 export const revalidate = 300;
 
 export async function generateStaticParams() {
+  if (IS_ZATOURS) return [];
   const slugs = await getAllGuideSlugs();
   return slugs.map((slug) => ({ slug }));
 }
@@ -42,6 +43,7 @@ export async function generateMetadata({
 }
 
 export default async function GuideProfilePage({ params }: { params: { slug: string } }) {
+  route22Only(); // Route22 corridor content — 404 on ZAtours
   const result = await getGuide(params.slug);
   if (!result) notFound();
   const { guide, isExample } = result;

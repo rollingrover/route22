@@ -10,11 +10,12 @@ import {
   getAllOpportunitySlugs,
   typeLabel,
 } from "@/lib/opportunities";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, IS_ZATOURS, route22Only } from "@/lib/site";
 
 export const revalidate = 300;
 
 export async function generateStaticParams() {
+  if (IS_ZATOURS) return [];
   const slugs = await getAllOpportunitySlugs();
   return slugs.map((slug) => ({ slug }));
 }
@@ -40,6 +41,7 @@ export async function generateMetadata({
 }
 
 export default async function OpportunityPage({ params }: { params: { slug: string } }) {
+  route22Only(); // Route22 corridor content — 404 on ZAtours
   const result = await getOpportunity(params.slug);
   if (!result) notFound();
   const { opportunity, isExample } = result;

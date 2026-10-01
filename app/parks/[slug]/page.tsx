@@ -5,10 +5,11 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ShareButtons from "@/components/ShareButtons";
 import { parks, getPark } from "@/lib/parks";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, IS_ZATOURS, route22Only } from "@/lib/site";
 
 // Pre-render every park page at build time.
 export function generateStaticParams() {
+  if (IS_ZATOURS) return [];
   return parks.map((p) => ({ slug: p.slug }));
 }
 
@@ -32,6 +33,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
 }
 
 export default function ParkPage({ params }: { params: { slug: string } }) {
+  route22Only(); // Route22 corridor content — 404 on ZAtours
   const park = getPark(params.slug);
   if (!park) notFound();
 

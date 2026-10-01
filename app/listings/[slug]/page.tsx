@@ -9,8 +9,10 @@ import ReviewsSection from "@/components/ReviewsSection";
 import { getListing, getListings, getAllListingSlugs } from "@/lib/listings";
 import { getReviews, REVIEWS_ENABLED } from "@/lib/reviews";
 import ListingEnquiryForm from "@/components/ListingEnquiryForm";
-import { categoryHue, categoryLabel, partnerBadge } from "@/lib/data";
-import { absoluteUrl } from "@/lib/site";
+import { categoryHue, categoryLabel, isFreeTier, partnerBadge } from "@/lib/data";
+import { absoluteUrl, canonicalListingUrl, IS_ZATOURS } from "@/lib/site";
+import { BRAND } from "@/lib/brand";
+import OwnerLink from "@/components/OwnerLink";
 
 export const revalidate = 300;
 
@@ -25,17 +27,35 @@ export async function generateMetadata({
   params: { slug: string };
 }): Promise<Metadata> {
   const result = await getListing(params.slug);
-  if (!result) return { title: "Not found — Route22 Zululand" };
-  const { listing } = result;
-  const title = `${listing.name} — ${categoryLabel[listing.category]} in ${listing.location} | Route22`;
-  const description = listing.desc || `${listing.name}, a ${categoryLabel[listing.category].toLowerCase()} listing in ${listing.location} on the Route22 Elephant Coast route.`;
-  const url = absoluteUrl(`/listings/${listing.slug}`);
+  if (!result) return { title: `Not found — ${BRAND.fullName}` };
+  const { listing, isExample } = result;
+  const title = `${listing.name} — ${categoryLabel[listing.category]} in ${listing.location} | ${BRAND.name}`;
+  const description =
+    listing.desc ||
+    (IS_ZATOURS
+      ? `${listing.name}, a ${categoryLabel[listing.category].toLowerCase()} listing in ${listing.location}, ${listing.province ?? "South Africa"}. Enquire directly on ZAtours.`
+      : `${listing.name}, a ${categoryLabel[listing.category].toLowerCase()} listing in ${listing.location} on the Route22 Elephant Coast route.`);
+  // ZAtours is the canonical home for listings shown on both sites.
+  const canonical = canonicalListingUrl(listing);
+  const ownUrl = absoluteUrl(`/listings/${listing.slug}`);
   return {
     title,
     description,
-    alternates: { canonical: url },
-    openGraph: { title, description, type: "website", url },
-    twitter: { card: "summary", title, description },
+    alternates: { canonical },
+    ...(isExample ? { robots: { index: false, follow: true } } : {}),
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      url: ownUrl,
+      ...(listing.photoUrl ? { images: [listing.photoUrl] } : {}),
+    },
+    twitter: {
+      card: listing.photoUrl ? "summary_large_image" : "summary",
+      title,
+      description,
+      ...(listing.photoUrl ? { images: [listing.photoUrl] } : {}),
+    },
   };
 }
 
@@ -45,7 +65,16 @@ export default async function ListingPage({ params }: { params: { slug: string }
   const { listing, isExample } = result;
 
   const [{ listings }, reviews] = await Promise.all([getListings(), getReviews(listing.slug)]);
-  const nearby = listings.filter((l) => l.slug !== listing.slug && l.category !== "tours").slice(0, 4);
+  const others = listings.filter((l) => l.slug !== listing.slug && l.tier !== "community");
+  // ZAtours: same province first; Route22: everything is "along the route".
+  const nearby = (
+    IS_ZATOURS
+      ? [
+          ...others.filter((l) => l.province && l.province === listing.province),
+          ...others.filter((l) => !l.province || l.province !== listing.province),
+        ]
+      : others.filter((l) => l.category !== "tours")
+  ).slice(0, 4);
   const url = absoluteUrl(`/listings/${listing.slug}`);
 
   const jsonLd = {
@@ -56,7 +85,7 @@ export default async function ListingPage({ params }: { params: { slug: string }
     address: {
       "@type": "PostalAddress",
       addressLocality: listing.location,
-      addressRegion: "KwaZulu-Natal",
+      addressRegion: listing.province || "KwaZulu-Natal",
       addressCountry: "ZA",
     },
     ...(listing.lat && listing.lng
@@ -83,11 +112,11 @@ export default async function ListingPage({ params }: { params: { slug: string }
             <div className="mx-auto max-w-[1120px] px-5 py-16">
               <nav className="mb-5 text-[0.85rem] text-white/80">
                 <Link href="/" className="text-white/80 no-underline hover:text-white">
-                  Route22
+                  {BRAND.name}
                 </Link>{" "}
                 <span className="opacity-60">/</span>{" "}
-                <Link href="/#listings" className="text-white/80 no-underline hover:text-white">
-                  Stay &amp; Do
+                <Link href={BRAND.directoryHref} className="text-white/80 no-underline hover:text-white">
+                  {IS_ZATOURS ? "Directory" : "Stay & Do"}
                 </Link>{" "}
                 <span className="opacity-60">/</span>{" "}
                 <span className="text-white">{listing.name}</span>
@@ -112,7 +141,7 @@ export default async function ListingPage({ params }: { params: { slug: string }
               )}
               <h1 className="mb-3 mt-4 max-w-[18ch] text-[clamp(2rem,5vw,3.2rem)]">{listing.name}</h1>
               <p className="max-w-[60ch] text-[clamp(1rem,2.2vw,1.15rem)] text-white/90">
-                {listing.location} · on the Route22 Elephant Coast route
+                {BRAND.listingContext(listing)}
               </p>
             </div>
           </div>
@@ -121,9 +150,9 @@ export default async function ListingPage({ params }: { params: { slug: string }
         <div className="mx-auto max-w-[1120px] px-5 py-14">
           {isExample && (
             <div className="mb-8 rounded-xl border border-dashed border-clay bg-[#fff6e9] px-4 py-3 text-[0.9rem] text-ink-soft">
-              This is an <strong>example listing</strong> shown for layout purposes — real Route22
+              This is an <strong>example listing</strong> shown for layout purposes — real {BRAND.name}
               partners appear here once published.{" "}
-              <Link href="/#partner" className="whitespace-nowrap font-semibold text-clay no-underline">
+              <Link href="/list-your-business" className="whitespace-nowrap font-semibold text-clay no-underline">
                 List your business →
               </Link>
             </div>
@@ -132,7 +161,10 @@ export default async function ListingPage({ params }: { params: { slug: string }
           <div className="grid gap-10 md:grid-cols-[1fr_300px]">
             <article>
               <p className="text-[1.12rem] leading-relaxed text-ink-soft">
-                {listing.desc || `${listing.name} is part of the Route22 directory of places to stay and things to do along the Elephant Coast.`}
+                {listing.desc ||
+                  (IS_ZATOURS
+                    ? `${listing.name} is listed in the ZAtours directory of places to stay and things to do in South Africa.`
+                    : `${listing.name} is part of the Route22 directory of places to stay and things to do along the Elephant Coast.`)}
               </p>
 
               {listing.lat && listing.lng && (
@@ -159,24 +191,35 @@ export default async function ListingPage({ params }: { params: { slug: string }
                   {listing.verified
                     ? "Verified operator — your enquiry goes straight into their bookings system."
                     : `Send your dates and questions and ${listing.name} will reply by email.`}
+                  {IS_ZATOURS &&
+                    " ZAtours is a directory, not a tour operator — you deal with the business directly."}
                 </p>
                 {!isExample && <ListingEnquiryForm slug={listing.slug} name={listing.name} />}
                 <div className="mt-6 flex flex-wrap gap-3">
                   <Link
-                    href="/#listings"
+                    href={BRAND.directoryHref}
                     className="rounded-full border-2 border-bush px-5 py-2.5 font-semibold text-bush no-underline hover:bg-bush hover:text-white"
                   >
                     Back to the directory
                   </Link>
-                  {!listing.claimed && (
-                    <Link
-                      href={`/claim?slug=${listing.slug}`}
-                      className="rounded-full border-2 border-line px-5 py-2.5 font-semibold text-ink-soft no-underline hover:border-clay hover:text-clay"
-                    >
-                      Is this your business? Claim it
-                    </Link>
-                  )}
                 </div>
+                {!isExample && isFreeTier(listing.tier) ? (
+                  <p className="mb-0 mt-5 text-[0.8rem]">
+                    <OwnerLink slug={listing.slug} claimed={listing.claimed} />
+                  </p>
+                ) : (
+                  !listing.claimed && (
+                    <p className="mb-0 mt-5 text-[0.8rem]">
+                      <Link
+                        href={`/claim?slug=${listing.slug}`}
+                        rel="nofollow"
+                        className="text-ink-soft underline decoration-line underline-offset-2 hover:text-clay"
+                      >
+                        Is this your business? Claim it
+                      </Link>
+                    </p>
+                  )
+                )}
               </div>
             </article>
 
@@ -239,7 +282,7 @@ export default async function ListingPage({ params }: { params: { slug: string }
 
           {nearby.length > 0 && (
             <div className="mt-16 border-t border-line pt-10">
-              <h2 className="mb-5 text-[1.4rem]">More along the route</h2>
+              <h2 className="mb-5 text-[1.4rem]">{BRAND.moreHeading}</h2>
               <div className="grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-4">
                 {nearby.map((l) => (
                   <Link

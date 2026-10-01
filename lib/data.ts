@@ -283,12 +283,22 @@ export function partnerBadge(l: { verified?: boolean; partnerSource?: string }):
   return null;
 }
 
+// Free tiers: "community" (card only, no page) and "basic" (free page, e.g.
+// after a claim is approved). These get the small owner-facing
+// "Claim or upgrade" link; paying tiers never do.
+export function isFreeTier(tier: string): boolean {
+  return tier === "community" || tier === "basic";
+}
+
 export type Listing = {
   id: string;
   slug: string;
   name: string;
   category: Category;
   location: string;
+  province?: string;
+  // Which directory front ends show this listing (dir_listings.sites).
+  sites?: string[];
   desc: string;
   tier: "community" | "basic" | "premium" | "featured";
   photoUrl?: string;

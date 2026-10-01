@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { loginAction } from "../actions";
+import { SITE_ID } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Admin login | Route22",
+  title: `Admin login | ${SITE_ID === "zatours" ? "ZAtours" : "Route22"}`,
   robots: { index: false, follow: false },
 };
 
@@ -17,7 +18,7 @@ export default function AdminLoginPage({
         action={loginAction}
         className="w-full max-w-[380px] rounded-xl2 border border-line bg-paper p-8 shadow-card"
       >
-        <h1 className="mb-1 text-[1.4rem]">Route22 admin</h1>
+        <h1 className="mb-1 text-[1.4rem]">{SITE_ID === "zatours" ? "ZAtours" : "Route22"} admin</h1>
         <p className="mb-5 text-[0.88rem] text-ink-soft">Enter the admin password to continue.</p>
         <label className="mb-4 flex flex-col gap-1.5 text-[0.85rem] font-semibold text-ink-soft">
           Password

@@ -11,7 +11,17 @@ type Payload = {
   phone?: string;
   location?: string;
   message?: string;
+  interest?: string;
+  listing?: string;
   consent?: boolean;
+};
+
+const INTEREST_LABEL: Record<string, string> = {
+  premium: "Premium listing",
+  featured: "Featured listing",
+  opdesk: "OpDesk bundle",
+  free: "Free listing",
+  unsure: "Not sure",
 };
 
 function isEmail(v: string): boolean {
@@ -46,7 +56,17 @@ export async function POST(req: NextRequest) {
 
   const phone = (body.phone ?? "").trim();
   const location = (body.location ?? "").trim();
-  const message = (body.message ?? "").trim();
+  const message = (body.message ?? "").trim().slice(0, 5000);
+  const interest = INTEREST_LABEL[String(body.interest ?? "")] ?? null;
+  const listing = /^[a-z0-9]+(-[a-z0-9]+)*$/.test(String(body.listing ?? ""))
+    ? String(body.listing)
+    : null;
+  // No schema change: interest + the listing being upgraded are recorded as a
+  // header on the stored message, so they show in /admin and the lead email.
+  const header = [interest && `Interest: ${interest}`, listing && `Listing: ${listing}`]
+    .filter(Boolean)
+    .join(" · ");
+  const storedMessage = header ? `[${header}]${message ? `\n${message}` : ""}` : message;
 
   // 1) Persist the enquiry to Supabase (best-effort — never blocks the response).
   const supabase = getServiceSupabase();
@@ -59,12 +79,12 @@ export async function POST(req: NextRequest) {
       email,
       phone,
       location,
-      message,
+      message: storedMessage,
     });
     if (error) console.error("Supabase insert failed:", error.message);
   }
 
-  // 2) Route the enquiry to the Route22 inbox via Resend.
+  // 2) Route the enquiry to the directory inbox via Resend.
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.ENQUIRY_TO_EMAIL;
   const from = process.env.ENQUIRY_FROM_EMAIL;
@@ -76,13 +96,15 @@ export async function POST(req: NextRequest) {
         from,
         to,
         reply_to: email,
-        subject: `New ${SITE_ID === "zatours" ? "ZAtours" : "Route22"} listing lead — ${business}`,
+        subject: `New ${SITE_ID === "zatours" ? "ZAtours" : "Route22"} listing lead${interest ? ` (${interest})` : ""} — ${business}`,
         text: [
           `Business: ${business}`,
           `Contact:  ${contact}`,
           `Email:    ${email}`,
           `Phone:    ${phone || "—"}`,
           `Location: ${location || "—"}`,
+          `Interest: ${interest || "—"}`,
+          `Listing:  ${listing || "—"}`,
           "",
           "Message:",
           message || "(none)",

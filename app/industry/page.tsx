@@ -3,7 +3,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { industryPosts } from "@/lib/industry";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, IS_ZATOURS, route22Only } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Industry Info — Travel Tips, Conservation & Trip Planning | Route22",
@@ -24,6 +24,7 @@ export const metadata: Metadata = {
 };
 
 export default function IndustryIndexPage() {
+  route22Only(); // Route22 corridor content — 404 on ZAtours
   return (
     <>
       <Header />

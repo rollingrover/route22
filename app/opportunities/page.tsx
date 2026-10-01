@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import OpportunitiesBoard from "@/components/OpportunitiesBoard";
 import OpportunitySubmitForm from "@/components/OpportunitySubmitForm";
 import { getOpportunities } from "@/lib/opportunities";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, IS_ZATOURS, route22Only } from "@/lib/site";
 import { formatZAR, pricing } from "@/lib/pricing";
 
 export const revalidate = 300;
@@ -29,6 +29,7 @@ export const metadata: Metadata = {
 };
 
 export default async function OpportunitiesPage() {
+  route22Only(); // Route22 corridor content — 404 on ZAtours
   const { opportunities, isExample } = await getOpportunities();
 
   return (

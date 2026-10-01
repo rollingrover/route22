@@ -90,7 +90,7 @@ export default function ReviewsSection({
       (user.user_metadata?.full_name as string) ||
       (user.user_metadata?.name as string) ||
       user.email ||
-      "Route22 visitor";
+      "Visitor";
 
     const { error } = await supabase.from("reviews").upsert(
       {

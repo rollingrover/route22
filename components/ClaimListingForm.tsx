@@ -118,7 +118,7 @@ export default function ClaimListingForm({ slug, name }: { slug: string; name: s
       <h3 className="mb-1 text-[1.15rem]">Claim this listing</h3>
       <p className="mb-4 text-[0.9rem] text-ink-soft">
         If {name} is your business, verify you own its website and we&apos;ll follow up about
-        setting up (or upgrading) your Route22 listing.
+        setting up (or upgrading) your listing.
       </p>
       <label className="mb-3.5 flex flex-col gap-1.5 text-[0.85rem] font-semibold text-ink-soft">
         Your email

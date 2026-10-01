@@ -7,7 +7,7 @@ const tierRank: Record<string, number> = { featured: 0, premium: 1, basic: 2, co
 
 // Read from the public view (published rows only, verified computed live).
 const COLUMNS =
-  "id, slug, name, category, town, province, description, tier, photo_url, website_url, phone, email, lat, lng, claimed, partner_source, verified, has_live_availability";
+  "id, slug, name, category, town, province, description, tier, sites, photo_url, website_url, phone, email, lat, lng, claimed, partner_source, verified, has_live_availability";
 
 function mapRow(r: Record<string, unknown>): Listing {
   return {
@@ -16,6 +16,8 @@ function mapRow(r: Record<string, unknown>): Listing {
     name: r.name as string,
     category: r.category as Listing["category"],
     location: (r.town as string) || (r.province as string) || "",
+    province: (r.province as string) ?? undefined,
+    sites: Array.isArray(r.sites) ? (r.sites as string[]) : undefined,
     desc: (r.description as string) ?? "",
     tier: r.tier as Listing["tier"],
     photoUrl: (r.photo_url as string) ?? undefined,

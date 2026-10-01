@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import GuidesDirectory from "@/components/GuidesDirectory";
 import GuideSubmitForm from "@/components/GuideSubmitForm";
 import { getGuides } from "@/lib/guides";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, IS_ZATOURS, route22Only } from "@/lib/site";
 import { formatZAR, pricing } from "@/lib/pricing";
 
 export const revalidate = 300;
@@ -33,6 +33,7 @@ export const metadata: Metadata = {
 };
 
 export default async function GuidesPage() {
+  route22Only(); // Route22 corridor content — 404 on ZAtours
   const { guides, isExample } = await getGuides();
 
   return (

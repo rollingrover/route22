@@ -1,30 +1,39 @@
 import type { Config } from "tailwindcss";
 
+// Colours are CSS variables (RGB triplets) set per site in app/globals.css via
+// <html data-site="route22|zatours">. Same class names on both sites — Route22
+// renders earthy bush/clay, ZAtours renders its national navy/green palette.
+// The `/ <alpha-value>` form keeps opacity modifiers (from-clay/80) working.
+const v = (name: string) => `rgb(var(--c-${name}) / <alpha-value>)`;
+
 const config: Config = {
-  content: [
-    "./app/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-  ],
+  content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        ink: "#1c1a17",
-        "ink-soft": "#4b463f",
-        sand: "#f6f1e7",
-        "sand-2": "#efe7d7",
-        paper: "#fffdf9",
-        bush: "#2f5e3a",
-        "bush-dk": "#234a2c",
-        clay: "#c1622d",
-        "clay-dk": "#a44f22",
-        ocean: "#1f6f7a",
-        line: "#e2d9c7",
+        ink: v("ink"),
+        "ink-soft": v("ink-soft"),
+        sand: v("sand"),
+        "sand-2": v("sand-2"),
+        paper: v("paper"),
+        bush: v("bush"),
+        "bush-dk": v("bush-dk"),
+        clay: v("clay"),
+        "clay-dk": v("clay-dk"),
+        ocean: v("ocean"),
+        line: v("line"),
+        gold: v("gold"),
+        foot: v("foot"),
+        "foot-text": v("foot-text"),
+        "foot-line": v("foot-line"),
       },
       fontFamily: {
-        serif: ["Georgia", "Times New Roman", "serif"],
+        // `font-serif` is the heading face: Georgia on Route22, a heavy
+        // system sans on ZAtours (no web-font download, no build-time fetch).
+        serif: ["var(--font-heading)"],
       },
       boxShadow: {
-        card: "0 8px 28px rgba(40, 30, 15, 0.12)",
+        card: "0 8px 28px rgba(var(--shadow-rgb), 0.12)",
       },
       borderRadius: {
         xl2: "16px",

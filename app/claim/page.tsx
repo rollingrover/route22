@@ -6,9 +6,10 @@ import Footer from "@/components/Footer";
 import ClaimListingForm from "@/components/ClaimListingForm";
 import { getListingForClaim } from "@/lib/listings";
 import { categoryLabel } from "@/lib/data";
+import { BRAND } from "@/lib/brand";
 
 export const metadata: Metadata = {
-  title: "Claim your listing | Route22",
+  title: `Claim your listing | ${BRAND.name}`,
   robots: { index: false, follow: false },
 };
 
@@ -29,7 +30,7 @@ export default async function ClaimPage({
         <section className="py-16">
           <div className="mx-auto max-w-[600px] px-5">
             <nav className="mb-5 text-[0.85rem] text-ink-soft">
-              <Link href="/#listings" className="text-ink-soft no-underline hover:text-clay">
+              <Link href={BRAND.directoryHref} className="text-ink-soft no-underline hover:text-clay">
                 Directory
               </Link>{" "}
               <span>/</span> <span>Claim listing</span>

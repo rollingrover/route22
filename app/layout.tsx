@@ -1,38 +1,32 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import { SITE_URL } from "@/lib/site";
+import { SITE_ID, SITE_URL } from "@/lib/site";
+import { BRAND } from "@/lib/brand";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Route22 Zululand — The Elephant Coast Tourism Route",
-  description:
-    "Your guide to the R22 Elephant Coast route — from St Lucia and Hluhluwe-iMfolozi up through Sodwana, Kosi Bay and the great game reserves of Maputaland. Plan your journey, find lodges, tours and experiences.",
-  keywords: [
-    "Elephant Coast",
-    "R22 route",
-    "Zululand tourism",
-    "Hluhluwe iMfolozi",
-    "iSimangaliso Wetland Park",
-    "Sodwana Bay diving",
-    "Kosi Bay",
-    "KwaZulu-Natal safari",
-    "Maputaland",
-  ],
+  title: BRAND.title,
+  description: BRAND.description,
+  keywords: BRAND.keywords,
+  applicationName: BRAND.name,
+  icons: { icon: BRAND.icon, ...(BRAND.appleIcon ? { apple: BRAND.appleIcon } : {}) },
   openGraph: {
-    title: "Route22 Zululand",
-    description:
-      "Drive the wildest road in South Africa — the R22 Elephant Coast route through Zululand's great game reserves and coastline.",
+    title: BRAND.ogTitle,
+    description: BRAND.ogDescription,
+    siteName: BRAND.fullName,
+    locale: "en_ZA",
     type: "website",
   },
+  twitter: { card: "summary_large_image", title: BRAND.ogTitle, description: BRAND.ogDescription },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export const viewport: Viewport = {
+  themeColor: BRAND.themeColor,
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en-ZA" data-site={SITE_ID}>
       <body>{children}</body>
     </html>
   );
