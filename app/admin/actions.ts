@@ -159,7 +159,7 @@ export async function setBillingStatus(formData: FormData) {
   if (
     !entityId ||
     !["listing", "guide", "opportunity"].includes(entityType) ||
-    !["paid", "comped", "trial", "lapsed"].includes(billingStatus)
+    !["free", "paid", "comped", "trial", "lapsed"].includes(billingStatus)
   ) {
     return;
   }

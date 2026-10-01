@@ -284,6 +284,12 @@ export default async function AdminPage({
 
 type BillingInfo = { billing_status: string; owner_email: string | null };
 
+// With no billing record yet, free tiers show "Free"; a paid tier with no
+// record shows "Trial" so it stands out as needing an invoice.
+function defaultBilling(tier: string): string {
+  return tier === "community" || tier === "free" ? "free" : "trial";
+}
+
 function BillingPanel({
   listings,
   guides,
@@ -298,7 +304,7 @@ function BillingPanel({
   const billingMap = new Map<string, BillingInfo>();
   for (const b of billing) {
     billingMap.set(`${String(b.entity_type)}:${String(b.entity_id)}`, {
-      billing_status: String(b.billing_status ?? "paid"),
+      billing_status: String(b.billing_status ?? "free"),
       owner_email: (b.owner_email as string) ?? null,
     });
   }
@@ -338,9 +344,10 @@ function BillingPanel({
                     <input type="hidden" name="entityId" value={m.id} />
                     <select
                       name="billingStatus"
-                      defaultValue={info?.billing_status ?? "paid"}
+                      defaultValue={info?.billing_status ?? defaultBilling(m.tier)}
                       className="rounded-full border border-line bg-paper px-2 py-1 text-[0.75rem]"
                     >
+                      <option value="free">Free</option>
                       <option value="paid">Paid</option>
                       <option value="comped">Comped</option>
                       <option value="trial">Trial</option>
