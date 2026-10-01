@@ -340,4 +340,3 @@ lib/
   slugify.ts               slug generator used by the submission API routes
 supabase/schema.sql     tables (listings, guides, opportunities, amenities, claims, reviews, billing, enquiries) + RLS policies
 ```
-"# route22" 
