@@ -1,10 +1,12 @@
 import { FOUNDING, formatZAR, opdeskBundle } from "@/lib/pricing";
 import { fromSnapshot, type PriceSnapshot } from "@/lib/prices";
+import { Approx } from "./CurrencyProvider";
 
 export type Interest = "premium" | "featured" | "opdesk" | "free" | "unsure" | "route_hub";
 
 type Tier = {
   key: Interest;
+  zar?: number; // numeric ZAR price for the "≈ your currency" line
   name: string;
   price: string;
   was?: string; // standard price, struck through while founding pricing runs
@@ -37,6 +39,7 @@ export function getTiers(siteName: string, snap: PriceSnapshot): Tier[] {
       key: "premium",
       name: p.get("premium")?.name ?? "Premium",
       price: formatZAR(p.premium),
+      zar: p.premium,
       was: p.founding && p.standard.premium !== p.premium ? formatZAR(p.standard.premium) : undefined,
       per: "/ month",
       highlight: true,
@@ -48,6 +51,7 @@ export function getTiers(siteName: string, snap: PriceSnapshot): Tier[] {
       key: "featured",
       name: p.get("featured")?.name ?? "Featured",
       price: formatZAR(p.featured),
+      zar: p.featured,
       was: p.founding && p.standard.featured !== p.featured ? formatZAR(p.standard.featured) : undefined,
       per: "/ month",
       badge: p.founding ? "Founding price" : undefined,
@@ -120,6 +124,7 @@ export default function TierCards({
                 {t.was}
               </span>
             )}
+                      {t.zar ? <Approx zar={t.zar} /> : null}
           </p>
           <ul className="mb-5 flex flex-1 list-none flex-col gap-2.5 p-0">
             {t.perks.map((p) => (

@@ -6,13 +6,14 @@ import Link from "next/link";
 import { BRAND } from "@/lib/brand";
 import { IS_ZATOURS } from "@/lib/site";
 import ZaLogo from "./ZaLogo";
+import { CurrencySwitcher } from "./CurrencyProvider";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-[1000] flex items-center justify-between gap-4 border-b border-line bg-paper/90 px-5 py-2 backdrop-blur">
-      <Link href="/" className="flex items-center gap-2.5 no-underline" onClick={() => setOpen(false)}>
+      <Link href="/" className="flex shrink-0 items-center gap-2.5 no-underline" onClick={() => setOpen(false)}>
         {IS_ZATOURS ? (
           <span className="py-1">
             <ZaLogo />
@@ -28,7 +29,7 @@ export default function Header() {
               className="h-11 w-auto"
             />
             <span className="hidden flex-col leading-none sm:flex">
-              <strong className="font-serif text-lg text-ink">ROUTE 22</strong>
+              <strong className="whitespace-nowrap font-serif text-lg text-ink">ROUTE 22</strong>
               <em className="text-[0.68rem] uppercase not-italic tracking-[2px] text-bush">
                 Elephant Coast
               </em>
@@ -37,14 +38,14 @@ export default function Header() {
         )}
       </Link>
 
-      {/* Route22 has 8 nav links, so it collapses to the menu below xl;
+      {/* Route22 has 8 nav links + currency, so it collapses to the menu below 1360px;
           ZAtours (3 links) only below md. Class strings are static so
           Tailwind keeps them. */}
       <nav
         className={`${open ? "flex" : "hidden"} absolute left-0 right-0 top-[60px] flex-col gap-4 border-b border-line bg-paper px-5 py-4 ${
           IS_ZATOURS
             ? "md:static md:flex md:flex-row md:items-center md:gap-6 md:border-0 md:bg-transparent md:p-0"
-            : "xl:static xl:flex xl:flex-row xl:items-center xl:gap-5 xl:border-0 xl:bg-transparent xl:p-0"
+            : "min-[1360px]:static min-[1360px]:flex min-[1360px]:flex-row min-[1360px]:items-center min-[1360px]:gap-4 min-[1360px]:border-0 min-[1360px]:bg-transparent min-[1360px]:p-0"
         }`}
       >
         {BRAND.nav.map((l) =>
@@ -52,7 +53,7 @@ export default function Header() {
             <a
               key={l.href}
               href={l.href}
-              className="whitespace-nowrap text-[0.92rem] font-medium text-ink-soft no-underline hover:text-clay"
+              className="whitespace-nowrap text-[0.9rem] font-medium text-ink-soft no-underline hover:text-clay"
             >
               {l.label}
             </a>
@@ -61,12 +62,13 @@ export default function Header() {
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="whitespace-nowrap text-[0.92rem] font-medium text-ink-soft no-underline hover:text-clay"
+              className="whitespace-nowrap text-[0.9rem] font-medium text-ink-soft no-underline hover:text-clay"
             >
               {l.label}
             </Link>
           )
         )}
+        <CurrencySwitcher />
         <Link
           href="/list-your-business"
           onClick={() => setOpen(false)}
@@ -81,7 +83,7 @@ export default function Header() {
       </nav>
 
       <button
-        className={`cursor-pointer border-0 bg-transparent text-2xl text-ink ${IS_ZATOURS ? "md:hidden" : "xl:hidden"}`}
+        className={`cursor-pointer border-0 bg-transparent text-2xl text-ink ${IS_ZATOURS ? "md:hidden" : "min-[1360px]:hidden"}`}
         aria-label="Menu"
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
