@@ -189,7 +189,7 @@ export default async function ListingPage({ params }: { params: { slug: string }
                 <h3 id="enquire" className="mb-1 text-[1.25rem]">Enquire with {listing.name}</h3>
                 <p className="mb-0 text-[0.95rem] text-ink-soft">
                   {listing.verified
-                    ? "Verified operator — your enquiry goes straight into their bookings system."
+                    ? "Verified operator — your enquiry goes straight into their OpDesk bookings inbox."
                     : `Send your dates and questions and ${listing.name} will reply by email.`}
                   {IS_ZATOURS &&
                     " ZAtours is a directory, not a tour operator — you deal with the business directly."}

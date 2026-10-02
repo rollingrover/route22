@@ -30,7 +30,7 @@ export default function Partner() {
         <TierCards siteName="Route22" onPick={setInterest} ctaHref="#lead" />
 
         <p className="mx-auto mb-10 mt-6 max-w-[60ch] text-center text-[0.85rem] text-white/80">
-          Prices in ZAR per month. Listings on Route22 also appear on ZAtours, South Africa&apos;s
+          Flat monthly prices in ZAR — no commission, no per-booking or per-enquiry fees. Listings on Route22 also appear on ZAtours, South Africa&apos;s
           national tourism directory.{" "}
           <a href="/list-your-business" className="font-semibold text-white">
             Compare plans →

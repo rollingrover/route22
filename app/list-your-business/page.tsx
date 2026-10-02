@@ -53,6 +53,7 @@ export default async function ListYourBusinessPage({
                 : "Get found by travellers on the Elephant Coast"}
             </h1>
             <p className="max-w-[62ch] text-[1.05rem] text-ink-soft">
+              <strong className="text-ink">No commission, no per-booking or per-enquiry fees — ever.</strong>{" "}
               Every business can list for free. Upgrade for a full page, enquiries straight to your
               inbox and better placement — or link your listing to OpDesk to show as{" "}
               <strong className="text-ink">verified &amp; bookable</strong>.

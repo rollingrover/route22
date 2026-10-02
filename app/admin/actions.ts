@@ -35,6 +35,7 @@ function upgradeLines(slug: string, tier: string | null | undefined): string[] {
     "",
     `Want more enquiries? Upgrade to Premium (${formatZAR(pricing.listingsPremium.amount)}/month) for a full page with photos, your website and booking links, and an enquiry form to your inbox — or Featured (${formatZAR(pricing.listingsFeatured.amount)}/month) for home-page placement:`,
     absoluteUrl(`/list-your-business?listing=${slug}`),
+    "Flat monthly price — no commission, no per-booking or per-enquiry fees.",
   ];
 }
 

@@ -61,16 +61,17 @@ export async function POST(req: NextRequest) {
   const listing = /^[a-z0-9]+(-[a-z0-9]+)*$/.test(String(body.listing ?? ""))
     ? String(body.listing)
     : null;
-  // No schema change: interest + the listing being upgraded are recorded as a
-  // header on the stored message, so they show in /admin and the lead email.
-  const header = [interest && `Interest: ${interest}`, listing && `Listing: ${listing}`]
-    .filter(Boolean)
-    .join(" · ");
-  const storedMessage = header ? `[${header}]${message ? `\n${message}` : ""}` : message;
+  const interestKey = String(body.interest ?? "");
 
   // 1) Persist the enquiry to Supabase (best-effort — never blocks the response).
   const supabase = getServiceSupabase();
   if (supabase) {
+    // Resolve the listing being upgraded (if any) to its id for the admin.
+    let listingId: string | null = null;
+    if (listing) {
+      const { data } = await supabase.from(T.listings).select("id").eq("slug", listing).maybeSingle();
+      listingId = (data?.id as string | undefined) ?? null;
+    }
     const { error } = await supabase.from(T.businessEnquiries).insert({
       site: SITE_ID,
       consent: true,
@@ -79,7 +80,9 @@ export async function POST(req: NextRequest) {
       email,
       phone,
       location,
-      message: storedMessage,
+      message,
+      interest: interest ? interestKey : null,
+      listing_id: listingId,
     });
     if (error) console.error("Supabase insert failed:", error.message);
   }

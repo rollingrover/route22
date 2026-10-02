@@ -108,6 +108,14 @@ export default async function AdminPage({
 
   return (
     <main className="mx-auto max-w-[1200px] px-5 py-10">
+      <div className="mb-6 rounded-xl border border-dashed border-clay bg-sand-2 px-4 py-3 text-[0.9rem] text-ink-soft">
+        Directory admin is moving to the OpDesk superadmin:{" "}
+        <a href="https://opdesk.app/admin/directory" className="font-semibold text-clay">
+          opdesk.app/admin/directory
+        </a>{" "}
+        (listings, claims, leads and payment links for both sites). This panel keeps working
+        until that&apos;s proven; CSV import still lives here for now.
+      </div>
       <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
         <div>
           <h1 className="mb-1">{SITE_NAME} admin</h1>
