@@ -3,6 +3,7 @@ import { SITE_URL, IS_ZATOURS, canonicalListingUrl } from "@/lib/site";
 import { parks } from "@/lib/parks";
 import { industryPosts } from "@/lib/industry";
 import { getListings } from "@/lib/listings";
+import { getRoutes } from "@/lib/routes";
 import { getAllGuideSlugs } from "@/lib/guides";
 import { getAllOpportunitySlugs } from "@/lib/opportunities";
 
@@ -24,8 +25,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           priority: 0.7,
         }));
 
+  const routes = await getRoutes();
   const common: MetadataRoute.Sitemap = [
     { url: `${SITE_URL}/`, changeFrequency: "weekly", priority: 1 },
+    { url: `${SITE_URL}/routes`, changeFrequency: "weekly", priority: 0.7 },
+    ...routes.map((r) => ({ url: `${SITE_URL}/routes/${r.slug}`, changeFrequency: "weekly" as const, priority: 0.7 })),
     { url: `${SITE_URL}/list-your-business`, changeFrequency: "monthly", priority: 0.5 },
   ];
 

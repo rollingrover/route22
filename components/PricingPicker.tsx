@@ -2,17 +2,20 @@
 
 import { useState } from "react";
 import TierCards, { type Interest } from "./TierCards";
+import type { PriceSnapshot } from "@/lib/prices";
 import BusinessLeadForm from "./BusinessLeadForm";
 
 // Tier cards + lead form sharing one "interest" selection: clicking a tier's
 // button scrolls to the form with that tier preselected.
 export default function PricingPicker({
   siteName,
+  prices,
   listingSlug,
   listingName,
   initialInterest,
 }: {
   siteName: string;
+  prices: PriceSnapshot;
   listingSlug?: string;
   listingName?: string;
   initialInterest?: Interest;
@@ -20,7 +23,7 @@ export default function PricingPicker({
   const [interest, setInterest] = useState<Interest | undefined>(initialInterest);
   return (
     <>
-      <TierCards siteName={siteName} onPick={setInterest} ctaHref="#lead" />
+      <TierCards siteName={siteName} prices={prices} onPick={setInterest} ctaHref="#lead" />
       <div className="mt-14">
         <BusinessLeadForm interest={interest} listingSlug={listingSlug} listingName={listingName} />
       </div>

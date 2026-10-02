@@ -7,7 +7,8 @@ import { getListingForClaim } from "@/lib/listings";
 import { categoryLabel, isFreeTier } from "@/lib/data";
 import { BRAND } from "@/lib/brand";
 import { absoluteUrl, IS_ZATOURS } from "@/lib/site";
-import { FOUNDING, formatZAR, listingPrices, opdeskBundle } from "@/lib/pricing";
+import { FOUNDING, formatZAR, opdeskBundle } from "@/lib/pricing";
+import { getPrices, snapshot } from "@/lib/prices";
 import { pricingNote } from "@/components/TierCards";
 
 const title = `List your business — free, Premium & Featured plans | ${BRAND.name}`;
@@ -32,9 +33,13 @@ export default async function ListYourBusinessPage({
   const found = slug ? await getListingForClaim(slug) : null;
   const listing = found && !found.isExample ? found.listing : null;
   const plan = searchParams.plan;
-  const prices = listingPrices();
+  const prices = await getPrices();
+  const snap = snapshot(prices);
+  const hubs = prices.packages.filter((p) => p.kind === "route_hub");
+  const memberRate = prices.get("route_member_premium");
+  const bulk = prices.get("association_bulk_premium");
   const initialInterest =
-    plan === "premium" || plan === "featured" || plan === "opdesk" || plan === "free"
+    plan === "premium" || plan === "featured" || plan === "opdesk" || plan === "free" || plan === "route_hub"
       ? plan
       : listing
         ? "premium"
@@ -99,18 +104,66 @@ export default async function ListYourBusinessPage({
           <div className="mx-auto max-w-[1120px] px-5">
             <PricingPicker
               siteName={BRAND.name}
+              prices={snap}
               listingSlug={listing?.slug}
               listingName={listing?.name}
               initialInterest={initialInterest}
             />
 
             <p className="mx-auto mt-6 max-w-[62ch] text-center text-[0.82rem] text-ink-soft">
-              {pricingNote()} Prices in ZAR per month. We reply within one business day to confirm your details and
+              {pricingNote(snap)} Prices in ZAR per month. We reply within one business day to confirm your details and
               how to pay — nothing is charged until you agree.
               {IS_ZATOURS
                 ? " KwaZulu-Natal listings on the R22 corridor also appear on Route22."
                 : " Your listing also appears on ZAtours, South Africa's national tourism directory."}
             </p>
+
+            {hubs.length > 0 && (
+              <div id="routes" className="mx-auto mt-20 max-w-[1000px] scroll-mt-24">
+                <p className="mb-2 text-[0.75rem] font-bold uppercase tracking-[2px] text-clay">
+                  For tourism routes &amp; associations
+                </p>
+                <h2 className="mb-2">Put your whole route on the map</h2>
+                <p className="mb-8 max-w-[65ch] text-ink-soft">
+                  Birding routes, heritage and wildlife routes, community tourism associations: get a
+                  route page on {BRAND.name} with your story, a map and every member business, plus a
+                  &ldquo;Member of&rdquo; badge on each member&apos;s listing.
+                </p>
+                <div className="grid gap-5 md:grid-cols-2">
+                  {hubs.map((h) => (
+                    <div key={h.key} className={`flex flex-col rounded-xl2 bg-paper p-6 shadow-card ${h.key === "route_hub_plus" ? "border-2 border-clay" : "border border-line"}`}>
+                      <h3 className="text-[1.25rem]">{h.name}</h3>
+                      <p className="mb-3 mt-0 font-serif text-[1.5rem] text-clay">
+                        {formatZAR(prices.price(h.key))}
+                        <span className="font-sans text-[0.85rem] text-ink-soft"> / month</span>
+                        {prices.founding && h.standard_price !== h.founding_price && (
+                          <span className="ml-2 font-sans text-[0.85rem] text-ink-soft line-through">{formatZAR(h.standard_price)}</span>
+                        )}
+                      </p>
+                      <ul className="mb-5 flex flex-1 list-none flex-col gap-2 p-0">
+                        {h.features.map((f) => (
+                          <li key={f} className="relative pl-[22px] text-[0.92rem] before:absolute before:left-0 before:font-bold before:text-bush before:content-['✓']">
+                            {f}
+                          </li>
+                        ))}
+                      </ul>
+                      <a href="/list-your-business?plan=route_hub#lead" className="rounded-full border-2 border-bush py-2.5 text-center font-semibold text-bush no-underline hover:bg-bush hover:text-white">
+                        Talk to us about {h.name}
+                      </a>
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-5 text-[0.88rem] text-ink-soft">
+                  {memberRate && (
+                    <>Members of a Route Hub Plus route get Premium at {formatZAR(prices.price("route_member_premium"))}/month. </>
+                  )}
+                  {bulk && (
+                    <>Associations can also cover Premium for all members at {formatZAR(prices.price("association_bulk_premium"))}/member/month (minimum {bulk.min_quantity ?? 10}). </>
+                  )}
+                  {prices.founding && <>Founding prices for routes that join by {FOUNDING.deadlineLabel}, locked {FOUNDING.lockYears} years.</>}
+                </p>
+              </div>
+            )}
 
             <div className="mx-auto mt-16 grid max-w-[900px] gap-8 md:grid-cols-2">
               <div>

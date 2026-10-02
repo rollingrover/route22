@@ -21,6 +21,7 @@ const INTEREST_LABEL: Record<string, string> = {
   featured: "Featured listing",
   opdesk: "OpDesk bundle",
   free: "Free listing",
+  route_hub: "Route Hub (route / association)",
   unsure: "Not sure",
 };
 

@@ -10,7 +10,8 @@ import { generateToken } from "@/lib/tokens";
 import { absoluteUrl, SITE_ID } from "@/lib/site";
 import { T } from "@/lib/tables";
 import { baseSlug, parseCsv, parseListing, type ListingInsert } from "@/lib/listing-input";
-import { FOUNDING, formatZAR, listingPrices } from "@/lib/pricing";
+import { FOUNDING, formatZAR } from "@/lib/pricing";
+import { getPrices } from "@/lib/prices";
 import { isFreeTier } from "@/lib/data";
 
 // Logical names used in the admin forms -> physical dir_* tables.
@@ -29,9 +30,9 @@ function isTable(v: FormDataEntryValue | null): v is Table {
 const SITE_NAME = SITE_ID === "zatours" ? "ZAtours" : "Route22";
 
 // Appended to owner emails (claim approval, edit link) for FREE listings only.
-function upgradeLines(slug: string, tier: string | null | undefined): string[] {
+async function upgradeLines(slug: string, tier: string | null | undefined): Promise<string[]> {
   if (!tier || !isFreeTier(tier)) return [];
-  const p = listingPrices();
+  const p = await getPrices();
   const founding = p.founding
     ? ` Founding-member prices for businesses joining by ${FOUNDING.deadlineLabel}, locked for ${FOUNDING.lockYears} years.`
     : "";
@@ -239,7 +240,7 @@ export async function sendEditLink(formData: FormData) {
       editUrl,
       "",
       "Keep this link private; anyone with it can edit the listing.",
-      ...upgradeLines(slug, tierRow?.tier as string | undefined),
+      ...(await upgradeLines(slug, tierRow?.tier as string | undefined)),
     ].join("\n")
   );
   revalidatePath("/admin");
@@ -303,7 +304,7 @@ export async function approveClaim(formData: FormData) {
             editUrl,
             "",
             "Keep this link private; anyone with it can edit the listing.",
-            ...upgradeLines(listingSlug, nextTier),
+            ...(await upgradeLines(listingSlug, nextTier)),
           ].join("\n")
         );
       }

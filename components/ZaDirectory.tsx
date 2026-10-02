@@ -17,6 +17,7 @@ export default function ZaDirectory({
   const [q, setQ] = useState("");
   const [cat, setCat] = useState<"all" | Category>("all");
   const [prov, setProv] = useState("all");
+  const [route, setRoute] = useState("all");
 
   const categories = useMemo(() => {
     const counts = new Map<Category, number>();
@@ -32,18 +33,25 @@ export default function ZaDirectory({
     [listings]
   );
 
+  const routeOptions = useMemo(() => {
+    const m = new Map<string, string>();
+    listings.forEach((l) => l.routes?.forEach((r) => m.set(r.slug, r.name)));
+    return Array.from(m.entries()).sort((a, b) => a[1].localeCompare(b[1]));
+  }, [listings]);
+
   const filtered = useMemo(() => {
     const needle = q.trim().toLowerCase();
     return listings.filter(
       (l) =>
         (cat === "all" || hasCategory(l, cat)) &&
         (prov === "all" || l.province === prov) &&
+        (route === "all" || Boolean(l.routes?.some((r) => r.slug === route))) &&
         (!needle ||
           [l.name, l.location, l.province, l.desc, ...listingCategories(l).map((c) => categoryLabel[c])]
             .filter(Boolean)
             .some((v) => String(v).toLowerCase().includes(needle)))
     );
-  }, [listings, q, cat, prov]);
+  }, [listings, q, cat, prov, route]);
 
   const full = filtered.filter((l) => l.tier !== "community");
   const community = filtered.filter((l) => l.tier === "community");
@@ -84,6 +92,21 @@ export default function ZaDirectory({
               className="w-full border-0 bg-transparent py-3 text-ink outline-none"
             />
           </label>
+          {routeOptions.length > 0 && (
+            <label className="flex items-center">
+              <span className="sr-only">Route</span>
+              <select
+                value={route}
+                onChange={(e) => setRoute(e.target.value)}
+                className="w-full rounded-[10px] border border-line bg-sand px-3 py-3 text-ink sm:w-auto"
+              >
+                <option value="all">All routes</option>
+                {routeOptions.map(([slug, name]) => (
+                  <option key={slug} value={slug}>{name}</option>
+                ))}
+              </select>
+            </label>
+          )}
           {provinces.length > 1 && (
             <label className="flex items-center">
               <span className="sr-only">Province</span>

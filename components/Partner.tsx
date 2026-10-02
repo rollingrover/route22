@@ -3,10 +3,11 @@
 import { useState } from "react";
 import TierCards, { pricingNote, type Interest } from "./TierCards";
 import BusinessLeadForm from "./BusinessLeadForm";
+import type { PriceSnapshot } from "@/lib/prices";
 
 // Route22 home page "for business" section. The full pricing page lives at
 // /list-your-business (shared by Route22 and ZAtours).
-export default function Partner() {
+export default function Partner({ prices }: { prices: PriceSnapshot }) {
   const [interest, setInterest] = useState<Interest | undefined>();
 
   return (
@@ -27,10 +28,10 @@ export default function Partner() {
           </p>
         </div>
 
-        <TierCards siteName="Route22" onPick={setInterest} ctaHref="#lead" />
+        <TierCards siteName="Route22" prices={prices} onPick={setInterest} ctaHref="#lead" />
 
         <p className="mx-auto mb-10 mt-6 max-w-[60ch] text-center text-[0.85rem] text-white/80">
-          {pricingNote()} Flat monthly prices in ZAR — no commission, no per-booking or
+          {pricingNote(prices)} Flat monthly prices in ZAR — no commission, no per-booking or
           per-enquiry fees. Listings on Route22 also appear on ZAtours, South Africa&apos;s
           national tourism directory.{" "}
           <a href="/list-your-business" className="font-semibold text-white">

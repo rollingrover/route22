@@ -13,6 +13,7 @@ import Footer from "@/components/Footer";
 import { getListings } from "@/lib/listings";
 import { getAmenities } from "@/lib/amenities";
 import ZaHome from "@/components/ZaHome";
+import { getPrices, snapshot } from "@/lib/prices";
 import { IS_ZATOURS } from "@/lib/site";
 
 // Revalidate listings periodically so new Supabase partners appear without a redeploy.
@@ -20,21 +21,22 @@ export const revalidate = 300;
 
 export default async function Home() {
   if (IS_ZATOURS) {
-    const { listings, isExample } = await getListings();
+    const [{ listings, isExample }, prices] = await Promise.all([getListings(), getPrices()]);
     return (
       <>
         <Header />
         <main>
-          <ZaHome listings={listings} isExample={isExample} />
+          <ZaHome listings={listings} isExample={isExample} prices={prices} />
         </main>
         <Footer />
       </>
     );
   }
 
-  const [{ listings, isExample }, { amenities }] = await Promise.all([
+  const [{ listings, isExample }, { amenities }, prices] = await Promise.all([
     getListings(),
     getAmenities(),
+    getPrices(),
   ]);
 
   const tours = listings.filter((l) => hasCategory(l, "tours"));
@@ -51,7 +53,7 @@ export default async function Home() {
         <Itineraries listings={listings} />
         <Listings listings={listings} isExample={isExample} />
         <MoreResources />
-        <Partner />
+        <Partner prices={snapshot(prices)} />
       </main>
       <Footer />
     </>

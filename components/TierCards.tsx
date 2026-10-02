@@ -1,6 +1,7 @@
-import { FOUNDING, INCLUDED_CATEGORIES, formatZAR, listingPrices, opdeskBundle } from "@/lib/pricing";
+import { FOUNDING, formatZAR, opdeskBundle } from "@/lib/pricing";
+import { fromSnapshot, type PriceSnapshot } from "@/lib/prices";
 
-export type Interest = "premium" | "featured" | "opdesk" | "free" | "unsure";
+export type Interest = "premium" | "featured" | "opdesk" | "free" | "unsure" | "route_hub";
 
 type Tier = {
   key: Interest;
@@ -16,54 +17,41 @@ type Tier = {
 
 const cats = (n: number) => `${n} ${n === 1 ? "category" : "categories"}`;
 
-export function getTiers(siteName: string): Tier[] {
-  const p = listingPrices();
-  const lock = p.founding ? ` — founding price locked ${FOUNDING.lockYears} years` : "";
+export function getTiers(siteName: string, snap: PriceSnapshot): Tier[] {
+  const p = fromSnapshot(snap);
+  const lock = p.founding ? `Founding price locked ${FOUNDING.lockYears} years` : "";
+  const feats = (key: string, fallback: string[]) => {
+    const f = p.get(key)?.features ?? [];
+    return (f.length ? f : fallback).map((x) => x.replace("ZAtours", siteName));
+  };
   return [
     {
       key: "free",
       name: "Free",
       price: "R0",
       per: "",
-      perks: [
-        `Name, town & ${cats(INCLUDED_CATEGORIES.basic)} in the directory`,
-        "Claim it to get your own page",
-        "Edit your details any time — no account needed",
-      ],
+      perks: feats("free", [`Listed in ${cats(p.included.free)}`, "Claim it to get your own page", "Edit any time — no account needed"]),
       cta: "Get listed free",
     },
     {
       key: "premium",
-      name: "Premium",
+      name: p.get("premium")?.name ?? "Premium",
       price: formatZAR(p.premium),
-      was: p.founding ? formatZAR(p.standard.premium) : undefined,
+      was: p.founding && p.standard.premium !== p.premium ? formatZAR(p.standard.premium) : undefined,
       per: "/ month",
       highlight: true,
       badge: p.founding ? "Founding price" : "Most popular",
-      perks: [
-        `Listed in ${cats(INCLUDED_CATEGORIES.premium)}`,
-        "Full page: photos & full description",
-        "Website, phone & booking links",
-        "Enquiry form straight to your inbox",
-        "Your pin on the ZAtours map",
-        `Priority placement & “Premium” badge${lock}`,
-      ],
+      perks: [...feats("premium", [`Listed in ${cats(p.included.premium)}`]), ...(lock ? [lock] : [])],
       cta: "Go Premium",
     },
     {
       key: "featured",
-      name: "Featured",
+      name: p.get("featured")?.name ?? "Featured",
       price: formatZAR(p.featured),
-      was: p.founding ? formatZAR(p.standard.featured) : undefined,
+      was: p.founding && p.standard.featured !== p.featured ? formatZAR(p.standard.featured) : undefined,
       per: "/ month",
       badge: p.founding ? "Founding price" : undefined,
-      perks: [
-        "Everything in Premium",
-        `Listed in ${cats(INCLUDED_CATEGORIES.featured)}`,
-        `Spotlight on the ${siteName} home page`,
-        "Top of your categories",
-        `Included in featured round-ups${lock}`,
-      ],
+      perks: [...feats("featured", ["Everything in Premium", `Listed in ${cats(p.included.featured)}`, `Spotlight on the ${siteName} home page`]), ...(lock ? [lock] : [])],
       cta: "Go Featured",
     },
     {
@@ -85,8 +73,8 @@ export function getTiers(siteName: string): Tier[] {
 }
 
 // One line explaining founding pricing + extra categories; shown under the cards.
-export function pricingNote(): string {
-  const p = listingPrices();
+export function pricingNote(snap: PriceSnapshot): string {
+  const p = fromSnapshot(snap);
   const extra = `Extra categories ${formatZAR(p.extraCategory)}/month each on paid plans.`;
   return p.founding
     ? `Founding-member prices for businesses that join by ${FOUNDING.deadlineLabel}, locked for ${FOUNDING.lockYears} years from sign-up (standard prices after that date: ${formatZAR(p.standard.premium)} / ${formatZAR(p.standard.featured)}). ${extra}`
@@ -95,14 +83,16 @@ export function pricingNote(): string {
 
 export default function TierCards({
   siteName,
+  prices,
   onPick,
   ctaHref = "#lead",
 }: {
   siteName: string;
+  prices: PriceSnapshot;
   onPick?: (k: Interest) => void;
   ctaHref?: string;
 }) {
-  const tiers = getTiers(siteName);
+  const tiers = getTiers(siteName, prices);
   return (
     <div className="grid grid-cols-[repeat(auto-fit,minmax(230px,1fr))] gap-5">
       {tiers.map((t) => (

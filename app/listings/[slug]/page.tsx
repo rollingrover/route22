@@ -13,6 +13,7 @@ import { categoryHue, categoryLabel, categoryLabels, hasCategory, isFreeTier, li
 import { absoluteUrl, canonicalListingUrl, IS_ZATOURS } from "@/lib/site";
 import { BRAND } from "@/lib/brand";
 import OwnerLink from "@/components/OwnerLink";
+import { getRouteMemberships } from "@/lib/routes";
 
 export const revalidate = 300;
 
@@ -63,6 +64,7 @@ export default async function ListingPage({ params }: { params: { slug: string }
   const result = await getListing(params.slug);
   if (!result) notFound();
   const { listing, isExample } = result;
+  const memberOf = isExample ? [] : (await getRouteMemberships()).get(listing.slug) ?? [];
 
   const [{ listings }, reviews] = await Promise.all([getListings(), getReviews(listing.slug)]);
   const others = listings.filter((l) => l.slug !== listing.slug && l.tier !== "community");
@@ -143,6 +145,15 @@ export default async function ListingPage({ params }: { params: { slug: string }
               <p className="max-w-[60ch] text-[clamp(1rem,2.2vw,1.15rem)] text-white/90">
                 {BRAND.listingContext(listing)}
               </p>
+              {memberOf.length > 0 && (
+                <p className="m-0 mt-2 flex flex-wrap gap-2">
+                  {memberOf.map((r) => (
+                    <Link key={r.slug} href={`/routes/${r.slug}`} className="rounded-full bg-white/15 px-3 py-1 text-[0.75rem] font-semibold text-white no-underline backdrop-blur hover:bg-white/25">
+                      Member of {r.name}
+                    </Link>
+                  ))}
+                </p>
+              )}
             </div>
           </div>
         </section>

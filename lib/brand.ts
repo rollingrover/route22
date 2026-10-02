@@ -108,6 +108,7 @@ const zatours: Brand = {
     { href: "/#directory", label: "Browse the directory" },
     { href: "/#featured", label: "Featured" },
     { href: "/#map", label: "Map" },
+    { href: "/routes", label: "Routes" },
     { href: ROUTE22_URL, label: "Elephant Coast route", external: true },
   ],
   footerExplore: [

@@ -4,14 +4,14 @@ import ZaMap from "./ZaMap";
 import { ListingCard } from "./ListingCard";
 import { Listing } from "@/lib/data";
 import { ROUTE22_URL } from "@/lib/site";
-import { FOUNDING, formatZAR, listingPrices } from "@/lib/pricing";
+import { FOUNDING, formatZAR } from "@/lib/pricing";
+import type { Prices } from "@/lib/prices";
 
 // ZAtours home page — national directory. Shares data, cards and the lead
 // pipeline with Route22; only the framing and palette differ.
-export default function ZaHome({ listings, isExample }: { listings: Listing[]; isExample: boolean }) {
+export default function ZaHome({ listings, isExample, prices }: { listings: Listing[]; isExample: boolean; prices: Prices }) {
   const real = isExample ? [] : listings;
   const featured = listings.filter((l) => l.tier === "featured" || l.tier === "premium").slice(0, 6);
-  const prices = listingPrices();
   const provinces = new Set(real.map((l) => l.province).filter(Boolean)).size;
 
   return (

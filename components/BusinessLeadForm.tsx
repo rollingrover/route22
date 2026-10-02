@@ -11,6 +11,7 @@ const interestOptions: { value: Interest; label: string }[] = [
   { value: "featured", label: "Featured listing" },
   { value: "opdesk", label: "OpDesk bundle (verified & bookable)" },
   { value: "free", label: "Free listing" },
+  { value: "route_hub", label: "Route / association Route Hub" },
   { value: "unsure", label: "Not sure yet — advise me" },
 ];
 

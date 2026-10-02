@@ -309,6 +309,8 @@ export type Listing = {
   category: Category;
   location: string;
   categories?: Category[];
+  // Route Hubs this listing belongs to ("Member of …").
+  routes?: { slug: string; name: string; kind: "route" | "association" }[];
   province?: string;
   // Which directory front ends show this listing (dir_listings.sites).
   sites?: string[];

@@ -1,3 +1,4 @@
+import { getRouteMemberships } from "./routes";
 import { getSupabase } from "./supabase";
 import { T } from "./tables";
 import { SITE_ID } from "./site";
@@ -41,10 +42,10 @@ export async function getListings(): Promise<{ listings: Listing[]; isExample: b
   const supabase = getSupabase();
   if (!supabase) return { listings: exampleListings, isExample: true };
 
-  const { data, error } = await supabase
-    .from(T.publicListings)
-    .select(COLUMNS)
-    .contains("sites", [SITE_ID]);
+  const [{ data, error }, memberships] = await Promise.all([
+    supabase.from(T.publicListings).select(COLUMNS).contains("sites", [SITE_ID]),
+    getRouteMemberships(),
+  ]);
 
   if (error || !data || data.length === 0) {
     return { listings: exampleListings, isExample: true };
@@ -52,6 +53,7 @@ export async function getListings(): Promise<{ listings: Listing[]; isExample: b
 
   const listings: Listing[] = data
     .map(mapRow)
+    .map((l) => (memberships.has(l.slug) ? { ...l, routes: memberships.get(l.slug) } : l))
     .sort(
       (a, b) =>
         (tierRank[a.tier] ?? 9) - (tierRank[b.tier] ?? 9) ||
