@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ZaDirectory from "./ZaDirectory";
+import ZaMap from "./ZaMap";
 import { ListingCard } from "./ListingCard";
 import { Listing } from "@/lib/data";
 import { ROUTE22_URL } from "@/lib/site";
@@ -86,6 +87,8 @@ export default function ZaHome({ listings, isExample }: { listings: Listing[]; i
           </div>
         </section>
       )}
+
+      <ZaMap listings={real} route22Url={ROUTE22_URL} />
 
       <ZaDirectory listings={listings} isExample={isExample} />
 

@@ -9,6 +9,7 @@ import {
   Popup,
   useMap,
 } from "react-leaflet";
+import { TILES } from "@/lib/tiles";
 import { stops, routeLine } from "@/lib/data";
 import { Amenity, amenityCategoryLabel } from "@/lib/amenities";
 
@@ -42,8 +43,8 @@ export default function MapInner({
       className="z-[1] h-[380px] w-full rounded-xl2 border border-line shadow-card md:h-[520px]"
     >
       <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution={TILES.attribution}
+        url={TILES.url}
       />
       <Polyline
         positions={routeLine}

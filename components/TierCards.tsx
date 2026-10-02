@@ -45,6 +45,7 @@ export function getTiers(siteName: string): Tier[] {
         "Full page: photos & full description",
         "Website, phone & booking links",
         "Enquiry form straight to your inbox",
+        "Your pin on the ZAtours map",
         `Priority placement & “Premium” badge${lock}`,
       ],
       cta: "Go Premium",

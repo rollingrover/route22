@@ -1,6 +1,7 @@
 "use client";
 
 import { MapContainer, TileLayer, CircleMarker, Popup } from "react-leaflet";
+import { TILES } from "@/lib/tiles";
 
 export default function ListingMapInner({
   lat,
@@ -19,8 +20,8 @@ export default function ListingMapInner({
       className="z-[1] h-[260px] w-full rounded-xl2 border border-line shadow-card"
     >
       <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution={TILES.attribution}
+        url={TILES.url}
       />
       <CircleMarker
         center={[lat, lng]}

@@ -167,7 +167,8 @@ export default async function ListingPage({ params }: { params: { slug: string }
                     : `${listing.name} is part of the Route22 directory of places to stay and things to do along the Elephant Coast.`)}
               </p>
 
-              {listing.lat && listing.lng && (
+              {/* Map location is a paid perk (Premium / Featured). */}
+              {listing.lat && listing.lng && !isFreeTier(listing.tier) && (
                 <div className="mt-9">
                   <h2 className="mb-3 text-[1.1rem]">Location</h2>
                   <ListingMap lat={listing.lat} lng={listing.lng} name={listing.name} />
