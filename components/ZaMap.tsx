@@ -49,15 +49,16 @@ export default function ZaMap({ listings, route22Url }: { listings: Listing[]; r
       <div className="mx-auto max-w-[1120px] px-5">
         <div className="mb-5 flex flex-wrap items-end justify-between gap-4">
           <div className="max-w-[640px]">
-            <h2 className="mb-1">Explore South Africa</h2>
+            <h2 className="mb-1">Explore Southern &amp; East Africa</h2>
             <p className="m-0 text-ink-soft">
-              National parks, game reserves and World Heritage Sites — with the businesses near them.
+              National parks, game reserves and World Heritage Sites — from the Cape to Kenya — with
+              the businesses near them. Listings start in South Africa; zoom in to explore.
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
             {toggle("parks", "Parks & reserves", parks, "/za/marker-park.svg")}
             {toggle("heritage", "World Heritage", heritage, "/za/marker-heritage.svg")}
-            {toggle("businesses", "Businesses", pinned.length, "/za/mark.webp")}
+            {toggle("businesses", "Businesses", pinned.length, "/za/mark.svg")}
           </div>
         </div>
         <ZaMapInner listings={pinned} layers={layers} route22Url={route22Url} />

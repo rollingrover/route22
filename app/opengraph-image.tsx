@@ -1,28 +1,16 @@
 import { ImageResponse } from "next/og";
-import { readFile } from "node:fs/promises";
-import path from "node:path";
 import { IS_ZATOURS } from "@/lib/site";
 import { BRAND } from "@/lib/brand";
 
 // Default social card for every page that doesn't set its own image.
-// Node runtime so ZAtours can embed its hero artwork from /public at build.
-export const runtime = "nodejs";
 export const alt = BRAND.ogTitle;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function OgImage() {
-  let hero: string | null = null;
-  if (IS_ZATOURS) {
-    try {
-      const buf = await readFile(path.join(process.cwd(), "public/za/hero-savanna.jpg"));
-      hero = `data:image/jpeg;base64,${buf.toString("base64")}`;
-    } catch {
-      hero = null; // fall back to the plain card
-    }
-  }
+  const hero: string | null = null; // real photography to come
   const bg = IS_ZATOURS
-    ? "linear-gradient(135deg, #1f2a44 0%, #141c30 60%, #9a3412 100%)"
+    ? "linear-gradient(135deg, #1f2a44 0%, #141c30 60%, #10283a 100%)"
     : "linear-gradient(160deg, #2c4a2f 0%, #1c3320 55%, #14261a 100%)";
   const accent = IS_ZATOURS ? "#f59e0b" : "#e9c9a6";
 
@@ -72,7 +60,7 @@ export default async function OgImage() {
         </div>
         <div style={{ display: "flex", fontSize: 34, marginTop: 20, maxWidth: 950, opacity: 0.9 }}>
           {IS_ZATOURS
-            ? "Stays, safaris, tours & experiences across South Africa"
+            ? "Stays, safaris, tours & experiences across Southern & East Africa"
             : "Lodges, tours & experiences on the R22 Elephant Coast route"}
         </div>
       </div>

@@ -83,13 +83,13 @@ const route22: Brand = {
 const zatours: Brand = {
   name: "ZAtours",
   fullName: "ZAtours",
-  tagline: "South Africa's tourism directory",
-  title: "ZAtours — South Africa's Tourism Directory | Stays, Tours & Experiences",
+  tagline: "Tourism directory · Southern & East Africa",
+  title: "ZAtours — Tourism Directory for South Africa, Southern & East Africa | Stays, Tours & Experiences",
   description:
-    "Find places to stay, tours, safaris and experiences across South Africa — listed by the businesses that run them. Enquire directly with lodges, guesthouses, tour and transfer operators.",
-  ogTitle: "ZAtours — South Africa's tourism directory",
+    "Find places to stay, tours, safaris and experiences across South Africa, Southern and East Africa — listed by the businesses that run them. Enquire directly with lodges, guesthouses, tour and transfer operators.",
+  ogTitle: "ZAtours — tourism directory for Southern & East Africa",
   ogDescription:
-    "Stays, safaris, tours and experiences across South Africa. Enquire directly with the businesses that run them.",
+    "Stays, safaris, tours and experiences across South Africa, Southern and East Africa. Enquire directly with the businesses that run them.",
   keywords: [
     "South Africa tourism directory",
     "South Africa accommodation",
@@ -101,9 +101,9 @@ const zatours: Brand = {
     "things to do in South Africa",
   ],
   logoAlt: "ZAtours logo",
-  regionLine: "South Africa",
+  regionLine: "South Africa · Southern & East Africa",
   footerBlurb:
-    "ZAtours is a directory of South African tourism businesses. We don't sell tours — you book directly with the businesses listed.",
+    "ZAtours is a directory of tourism businesses in South Africa, Southern and East Africa. We don't sell tours — you book directly with the businesses listed.",
   nav: [
     { href: "/#directory", label: "Browse the directory" },
     { href: "/#featured", label: "Featured" },
@@ -121,8 +121,7 @@ const zatours: Brand = {
       .filter(Boolean)
       .join(" · ") + " · South Africa",
   moreHeading: "More nearby",
-  icon: "/zatours-icon.png",
-  appleIcon: "/zatours-apple-icon.png",
+  icon: "/zatours-icon.svg",
   themeColor: "#1f2a44",
 };
 

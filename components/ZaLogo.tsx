@@ -18,7 +18,7 @@ export default function ZaLogo({ inverted = false }: { inverted?: boolean }) {
             inverted ? "text-foot-text" : "text-ink-soft"
           }`}
         >
-          South Africa&apos;s tourism directory
+          Southern &amp; East Africa
         </span>
       </span>
     </span>

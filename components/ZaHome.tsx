@@ -4,7 +4,6 @@ import ZaMap from "./ZaMap";
 import { ListingCard } from "./ListingCard";
 import { Listing } from "@/lib/data";
 import { ROUTE22_URL } from "@/lib/site";
-import { ZA_HERO } from "@/lib/za-assets";
 import { FOUNDING, formatZAR, listingPrices } from "@/lib/pricing";
 
 // ZAtours home page — national directory. Shares data, cards and the lead
@@ -17,33 +16,28 @@ export default function ZaHome({ listings, isExample }: { listings: Listing[]; i
 
   return (
     <>
-      <section className="relative isolate overflow-hidden bg-bush-dk text-white">
-        {/* Sunset Big Five artwork (original ZAtours brand art, text-free crop). */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={ZA_HERO}
-          alt=""
-          fetchPriority="high"
-          className="absolute inset-0 -z-10 h-full w-full object-cover object-bottom"
-        />
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 -z-10"
-          style={{
-            background:
-              "linear-gradient(90deg, rgba(20,28,48,0.88) 0%, rgba(20,28,48,0.55) 42%, rgba(20,28,48,0) 75%), linear-gradient(0deg, rgba(20,28,48,0.55) 0%, transparent 35%)",
-          }}
-        />
+      <section
+        className="relative isolate overflow-hidden text-white"
+        style={{
+          background:
+            "radial-gradient(circle at 85% 20%, rgba(245,158,11,0.22), transparent 45%), linear-gradient(135deg, #1f2a44 0%, #141c30 60%, #10283a 100%)",
+        }}
+      >
+        {/* No hero photo yet — real photography coming. Subtle horizon line only. */}
+        <svg aria-hidden="true" viewBox="0 0 1440 120" preserveAspectRatio="none" className="absolute bottom-0 left-0 -z-10 h-[70px] w-full">
+          <path d="M0 80c240-40 480-50 720-30s480 30 720-10v80H0z" fill="rgb(var(--c-sand))" />
+        </svg>
         <div className="relative mx-auto max-w-[1120px] px-5 pb-16 pt-16 md:pb-24 md:pt-20">
           <p className="mb-3 text-[0.72rem] font-semibold uppercase tracking-[3px] text-gold">
-            South Africa&apos;s tourism directory
+            Tourism directory · Southern &amp; East Africa
           </p>
-          <h1 className="mb-4 max-w-[17ch] text-[clamp(2.2rem,6vw,3.8rem)] text-white">
-            Find where to stay and what to do across South Africa.
+          <h1 className="mb-4 max-w-[19ch] text-[clamp(2.2rem,6vw,3.8rem)] text-white">
+            Find where to stay and what to do across Southern &amp; East Africa.
           </h1>
           <p className="max-w-[56ch] text-[clamp(1rem,2.2vw,1.15rem)] text-white/85">
             Lodges, guesthouses, safaris, tours and transfers — listed by the businesses that run
-            them. Enquire directly; ZAtours is a directory, not a tour operator.
+            them. Starting in South Africa and growing across the region. Enquire directly; ZAtours
+            is a directory, not a tour operator.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <a

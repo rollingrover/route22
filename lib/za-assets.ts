@@ -3,8 +3,8 @@
 // pre-sized here rather than at request time.
 import type { Category } from "./data";
 
-export const ZA_HERO = "/za/hero-savanna.webp";
-export const ZA_MARK = "/za/mark.webp";
+// Hero: none until real photography is ready (plain brand gradient for now).
+export const ZA_MARK = "/za/mark.svg";
 
 export const ZA_CATEGORY_ICON: Partial<Record<Category, string>> = {
   stay: "/za/cat-stay.svg",

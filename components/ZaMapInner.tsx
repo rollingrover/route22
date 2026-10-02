@@ -3,7 +3,7 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import { TILES } from "@/lib/tiles";
-import { places, placeTypeLabel, type PlaceType } from "@/lib/places";
+import { COUNTRIES, places, placeTypeLabel, type PlaceType } from "@/lib/places";
 import { categoryLabels, type Listing } from "@/lib/data";
 
 const iconCache = new Map<string, L.Icon | L.DivIcon>();
@@ -36,9 +36,9 @@ export default function ZaMapInner({
   );
   return (
     <MapContainer
-      center={[-28.8, 25.5]}
-      zoom={5}
-      minZoom={4}
+      center={[-13, 28]}
+      zoom={4}
+      minZoom={3}
       scrollWheelZoom={false}
       className="z-[1] h-[420px] w-full rounded-xl2 border border-line shadow-card md:h-[560px]"
     >
@@ -53,7 +53,7 @@ export default function ZaMapInner({
             <br />
             <strong>{p.name}</strong>
             <br />
-            <span style={{ fontSize: "0.75rem", color: "#57534e" }}>{p.province}</span>
+            <span style={{ fontSize: "0.75rem", color: "#57534e" }}>{p.province} · {COUNTRIES[p.country]}</span>
             <p style={{ margin: "6px 0 0", fontSize: "0.85rem" }}>{p.blurb}</p>
           </Popup>
         </Marker>
@@ -72,7 +72,7 @@ export default function ZaMapInner({
 
       {layers.businesses &&
         listings.map((l) => (
-          <Marker key={l.id} position={[l.lat!, l.lng!]} icon={imgIcon("/za/mark.webp", l.tier === "featured" ? 40 : 34)}>
+          <Marker key={l.id} position={[l.lat!, l.lng!]} icon={imgIcon("/za/mark.svg", l.tier === "featured" ? 40 : 34)}>
             <Popup>
               <span style={{ fontSize: "0.7rem", textTransform: "uppercase", letterSpacing: 0.5, color: "#0e7490", fontWeight: 700 }}>
                 {categoryLabels(l, 2)}

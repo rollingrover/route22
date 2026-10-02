@@ -2,9 +2,9 @@
 // major provincial reserves and UNESCO World Heritage Sites.
 //
 // Coordinates are approximate visitor-area points (not boundaries), compiled
-// Oct 2026 from general knowledge — spot-check before relying on them. Each
-// entry has a `country` so the map can grow beyond South Africa later by
-// adding rows, not code.
+// Oct 2026 from general knowledge — spot-check before relying on them.
+// South Africa is covered in depth; Southern & East Africa has the headline
+// parks and World Heritage Sites (OpDesk's wider market). Add rows to grow.
 //
 // Not yet included (verify first): UNESCO's 2024 South African inscriptions
 // (Nelson Mandela Legacy Sites; Pleistocene modern-human sites) — both are
@@ -12,12 +12,18 @@
 
 export type PlaceType = "national_park" | "reserve" | "heritage_site";
 
+export const COUNTRIES = {
+  ZA: "South Africa", BW: "Botswana", NA: "Namibia", ZW: "Zimbabwe", ZM: "Zambia", MZ: "Mozambique",
+  MW: "Malawi", SZ: "Eswatini", LS: "Lesotho", KE: "Kenya", TZ: "Tanzania", UG: "Uganda", RW: "Rwanda",
+} as const;
+export type CountryCode = keyof typeof COUNTRIES;
+
 export type Place = {
   id: string;
   name: string;
   type: PlaceType;
-  country: "ZA";
-  province: string;
+  country: CountryCode;
+  province: string; // province / region shown in the popup
   lat: number;
   lng: number;
   blurb: string;
@@ -70,4 +76,44 @@ export const places: Place[] = [
   { id: "richtersveld-wh", name: "Richtersveld Cultural and Botanical Landscape", type: "heritage_site", country: "ZA", province: "Northern Cape", lat: -28.10, lng: 17.25, blurb: "Semi-nomadic Nama pastoralism in a succulent-rich mountain desert." },
   { id: "khomani", name: "‡Khomani Cultural Landscape", type: "heritage_site", country: "ZA", province: "Northern Cape", lat: -26.40, lng: 20.30, blurb: "Ancestral land of the ‡Khomani San in the southern Kalahari." },
   { id: "barberton", name: "Barberton Makhonjwa Mountains", type: "heritage_site", country: "ZA", province: "Mpumalanga", lat: -25.85, lng: 31.0, blurb: "Some of Earth's oldest exposed rock — 3.6 billion years of geology." },
+
+  // ===== Southern Africa (headline parks & World Heritage Sites) =====
+  { id: "okavango", name: "Okavango Delta", type: "heritage_site", country: "BW", province: "Ngamiland", lat: -19.3, lng: 22.9, blurb: "The world's largest inland delta — a seasonal flood in the Kalahari." },
+  { id: "chobe", name: "Chobe National Park", type: "national_park", country: "BW", province: "Chobe", lat: -18.6, lng: 24.5, blurb: "Huge elephant herds and river safaris on the Chobe." },
+  { id: "etosha", name: "Etosha National Park", type: "national_park", country: "NA", province: "Kunene / Oshana", lat: -18.85, lng: 16.33, blurb: "A vast salt pan ringed by busy waterholes." },
+  { id: "namib", name: "Namib Sand Sea", type: "heritage_site", country: "NA", province: "Hardap / Erongo", lat: -24.75, lng: 15.3, blurb: "Coastal fog desert with the towering dunes of Sossusvlei." },
+  { id: "twyfelfontein", name: "Twyfelfontein", type: "heritage_site", country: "NA", province: "Kunene", lat: -20.59, lng: 14.37, blurb: "One of Africa's largest collections of rock engravings." },
+  { id: "victoria-falls", name: "Mosi-oa-Tunya / Victoria Falls", type: "heritage_site", country: "ZW", province: "Zimbabwe–Zambia border", lat: -17.92, lng: 25.86, blurb: "\"The smoke that thunders\" — one of the world's great waterfalls." },
+  { id: "hwange", name: "Hwange National Park", type: "national_park", country: "ZW", province: "Matabeleland North", lat: -18.75, lng: 26.5, blurb: "Zimbabwe's largest park, famous for elephants and painted dogs." },
+  { id: "mana-pools", name: "Mana Pools National Park", type: "heritage_site", country: "ZW", province: "Mashonaland West", lat: -15.75, lng: 29.4, blurb: "Zambezi floodplain famed for walking and canoe safaris." },
+  { id: "great-zimbabwe", name: "Great Zimbabwe", type: "heritage_site", country: "ZW", province: "Masvingo", lat: -20.27, lng: 30.93, blurb: "Stone city of a medieval southern African kingdom." },
+  { id: "south-luangwa", name: "South Luangwa National Park", type: "national_park", country: "ZM", province: "Eastern Province", lat: -13.08, lng: 31.6, blurb: "Birthplace of the walking safari; leopard country." },
+  { id: "lower-zambezi", name: "Lower Zambezi National Park", type: "national_park", country: "ZM", province: "Lusaka Province", lat: -15.4, lng: 29.6, blurb: "Canoe safaris beneath the Zambezi escarpment." },
+  { id: "gorongosa", name: "Gorongosa National Park", type: "national_park", country: "MZ", province: "Sofala", lat: -18.97, lng: 34.35, blurb: "A celebrated wildlife restoration story in central Mozambique." },
+  { id: "bazaruto", name: "Bazaruto Archipelago National Park", type: "national_park", country: "MZ", province: "Inhambane", lat: -21.7, lng: 35.47, blurb: "Islands, dugongs and coral reefs off the Mozambique coast." },
+  { id: "ilha-mocambique", name: "Island of Mozambique", type: "heritage_site", country: "MZ", province: "Nampula", lat: -15.03, lng: 40.73, blurb: "Historic trading-port island, former colonial capital." },
+  { id: "lake-malawi", name: "Lake Malawi National Park", type: "heritage_site", country: "MW", province: "Southern Region", lat: -14.03, lng: 34.85, blurb: "Crystal-clear lake waters with hundreds of cichlid fish species." },
+  { id: "hlane", name: "Hlane Royal National Park", type: "national_park", country: "SZ", province: "Lubombo", lat: -26.27, lng: 31.88, blurb: "Eswatini's largest protected area, with lion and rhino." },
+  { id: "sehlabathebe", name: "Sehlabathebe National Park", type: "national_park", country: "LS", province: "Qacha's Nek", lat: -29.87, lng: 29.12, blurb: "Remote highland park, part of the Maloti-Drakensberg World Heritage Site." },
+
+  // ===== East Africa =====
+  { id: "maasai-mara", name: "Maasai Mara National Reserve", type: "reserve", country: "KE", province: "Narok", lat: -1.49, lng: 35.14, blurb: "Big cats and the Great Migration's river crossings." },
+  { id: "amboseli", name: "Amboseli National Park", type: "national_park", country: "KE", province: "Kajiado", lat: -2.65, lng: 37.26, blurb: "Elephants beneath Kilimanjaro." },
+  { id: "tsavo-east", name: "Tsavo East National Park", type: "national_park", country: "KE", province: "Taita-Taveta", lat: -2.98, lng: 38.47, blurb: "One of Kenya's largest parks — red elephants and open plains." },
+  { id: "lake-nakuru", name: "Lake Nakuru National Park", type: "national_park", country: "KE", province: "Nakuru", lat: -0.37, lng: 36.08, blurb: "Rift Valley lake known for flamingos and rhino." },
+  { id: "mount-kenya", name: "Mount Kenya", type: "heritage_site", country: "KE", province: "Central Kenya", lat: -0.15, lng: 37.31, blurb: "Africa's second-highest peak and its forests." },
+  { id: "lamu", name: "Lamu Old Town", type: "heritage_site", country: "KE", province: "Lamu", lat: -2.27, lng: 40.9, blurb: "East Africa's oldest continuously inhabited Swahili town." },
+  { id: "serengeti", name: "Serengeti National Park", type: "heritage_site", country: "TZ", province: "Mara / Simiyu", lat: -2.33, lng: 34.83, blurb: "Endless plains and the Great Migration." },
+  { id: "ngorongoro", name: "Ngorongoro Conservation Area", type: "heritage_site", country: "TZ", province: "Arusha", lat: -3.17, lng: 35.58, blurb: "A wildlife-packed volcanic crater." },
+  { id: "kilimanjaro", name: "Kilimanjaro National Park", type: "heritage_site", country: "TZ", province: "Kilimanjaro", lat: -3.07, lng: 37.35, blurb: "Africa's highest mountain." },
+  { id: "tarangire", name: "Tarangire National Park", type: "national_park", country: "TZ", province: "Manyara", lat: -3.83, lng: 36.0, blurb: "Baobabs and big elephant herds in the dry season." },
+  { id: "ruaha", name: "Ruaha National Park", type: "national_park", country: "TZ", province: "Iringa", lat: -7.6, lng: 34.9, blurb: "Remote, wild and big — lions and kudu by the Great Ruaha River." },
+  { id: "nyerere", name: "Nyerere National Park (Selous)", type: "heritage_site", country: "TZ", province: "Southern Tanzania", lat: -8.5, lng: 37.5, blurb: "Vast wilderness with boat safaris on the Rufiji." },
+  { id: "stone-town", name: "Stone Town of Zanzibar", type: "heritage_site", country: "TZ", province: "Zanzibar", lat: -6.16, lng: 39.19, blurb: "Swahili trading town of carved doors and spice markets." },
+  { id: "bwindi", name: "Bwindi Impenetrable National Park", type: "heritage_site", country: "UG", province: "South-western Uganda", lat: -1.05, lng: 29.67, blurb: "Rainforest home to about half the world's mountain gorillas." },
+  { id: "queen-elizabeth", name: "Queen Elizabeth National Park", type: "national_park", country: "UG", province: "Western Uganda", lat: -0.2, lng: 30.0, blurb: "Tree-climbing lions and the Kazinga Channel." },
+  { id: "murchison", name: "Murchison Falls National Park", type: "national_park", country: "UG", province: "Northern Uganda", lat: 2.2, lng: 31.7, blurb: "The Nile forced through a 7-metre gorge." },
+  { id: "volcanoes", name: "Volcanoes National Park", type: "national_park", country: "RW", province: "Northern Province", lat: -1.47, lng: 29.53, blurb: "Mountain gorilla trekking in the Virunga volcanoes." },
+  { id: "nyungwe", name: "Nyungwe National Park", type: "heritage_site", country: "RW", province: "South-western Rwanda", lat: -2.48, lng: 29.2, blurb: "Ancient montane rainforest with chimpanzees and a canopy walk." },
+  { id: "akagera", name: "Akagera National Park", type: "national_park", country: "RW", province: "Eastern Province", lat: -1.88, lng: 30.7, blurb: "Rwanda's savanna Big Five park." },
 ];
