@@ -1,3 +1,4 @@
+import { hasCategory } from "@/lib/data";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Intro from "@/components/Intro";
@@ -36,7 +37,7 @@ export default async function Home() {
     getAmenities(),
   ]);
 
-  const tours = listings.filter((l) => l.category === "tours");
+  const tours = listings.filter((l) => hasCategory(l, "tours"));
 
   return (
     <>

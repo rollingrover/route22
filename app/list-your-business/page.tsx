@@ -7,7 +7,8 @@ import { getListingForClaim } from "@/lib/listings";
 import { categoryLabel, isFreeTier } from "@/lib/data";
 import { BRAND } from "@/lib/brand";
 import { absoluteUrl, IS_ZATOURS } from "@/lib/site";
-import { opdeskBundle } from "@/lib/pricing";
+import { FOUNDING, formatZAR, listingPrices, opdeskBundle } from "@/lib/pricing";
+import { pricingNote } from "@/components/TierCards";
 
 const title = `List your business — free, Premium & Featured plans | ${BRAND.name}`;
 const description = IS_ZATOURS
@@ -31,6 +32,7 @@ export default async function ListYourBusinessPage({
   const found = slug ? await getListingForClaim(slug) : null;
   const listing = found && !found.isExample ? found.listing : null;
   const plan = searchParams.plan;
+  const prices = listingPrices();
   const initialInterest =
     plan === "premium" || plan === "featured" || plan === "opdesk" || plan === "free"
       ? plan
@@ -58,6 +60,14 @@ export default async function ListYourBusinessPage({
               inbox and better placement — or link your listing to OpDesk to show as{" "}
               <strong className="text-ink">verified &amp; bookable</strong>.
             </p>
+
+            {prices.founding && (
+              <div className="mt-6 inline-flex flex-wrap items-center gap-2 rounded-full border border-clay bg-sand px-4 py-2 text-[0.9rem] text-ink">
+                <strong className="text-clay">Founding members:</strong> Premium from{" "}
+                {formatZAR(prices.premium)}/month, price locked for {FOUNDING.lockYears} years. Offer closes{" "}
+                {FOUNDING.deadlineLabel}.
+              </div>
+            )}
 
             {listing && (
               <div className="mt-7 max-w-[720px] rounded-xl2 border border-line bg-sand p-5">
@@ -95,7 +105,7 @@ export default async function ListYourBusinessPage({
             />
 
             <p className="mx-auto mt-6 max-w-[62ch] text-center text-[0.82rem] text-ink-soft">
-              Prices in ZAR per month. We reply within one business day to confirm your details and
+              {pricingNote()} Prices in ZAR per month. We reply within one business day to confirm your details and
               how to pay — nothing is charged until you agree.
               {IS_ZATOURS
                 ? " KwaZulu-Natal listings on the R22 corridor also appear on Route22."

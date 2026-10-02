@@ -10,7 +10,7 @@ import { generateToken } from "@/lib/tokens";
 import { absoluteUrl, SITE_ID } from "@/lib/site";
 import { T } from "@/lib/tables";
 import { baseSlug, parseCsv, parseListing, type ListingInsert } from "@/lib/listing-input";
-import { formatZAR, pricing } from "@/lib/pricing";
+import { FOUNDING, formatZAR, listingPrices } from "@/lib/pricing";
 import { isFreeTier } from "@/lib/data";
 
 // Logical names used in the admin forms -> physical dir_* tables.
@@ -31,9 +31,13 @@ const SITE_NAME = SITE_ID === "zatours" ? "ZAtours" : "Route22";
 // Appended to owner emails (claim approval, edit link) for FREE listings only.
 function upgradeLines(slug: string, tier: string | null | undefined): string[] {
   if (!tier || !isFreeTier(tier)) return [];
+  const p = listingPrices();
+  const founding = p.founding
+    ? ` Founding-member prices for businesses joining by ${FOUNDING.deadlineLabel}, locked for ${FOUNDING.lockYears} years.`
+    : "";
   return [
     "",
-    `Want more enquiries? Upgrade to Premium (${formatZAR(pricing.listingsPremium.amount)}/month) for a full page with photos, your website and booking links, and an enquiry form to your inbox — or Featured (${formatZAR(pricing.listingsFeatured.amount)}/month) for home-page placement:`,
+    `Want more enquiries? Upgrade to Premium (${formatZAR(p.premium)}/month) for a full page with photos, your website and booking links, and an enquiry form to your inbox — or Featured (${formatZAR(p.featured)}/month) for home-page placement.${founding}`,
     absoluteUrl(`/list-your-business?listing=${slug}`),
     "Flat monthly price — no commission, no per-booking or per-enquiry fees.",
   ];

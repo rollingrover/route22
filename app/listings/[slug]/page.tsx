@@ -9,7 +9,7 @@ import ReviewsSection from "@/components/ReviewsSection";
 import { getListing, getListings, getAllListingSlugs } from "@/lib/listings";
 import { getReviews, REVIEWS_ENABLED } from "@/lib/reviews";
 import ListingEnquiryForm from "@/components/ListingEnquiryForm";
-import { categoryHue, categoryLabel, isFreeTier, partnerBadge } from "@/lib/data";
+import { categoryHue, categoryLabel, categoryLabels, hasCategory, isFreeTier, listingCategories, partnerBadge } from "@/lib/data";
 import { absoluteUrl, canonicalListingUrl, IS_ZATOURS } from "@/lib/site";
 import { BRAND } from "@/lib/brand";
 import OwnerLink from "@/components/OwnerLink";
@@ -29,7 +29,7 @@ export async function generateMetadata({
   const result = await getListing(params.slug);
   if (!result) return { title: `Not found — ${BRAND.fullName}` };
   const { listing, isExample } = result;
-  const title = `${listing.name} — ${categoryLabel[listing.category]} in ${listing.location} | ${BRAND.name}`;
+  const title = `${listing.name} — ${categoryLabels(listing)} in ${listing.location} | ${BRAND.name}`;
   const description =
     listing.desc ||
     (IS_ZATOURS
@@ -73,13 +73,13 @@ export default async function ListingPage({ params }: { params: { slug: string }
           ...others.filter((l) => l.province && l.province === listing.province),
           ...others.filter((l) => !l.province || l.province !== listing.province),
         ]
-      : others.filter((l) => l.category !== "tours")
+      : others.filter((l) => listingCategories(l).some((c) => c !== "tours"))
   ).slice(0, 4);
   const url = absoluteUrl(`/listings/${listing.slug}`);
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": listing.category === "stay" ? "LodgingBusiness" : "LocalBusiness",
+    "@type": hasCategory(listing, "stay") ? "LodgingBusiness" : "LocalBusiness",
     name: listing.name,
     description: listing.desc,
     address: {
@@ -127,7 +127,7 @@ export default async function ListingPage({ params }: { params: { slug: string }
                 </span>
               )}
               <span className="mr-2 inline-block rounded-full bg-black/25 px-3 py-1 text-[0.68rem] font-bold uppercase tracking-wide backdrop-blur">
-                {categoryLabel[listing.category]}
+                {categoryLabels(listing)}
               </span>
               {partnerBadge(listing) && (
                 <span className="mr-2 inline-block rounded-full bg-ocean px-3 py-1 text-[0.68rem] font-bold uppercase tracking-wide backdrop-blur">
@@ -233,7 +233,7 @@ export default async function ListingPage({ params }: { params: { slug: string }
                     <dt className="text-[0.72rem] font-bold uppercase tracking-wide text-ink-soft">
                       Category
                     </dt>
-                    <dd className="m-0 text-[0.95rem] text-ink">{categoryLabel[listing.category]}</dd>
+                    <dd className="m-0 text-[0.95rem] text-ink">{categoryLabels(listing)}</dd>
                   </div>
                   <div className="mb-3 border-b border-line pb-3">
                     <dt className="text-[0.72rem] font-bold uppercase tracking-wide text-ink-soft">

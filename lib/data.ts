@@ -290,12 +290,25 @@ export function isFreeTier(tier: string): boolean {
   return tier === "community" || tier === "basic";
 }
 
+// A listing can sit in several categories (dir_listings.categories); the
+// primary `category` is always first. Older/example rows only have `category`.
+export function listingCategories(l: { category: Category; categories?: Category[] }): Category[] {
+  return l.categories && l.categories.length ? l.categories : [l.category];
+}
+export function hasCategory(l: { category: Category; categories?: Category[] }, c: Category): boolean {
+  return listingCategories(l).includes(c);
+}
+export function categoryLabels(l: { category: Category; categories?: Category[] }, max = 3): string {
+  return listingCategories(l).slice(0, max).map((c) => categoryLabel[c]).join(" · ");
+}
+
 export type Listing = {
   id: string;
   slug: string;
   name: string;
   category: Category;
   location: string;
+  categories?: Category[];
   province?: string;
   // Which directory front ends show this listing (dir_listings.sites).
   sites?: string[];

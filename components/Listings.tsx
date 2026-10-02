@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Category, Listing } from "@/lib/data";
+import { Category, hasCategory, Listing, listingCategories } from "@/lib/data";
 import { CommunityCard, ListingCard } from "./ListingCard";
 
 const filters: { key: "all" | Category; label: string }[] = [
@@ -24,13 +24,13 @@ export default function Listings({
 
   // Tours & safaris have their own dedicated section — keep them out of this
   // general directory so they aren't shown twice.
-  const directoryListings = useMemo(() => listings.filter((l) => l.category !== "tours"), [
+  const directoryListings = useMemo(() => listings.filter((l) => listingCategories(l).some((c) => c !== "tours")), [
     listings,
   ]);
 
   const filtered = useMemo(
     () =>
-      active === "all" ? directoryListings : directoryListings.filter((l) => l.category === active),
+      active === "all" ? directoryListings : directoryListings.filter((l) => hasCategory(l, active)),
     [active, directoryListings]
   );
   const shown = useMemo(() => filtered.filter((l) => l.tier !== "community"), [filtered]);

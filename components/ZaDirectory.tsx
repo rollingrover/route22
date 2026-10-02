@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Category, categoryLabel, Listing } from "@/lib/data";
+import { Category, categoryLabel, hasCategory, Listing, listingCategories } from "@/lib/data";
 import { CommunityCard, ListingCard } from "./ListingCard";
 import { ZA_CATEGORY_ICON } from "@/lib/za-assets";
 
@@ -20,7 +20,7 @@ export default function ZaDirectory({
 
   const categories = useMemo(() => {
     const counts = new Map<Category, number>();
-    listings.forEach((l) => counts.set(l.category, (counts.get(l.category) ?? 0) + 1));
+    listings.forEach((l) => listingCategories(l).forEach((c) => counts.set(c, (counts.get(c) ?? 0) + 1)));
     return (Object.keys(categoryLabel) as Category[])
       .filter((c) => counts.has(c))
       .map((c) => ({ key: c, label: categoryLabel[c], count: counts.get(c) ?? 0 }));
@@ -36,10 +36,10 @@ export default function ZaDirectory({
     const needle = q.trim().toLowerCase();
     return listings.filter(
       (l) =>
-        (cat === "all" || l.category === cat) &&
+        (cat === "all" || hasCategory(l, cat)) &&
         (prov === "all" || l.province === prov) &&
         (!needle ||
-          [l.name, l.location, l.province, l.desc, categoryLabel[l.category]]
+          [l.name, l.location, l.province, l.desc, ...listingCategories(l).map((c) => categoryLabel[c])]
             .filter(Boolean)
             .some((v) => String(v).toLowerCase().includes(needle)))
     );

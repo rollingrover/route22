@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import TierCards, { type Interest } from "./TierCards";
+import TierCards, { pricingNote, type Interest } from "./TierCards";
 import BusinessLeadForm from "./BusinessLeadForm";
 
 // Route22 home page "for business" section. The full pricing page lives at
@@ -30,7 +30,8 @@ export default function Partner() {
         <TierCards siteName="Route22" onPick={setInterest} ctaHref="#lead" />
 
         <p className="mx-auto mb-10 mt-6 max-w-[60ch] text-center text-[0.85rem] text-white/80">
-          Flat monthly prices in ZAR — no commission, no per-booking or per-enquiry fees. Listings on Route22 also appear on ZAtours, South Africa&apos;s
+          {pricingNote()} Flat monthly prices in ZAR — no commission, no per-booking or
+          per-enquiry fees. Listings on Route22 also appear on ZAtours, South Africa&apos;s
           national tourism directory.{" "}
           <a href="/list-your-business" className="font-semibold text-white">
             Compare plans →

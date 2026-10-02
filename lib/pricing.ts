@@ -24,9 +24,8 @@ export type PriceEntry = {
 };
 
 export const pricing = {
-  // General listings directory (stay/wildlife/ocean/culture/eat/tours)
-  listingsPremium: { amount: 249, period: "month", marketAverage: 275 },
-  listingsFeatured: { amount: 399, period: "month", marketAverage: 450 },
+  // Listing plans (Premium / Featured / extra categories) live in
+  // LISTING_PLANS below — founding vs standard pricing.
   // Guides & drivers — individual/freelancer tier, priced below the
   // business-listing tiers in line with typical freelancer-vs-business
   // directory pricing gaps
@@ -49,3 +48,33 @@ export const opdeskBundle: { amount: number | null; url: string } = {
   amount: null,
   url: "https://opdesk.app",
 };
+
+// ---------------------------------------------------------------------------
+// Listing plans — founding-member pricing (decided Oct 2026).
+// Businesses that sign up by 31 March 2027 pay the founding price, locked for
+// 3 years from their own sign-up date. After the deadline the site switches
+// to standard pricing automatically (no redeploy). Keep in step with
+// lib/directory.js in the OpDesk repo, which bills these amounts.
+// ---------------------------------------------------------------------------
+export const FOUNDING = {
+  deadline: "2027-03-31T23:59:59+02:00",
+  deadlineLabel: "31 March 2027",
+  lockYears: 3,
+};
+
+export const LISTING_PLANS = {
+  founding: { premium: 99, featured: 199, extraCategory: 29 },
+  standard: { premium: 149, featured: 249, extraCategory: 39 },
+} as const;
+
+// Categories included per tier; paid plans can add extra categories.
+export const INCLUDED_CATEGORIES = { community: 1, basic: 1, premium: 2, featured: 3 } as const;
+
+export function isFoundingOpen(now: Date = new Date()): boolean {
+  return now.getTime() <= new Date(FOUNDING.deadline).getTime();
+}
+
+export function listingPrices(now: Date = new Date()) {
+  const founding = isFoundingOpen(now);
+  return { founding, ...(founding ? LISTING_PLANS.founding : LISTING_PLANS.standard), standard: LISTING_PLANS.standard };
+}

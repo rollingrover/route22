@@ -4,13 +4,14 @@ import { ListingCard } from "./ListingCard";
 import { Listing } from "@/lib/data";
 import { ROUTE22_URL } from "@/lib/site";
 import { ZA_HERO } from "@/lib/za-assets";
-import { formatZAR, pricing } from "@/lib/pricing";
+import { FOUNDING, formatZAR, listingPrices } from "@/lib/pricing";
 
 // ZAtours home page — national directory. Shares data, cards and the lead
 // pipeline with Route22; only the framing and palette differ.
 export default function ZaHome({ listings, isExample }: { listings: Listing[]; isExample: boolean }) {
   const real = isExample ? [] : listings;
   const featured = listings.filter((l) => l.tier === "featured" || l.tier === "premium").slice(0, 6);
+  const prices = listingPrices();
   const provinces = new Set(real.map((l) => l.province).filter(Boolean)).size;
 
   return (
@@ -116,8 +117,12 @@ export default function ZaHome({ listings, isExample }: { listings: Listing[]; i
           <div className="max-w-[60ch]">
             <h2 className="mb-1 text-[1.4rem]">Run a tourism business?</h2>
             <p className="m-0 text-ink-soft">
-              List free, or upgrade from {formatZAR(pricing.listingsPremium.amount)}/month for a full
-              page and enquiries to your inbox. OpDesk users show as verified &amp; bookable.
+              List free, or upgrade from {formatZAR(prices.premium)}/month for a full page and
+              enquiries to your inbox
+              {prices.founding
+                ? ` — founding-member price, locked for ${FOUNDING.lockYears} years if you join by ${FOUNDING.deadlineLabel}`
+                : ""}
+              . No commission, ever. OpDesk users show as verified &amp; bookable.
             </p>
           </div>
           <Link

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { categoryHue, categoryLabel, isFreeTier, Listing, partnerBadge } from "@/lib/data";
+import { categoryHue, categoryLabel, categoryLabels, isFreeTier, Listing, partnerBadge } from "@/lib/data";
 import OwnerLink from "./OwnerLink";
 import { IS_ZATOURS } from "@/lib/site";
 import { ZA_CATEGORY_ICON } from "@/lib/za-assets";
@@ -71,7 +71,7 @@ export function ListingCard({ l, showProvince = false }: { l: Listing; showProvi
         </div>
         <div className="flex flex-1 flex-col gap-1.5 p-4">
           <span className="text-[0.7rem] font-bold uppercase tracking-wide text-ocean">
-            {categoryLabel[l.category]}
+            {categoryLabels(l, 2)}
           </span>
           <h3 className="m-0 text-[1.1rem] text-ink group-hover:text-clay">{l.name}</h3>
           <span className="text-[0.82rem] text-ink-soft">{place}</span>
@@ -112,7 +112,7 @@ export function CommunityCard({ l, showProvince = false }: { l: Listing; showPro
       />
       <div className="flex flex-col gap-1 p-3.5">
         <span className="text-[0.68rem] font-bold uppercase tracking-wide text-ink-soft">
-          {categoryLabel[l.category]}
+          {categoryLabels(l, 2)}
         </span>
         <h4 className="m-0 text-[0.95rem] text-ink">{l.name}</h4>
         <span className="text-[0.78rem] text-ink-soft">{place}</span>

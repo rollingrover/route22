@@ -1,4 +1,4 @@
-import { formatZAR, opdeskBundle, pricing } from "@/lib/pricing";
+import { FOUNDING, INCLUDED_CATEGORIES, formatZAR, listingPrices, opdeskBundle } from "@/lib/pricing";
 
 export type Interest = "premium" | "featured" | "opdesk" | "free" | "unsure";
 
@@ -6,6 +6,7 @@ type Tier = {
   key: Interest;
   name: string;
   price: string;
+  was?: string; // standard price, struck through while founding pricing runs
   per: string;
   highlight?: boolean;
   badge?: string;
@@ -13,7 +14,11 @@ type Tier = {
   cta: string;
 };
 
+const cats = (n: number) => `${n} ${n === 1 ? "category" : "categories"}`;
+
 export function getTiers(siteName: string): Tier[] {
+  const p = listingPrices();
+  const lock = p.founding ? ` — founding price locked ${FOUNDING.lockYears} years` : "";
   return [
     {
       key: "free",
@@ -21,7 +26,7 @@ export function getTiers(siteName: string): Tier[] {
       price: "R0",
       per: "",
       perks: [
-        "Name, category & town in the directory",
+        `Name, town & ${cats(INCLUDED_CATEGORIES.basic)} in the directory`,
         "Claim it to get your own page",
         "Edit your details any time — no account needed",
       ],
@@ -30,29 +35,33 @@ export function getTiers(siteName: string): Tier[] {
     {
       key: "premium",
       name: "Premium",
-      price: formatZAR(pricing.listingsPremium.amount),
+      price: formatZAR(p.premium),
+      was: p.founding ? formatZAR(p.standard.premium) : undefined,
       per: "/ month",
       highlight: true,
-      badge: "Most popular",
+      badge: p.founding ? "Founding price" : "Most popular",
       perks: [
+        `Listed in ${cats(INCLUDED_CATEGORIES.premium)}`,
         "Full page: photos & full description",
         "Website, phone & booking links",
         "Enquiry form straight to your inbox",
-        "Priority placement in your category",
-        "“Premium” badge",
+        `Priority placement & “Premium” badge${lock}`,
       ],
       cta: "Go Premium",
     },
     {
       key: "featured",
       name: "Featured",
-      price: formatZAR(pricing.listingsFeatured.amount),
+      price: formatZAR(p.featured),
+      was: p.founding ? formatZAR(p.standard.featured) : undefined,
       per: "/ month",
+      badge: p.founding ? "Founding price" : undefined,
       perks: [
         "Everything in Premium",
+        `Listed in ${cats(INCLUDED_CATEGORIES.featured)}`,
         `Spotlight on the ${siteName} home page`,
-        "Top of your category",
-        "Included in featured itineraries & round-ups",
+        "Top of your categories",
+        `Included in featured round-ups${lock}`,
       ],
       cta: "Go Featured",
     },
@@ -72,6 +81,15 @@ export function getTiers(siteName: string): Tier[] {
       cta: "Ask about the bundle",
     },
   ];
+}
+
+// One line explaining founding pricing + extra categories; shown under the cards.
+export function pricingNote(): string {
+  const p = listingPrices();
+  const extra = `Extra categories ${formatZAR(p.extraCategory)}/month each on paid plans.`;
+  return p.founding
+    ? `Founding-member prices for businesses that join by ${FOUNDING.deadlineLabel}, locked for ${FOUNDING.lockYears} years from sign-up (standard prices after that date: ${formatZAR(p.standard.premium)} / ${formatZAR(p.standard.featured)}). ${extra}`
+    : extra;
 }
 
 export default function TierCards({
@@ -106,6 +124,11 @@ export default function TierCards({
           <p className="mb-3.5 mt-0 font-serif text-[1.5rem] text-clay">
             {t.price}
             {t.per && <span className="font-sans text-[0.85rem] text-ink-soft"> {t.per}</span>}
+            {t.was && (
+              <span className="ml-2 font-sans text-[0.85rem] text-ink-soft line-through" aria-label={`Standard price ${t.was}`}>
+                {t.was}
+              </span>
+            )}
           </p>
           <ul className="mb-5 flex flex-1 list-none flex-col gap-2.5 p-0">
             {t.perks.map((p) => (
