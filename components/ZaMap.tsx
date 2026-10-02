@@ -55,8 +55,8 @@ export default function ZaMap({ listings, route22Url }: { listings: Listing[]; r
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
-            {toggle("parks", "Parks & reserves", parks, "/za/marker-park.webp")}
-            {toggle("heritage", "World Heritage", heritage, "/za/marker-heritage.webp")}
+            {toggle("parks", "Parks & reserves", parks, "/za/marker-park.svg")}
+            {toggle("heritage", "World Heritage", heritage, "/za/marker-heritage.svg")}
             {toggle("businesses", "Businesses", pinned.length, "/za/mark.webp")}
           </div>
         </div>

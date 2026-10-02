@@ -7,12 +7,12 @@ export const ZA_HERO = "/za/hero-savanna.webp";
 export const ZA_MARK = "/za/mark.webp";
 
 export const ZA_CATEGORY_ICON: Partial<Record<Category, string>> = {
-  stay: "/za/cat-stay.webp",
-  tours: "/za/cat-tours.webp",
-  wildlife: "/za/cat-wildlife.webp",
-  ocean: "/za/cat-ocean.webp",
-  culture: "/za/cat-culture.webp",
-  eat: "/za/cat-eat.webp",
-  transport: "/za/cat-transport.webp",
-  volunteer: "/za/cat-volunteer.webp",
+  stay: "/za/cat-stay.svg",
+  tours: "/za/cat-tours.svg",
+  wildlife: "/za/cat-wildlife.svg",
+  ocean: "/za/cat-ocean.svg",
+  culture: "/za/cat-culture.svg",
+  eat: "/za/cat-eat.svg",
+  transport: "/za/cat-transport.svg",
+  volunteer: "/za/cat-volunteer.svg",
 };

@@ -15,9 +15,9 @@ function imgIcon(url: string, size: number) {
   return iconCache.get(key)!;
 }
 const ICON: Record<PlaceType, string> = {
-  national_park: "/za/marker-park.webp",
-  reserve: "/za/marker-park.webp",
-  heritage_site: "/za/marker-heritage.webp",
+  national_park: "/za/marker-park.svg",
+  reserve: "/za/marker-park.svg",
+  heritage_site: "/za/marker-heritage.svg",
 };
 
 export type MapLayers = { parks: boolean; heritage: boolean; businesses: boolean };
