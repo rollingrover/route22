@@ -1,5 +1,7 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 import { useMemo, useState } from "react";
 import { Category, hasCategory, Listing, listingCategories } from "@/lib/data";
 import { CommunityCard, ListingCard } from "./ListingCard";
@@ -21,6 +23,8 @@ export default function Listings({
   isExample: boolean;
 }) {
   const [active, setActive] = useState<"all" | Category>("all");
+  const t = useTranslations("R22");
+  const tc = useTranslations("Categories");
 
   // Tours & safaris have their own dedicated section — keep them out of this
   // general directory so they aren't shown twice.
@@ -40,18 +44,17 @@ export default function Listings({
     <section id="listings" className="py-16">
       <div className="mx-auto max-w-[1120px] px-5">
         <div className="mb-8 max-w-[720px]">
-          <h2>Where to stay &amp; what to do</h2>
+          <h2>{t("listings.title")}</h2>
           <p className="text-ink-soft">
-            Lodges, camps, restaurants and experiences along the route.
+            {t("listings.lead")}
           </p>
         </div>
 
         {isExample && (
           <div className="mb-5 rounded-xl border border-dashed border-clay bg-[#fff6e9] px-4 py-3 text-[0.9rem] text-ink-soft">
-            Showing <strong>example listings</strong> — this is where verified Route22 partners
-            appear.{" "}
+            {t.rich("listings.example", { b: (c) => <strong>{c}</strong> })}{" "}
             <a href="/list-your-business" className="whitespace-nowrap font-semibold text-clay no-underline">
-              List your business →
+              {t("listings.list")}
             </a>
           </div>
         )}
@@ -67,7 +70,7 @@ export default function Listings({
                   : "border-line bg-paper text-ink-soft hover:border-clay"
               }`}
             >
-              {f.label}
+              {f.key === "all" ? t("listings.all") : tc(f.key)}
             </button>
           ))}
         </div>
@@ -82,8 +85,7 @@ export default function Listings({
           <div className="mt-12 border-t border-line pt-10">
             <h3 className="mb-1.5 text-[1.15rem]">Also along the route</h3>
             <p className="mb-5 max-w-[65ch] text-[0.88rem] text-ink-soft">
-              Free community listings — businesses on the route that haven&apos;t yet taken a full
-              Route22 page.
+              {t("listings.community")}
             </p>
             <div className="grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-3">
               {community.map((l) => (

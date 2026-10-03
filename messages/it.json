@@ -8,7 +8,16 @@
     "listBusiness": "Iscrivi la tua attività",
     "menu": "Menu",
     "language": "Lingua",
-    "currency": "Valuta visualizzata"
+    "currency": "Valuta visualizzata",
+    "r22Tours": "Tour",
+    "r22Route": "Il percorso",
+    "r22Parks": "Parchi",
+    "r22Itins": "Itinerari",
+    "r22Stay": "Dormire & fare",
+    "r22StayShort": "Dormire & fare",
+    "r22Guides": "Guide & autisti",
+    "r22Industry": "Info utili",
+    "r22Opps": "Opportunità"
   },
   "Footer": {
     "explore": "Esplora",
@@ -19,7 +28,9 @@
     "blurbZatours": "ZAtours è una guida alle attività turistiche in Sudafrica, Africa australe e orientale. Non vendiamo tour — prenoti direttamente con le attività elencate.",
     "route22Link": "Route22 — Elephant Coast",
     "featuredBusinesses": "Attività in evidenza",
-    "regionLine": "Sudafrica · Africa australe & orientale"
+    "regionLine": "Sudafrica · Africa australe & orientale",
+    "r22Blurb": "Route22 Zululand — una guida al percorso turistico della Elephant Coast, da St Lucia a Kosi Bay.",
+    "r22Region": "Elephant Coast · KwaZulu-Natal · Sudafrica"
   },
   "Categories": {
     "stay": "Alloggi",
@@ -158,5 +169,191 @@
   "Meta": {
     "listingTitle": "{name} — {category} a {location}",
     "listingDesc": "{name}, {category} a {location}. Contattali direttamente su {brand}."
+  },
+  "R22": {
+    "hero": {
+      "eyebrow": "Elephant Coast • KwaZulu-Natal • Sudafrica",
+      "title": "Percorri la strada più selvaggia del Sudafrica.",
+      "lead": "La R22 sale verso nord dalla N2 a Hluhluwe fino al confine con il Mozambico — tra riserve dei Big Five, zone umide Patrimonio dell’Umanità, barriere coralline e le trappole per pesci vecchie di 400 anni del Maputaland. Route22 è la tua guida a ogni tappa del viaggio.",
+      "explore": "Esplora il percorso",
+      "itins": "Vedi gli itinerari",
+      "stat1": "di strada asfaltata",
+      "stat2": "grandi riserve faunistiche",
+      "stat3": "sito Patrimonio dell’Umanità"
+    },
+    "intro": {
+      "title": "Una strada. Tutte le ragioni per venire nello Zululand.",
+      "body": "Il corridoio Route22 segue la R22 (la strada del Lubombo) come asse principale, collegando tratti della N2, della P453 e della strada per St Lucia, fino a Kosi Bay e poi verso Pongola. Lungo il percorso si trova la più alta concentrazione di fauna, natura selvaggia e costa del paese — dal parco faunistico più antico d’Africa al primo sito Patrimonio dell’Umanità del Sudafrica."
+    },
+    "tours": {
+      "title": "Tour & safari",
+      "lead": "Compagnie di safari e tour operator con escursioni giornaliere ed esperienze di più giorni lungo il percorso.",
+      "example": "Mostriamo <b>operatori di esempio</b> — qui appariranno i partner turistici verificati di Route22.",
+      "listTour": "Iscrivi la tua compagnia →"
+    },
+    "route": {
+      "title": "Il percorso",
+      "lead": "Tocca una tappa per vedere cosa offre. L’ideale è percorrerlo in 4–7 giorni.",
+      "amenities": "Mostra bancomat, cliniche & fast food"
+    },
+    "parks": {
+      "title": "Parchi & riserve lungo la strada",
+      "lead": "Tutte le grandi tappe della Elephant Coast, da sud a nord. Tocca un parco per pianificare la visita.",
+      "explore": "Scopri {name} →"
+    },
+    "itins": {
+      "title": "Itinerari di esempio",
+      "lead": "Punti di partenza da personalizzare. Più si sale a nord, più il viaggio è lungo, lento e selvaggio.",
+      "sponsored": "Sponsorizzato da {name} →"
+    },
+    "listings": {
+      "title": "Dove dormire & cosa fare",
+      "lead": "Lodge, campi, ristoranti ed esperienze lungo il percorso.",
+      "example": "Mostriamo <b>annunci di esempio</b> — qui appariranno i partner verificati di Route22.",
+      "list": "Iscrivi la tua attività →",
+      "community": "Annunci gratuiti — attività lungo il percorso che non hanno ancora una pagina completa su Route22.",
+      "all": "Tutti"
+    },
+    "more": {
+      "title": "Altro da Route22",
+      "explore": "Scopri →",
+      "guidesT": "Guide & autisti",
+      "guidesD": "Prenota guide indipendenti per safari, immersioni, birdwatching, pesca e cultura, oppure un autista per i transfer.",
+      "industryT": "Info utili",
+      "industryD": "Guide alla pianificazione, consigli stagionali, conservazione e risorse per gli operatori.",
+      "oppsT": "Opportunità",
+      "oppsD": "Lavoro, tirocini, volontariato, apprendistati e bandi lungo il percorso.",
+      "englishOnly": "(in inglese)",
+      "lead": "Oltre il percorso — persone, risorse e annunci."
+    },
+    "stops": {
+      "st-lucia": {
+        "kind": "Cittadina d’accesso",
+        "blurb": "Punto di partenza meridionale ai margini di iSimangaliso. Ippopotami e coccodrilli nell’estuario, crociere in barca e la deviazione per Cape Vidal."
+      },
+      "hluhluwe-imfolozi": {
+        "kind": "Riserva faunistica",
+        "blurb": "La più antica riserva ufficiale d’Africa e la culla della tutela del rinoceronte. Big Five, safari in autonomia e guidati."
+      },
+      "hluhluwe-town": {
+        "kind": "Incrocio sulla N2",
+        "blurb": "Qui il percorso incontra la N2 e la R22 inizia la sua corsa verso nord. Lodge, rifornimenti e base per le riserve."
+      },
+      "mkuze": {
+        "kind": "Riserva faunistica",
+        "blurb": "Una delle migliori riserve per il birdwatching in Africa, con celebri capanni, foreste di fichi e pozze piene di animali."
+      },
+      "sodwana": {
+        "kind": "Immersioni & oceano",
+        "blurb": "Immersioni di livello mondiale sulle barriere coralline più meridionali, pesca d’altura e l’area marina di iSimangaliso."
+      },
+      "mbazwana": {
+        "kind": "Cittadina sul percorso",
+        "blurb": "Principale centro di servizi sulla R22 settentrionale — carburante, negozi e incrocio per Sodwana e il lago Sibaya."
+      },
+      "sibaya": {
+        "kind": "Zona umida",
+        "blurb": "Il più grande lago d’acqua dolce del Sudafrica, circondato da dune boscose — ippopotami, coccodrilli e un’avifauna ricchissima."
+      },
+      "rocktail": {
+        "kind": "Costa",
+        "blurb": "Spiagge isolate e luoghi di nidificazione delle tartarughe marine — in estate arrivano tartarughe caretta e liuto."
+      },
+      "tembe": {
+        "kind": "Riserva faunistica",
+        "blurb": "Casa di alcuni dei più grandi elefanti con zanne d’Africa, nella foresta sabbiosa al confine con il Mozambico."
+      },
+      "ndumo": {
+        "kind": "Riserva ornitologica",
+        "blurb": "Il sogno di ogni birdwatcher nella pianura alluvionale del Pongola — oltre 400 specie e pozze affollate di animali."
+      },
+      "kosi-bay": {
+        "kind": "Estuario",
+        "blurb": "Capolinea settentrionale vicino al confine — laghi collegati, snorkeling e trappole per pesci tradizionali di 400 anni ancora in uso."
+      },
+      "pongola": {
+        "kind": "Diramazione ovest",
+        "blurb": "La porta occidentale — la diga di Pongolapoort, la pesca al pesce tigre e riserve dei Big Five sotto i monti Lebombo."
+      }
+    },
+    "parkCards": {
+      "hluhluwe-imfolozi": {
+        "kind": "Riserva dei Big Five",
+        "region": "Porta meridionale",
+        "desc": "Safari dei Big Five nella più antica riserva ufficiale d’Africa, culla della tutela del rinoceronte bianco."
+      },
+      "isimangaliso-wetland-park": {
+        "kind": "Patrimonio UNESCO",
+        "region": "L’asse costiero",
+        "desc": "Il primo sito Patrimonio dell’Umanità del Sudafrica — 21 ecosistemi, dal lago St Lucia a Kosi Bay."
+      },
+      "st-lucia": {
+        "kind": "Cittadina d’accesso",
+        "region": "Punto di partenza sud",
+        "desc": "La cittadina sull’estuario di St Lucia — crociere tra ippopotami e coccodrilli e la strada per Cape Vidal."
+      },
+      "sodwana-bay": {
+        "kind": "Immersioni & oceano",
+        "region": "Costa settentrionale",
+        "desc": "Immersioni di livello mondiale sulle barriere coralline più meridionali, oltre a pesca d’altura e spiagge."
+      },
+      "mkhuze-game-reserve": {
+        "kind": "Riserva faunistica e ornitologica",
+        "region": "Centro del percorso",
+        "desc": "Una leggendaria riserva per il birdwatching con capanni famosi, foreste di fichi e pozze piene di animali."
+      },
+      "tembe-elephant-park": {
+        "kind": "Grandi elefanti",
+        "region": "Estremo nord",
+        "desc": "Foresta sabbiosa selvaggia che ospita alcuni degli elefanti più grandi rimasti in Africa."
+      },
+      "ndumo-game-reserve": {
+        "kind": "Riserva ornitologica",
+        "region": "Estremo nord",
+        "desc": "Un paradiso per gli uccelli nella pianura alluvionale del Pongola, con pozze piene di animali."
+      },
+      "kosi-bay": {
+        "kind": "Estuario & laghi",
+        "region": "Capolinea nord",
+        "desc": "Laghi collegati, snorkeling alla foce e trappole per pesci tradizionali di 400 anni ancora in uso."
+      },
+      "lake-sibaya": {
+        "kind": "Lago d’acqua dolce",
+        "region": "Costa settentrionale",
+        "desc": "Il più grande lago naturale d’acqua dolce del Sudafrica — ippopotami, coccodrilli e un’avifauna ricchissima."
+      },
+      "pongola": {
+        "kind": "Porta occidentale",
+        "region": "Diramazione ovest",
+        "desc": "La porta occidentale — la diga di Pongolapoort, la pesca al pesce tigre e riserve dei Big Five sotto i monti Lebombo."
+      }
+    },
+    "itin": {
+      "i0": {
+        "days": "3 giorni",
+        "title": "Big Five & l’estuario",
+        "s0": "St Lucia — crociera sull’estuario & Cape Vidal",
+        "s1": "Hluhluwe-iMfolozi — safari di un’intera giornata",
+        "s2": "Mkhuze — capanni & pozze sulla via del ritorno"
+      },
+      "i1": {
+        "days": "5 giorni",
+        "title": "Risalendo la Elephant Coast",
+        "s0": "St Lucia & iSimangaliso",
+        "s1": "Safari a Hluhluwe-iMfolozi",
+        "s2": "Sodwana Bay — immersioni o snorkeling",
+        "s3": "Lago Sibaya & spiagge di Rocktail",
+        "s4": "Kosi Bay — trappole per pesci & estuario"
+      },
+      "i2": {
+        "days": "7+ giorni",
+        "title": "L’intero corridoio",
+        "s0": "St Lucia → Hluhluwe-iMfolozi",
+        "s1": "Mkhuze & Sodwana",
+        "s2": "Sibaya, Rocktail & Kosi Bay",
+        "s3": "Tembe & Ndumo nell’estremo nord",
+        "s4": "A ovest verso Pongola & la diga"
+      }
+    }
   }
 }

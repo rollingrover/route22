@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import { stops } from "@/lib/data";
@@ -18,15 +19,16 @@ const MapInner = dynamic(() => import("./MapInner"), {
 export default function RouteMap({ amenities }: { amenities: Amenity[] }) {
   const [selected, setSelected] = useState<string | null>(null);
   const [showAmenities, setShowAmenities] = useState(false);
+  const t = useTranslations("R22");
 
   return (
     <section id="route" className="bg-sand-2 py-16">
       <div className="mx-auto max-w-[1120px] px-5">
         <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
           <div className="max-w-[720px]">
-            <h2>The Route</h2>
+            <h2>{t("route.title")}</h2>
             <p className="text-ink-soft">
-              Tap a stop to see what&apos;s there. The route is best driven over 4–7 days.
+              {t("route.lead")}
             </p>
           </div>
           {amenities.length > 0 && (
@@ -37,7 +39,7 @@ export default function RouteMap({ amenities }: { amenities: Amenity[] }) {
                 onChange={(e) => setShowAmenities(e.target.checked)}
                 className="h-4 w-4 accent-clay"
               />
-              Show ATMs, clinics &amp; fast food
+              {t("route.amenities")}
             </label>
           )}
         </div>
@@ -60,10 +62,10 @@ export default function RouteMap({ amenities }: { amenities: Amenity[] }) {
                 }`}
               >
                 <span className="text-[0.72rem] font-semibold uppercase tracking-wide text-bush">
-                  {s.kind}
+                  {t(`stops.${s.id}.kind`)}
                 </span>
                 <h4 className="my-0.5 text-[1.02rem]">{s.name}</h4>
-                <p className="m-0 text-[0.88rem] text-ink-soft">{s.blurb}</p>
+                <p className="m-0 text-[0.88rem] text-ink-soft">{t(`stops.${s.id}.blurb`)}</p>
               </button>
             ))}
           </aside>

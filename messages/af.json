@@ -1,0 +1,359 @@
+{
+  "Nav": {
+    "browse": "Blaai deur die gids",
+    "featured": "Uitgelig",
+    "map": "Kaart",
+    "routes": "Roetes",
+    "elephantCoast": "Elephant Coast-roete",
+    "listBusiness": "Lys jou besigheid",
+    "menu": "Spyskaart",
+    "language": "Taal",
+    "currency": "Vertoonde geldeenheid",
+    "r22Tours": "Toere",
+    "r22Route": "Die roete",
+    "r22Parks": "Parke",
+    "r22Itins": "Reisplanne",
+    "r22Stay": "Bly & doen",
+    "r22StayShort": "Bly & doen",
+    "r22Guides": "Gidse & bestuurders",
+    "r22Industry": "Bedryfsinligting",
+    "r22Opps": "Geleenthede"
+  },
+  "Footer": {
+    "explore": "Verken",
+    "forBusiness": "Vir besighede",
+    "plans": "Pakkette & pryse",
+    "privacy": "Privaatheid",
+    "tradingLine": "{brand}, ’n handelsnaam van OpDesk (Pty) Ltd",
+    "blurbZatours": "ZAtours is ’n gids van toerismebesighede in Suid-Afrika, Suider- en Oos-Afrika. Ons verkoop nie toere nie — jy bespreek direk by die besighede wat gelys is.",
+    "route22Link": "Route22 — Elephant Coast",
+    "featuredBusinesses": "Uitgeligte besighede",
+    "regionLine": "Suid-Afrika · Suider- & Oos-Afrika",
+    "r22Blurb": "Route22 Zoeloeland — ’n gids vir die Elephant Coast-toerismeroete, van St Lucia tot Kosibaai.",
+    "r22Region": "Elephant Coast · KwaZulu-Natal · Suid-Afrika"
+  },
+  "Categories": {
+    "stay": "Verblyf",
+    "tours": "Toere & safari’s",
+    "wildlife": "Natuurlewe & parke",
+    "ocean": "Duik & oseaan",
+    "culture": "Kultuur",
+    "eat": "Eet & drink",
+    "transport": "Oordragte & pendeldienste",
+    "volunteer": "Vrywilligerswerk"
+  },
+  "Home": {
+    "eyebrow": "Toerismegids · Suider- & Oos-Afrika",
+    "title": "Vind waar om te bly en wat om te doen in Suider- & Oos-Afrika.",
+    "lead": "Lodges, gastehuise, safari’s, toere en oordragte — gelys deur die besighede self. Ons begin in Suid-Afrika en groei oor die hele streek. Kontak hulle direk; ZAtours is ’n gids, nie ’n toeroperateur nie.",
+    "browseCta": "Blaai deur die gids",
+    "planRoute": "Beplan die Elephant Coast-roete ↗",
+    "count": "{count, plural, one {# besigheid gelys} other {# besighede gelys}}",
+    "acrossProvinces": " in {count} provinsies",
+    "featuredTitle": "Uitgeligte besighede",
+    "featuredLead": "Uitgesoekte operateurs — kyk vir die <badge>Geverifieer & bespreekbaar</badge>-kenteken vir regstreekse besprekings.",
+    "r22Eyebrow": "Streeksgids · KwaZulu-Natal",
+    "r22Title": "Ry jy die Elephant Coast?",
+    "r22Body": "Route22 is ons sustergids vir die R22 — Hluhluwe-iMfolozi, St Lucia, Sodwana, Kosibaai en die reservate van Maputaland, met kaarte, parke en reisplanne.",
+    "r22Cta": "Verken Route22 ↗",
+    "bizTitle": "Bestuur jy ’n toerismebesigheid?",
+    "bizBody": "Lys gratis, of gradeer op vanaf {price}/maand vir ’n volle blad en navrae in jou inkassie. Nooit kommissie nie. OpDesk-gebruikers word as geverifieer & bespreekbaar gewys.",
+    "bizFounding": "Stigterprys, {years} jaar vas as jy voor {deadline} aansluit.",
+    "bizCta": "Sien pakkette"
+  },
+  "Directory": {
+    "title": "Blaai deur die gids",
+    "lead": "Verblyf, toere, safari’s, oordragte en belewenisse — kontak elke besigheid direk.",
+    "example": "Ons wys <b>voorbeeldinskrywings</b> terwyl die gids vol word.",
+    "listBusiness": "Lys jou besigheid →",
+    "searchLabel": "Soek",
+    "searchPlaceholder": "Soek op naam, dorp of aktiwiteit",
+    "allProvinces": "Alle provinsies",
+    "allRoutes": "Alle roetes",
+    "showing": "Wys: {category}",
+    "showAll": "wys alles",
+    "none": "Nog niks gevind nie — probeer ’n ander soektog of kom gou weer kyk.",
+    "more": "Meer besighede",
+    "moreLead": "Gratis inskrywings vir besighede wat nog nie ’n volle blad het nie."
+  },
+  "Map": {
+    "title": "Verken Suider- & Oos-Afrika",
+    "lead": "Nasionale parke, wildreservate en Wêrelderfenisgebiede — van die Kaap tot Kenia — met die besighede naby hulle. Inskrywings begin in Suid-Afrika; zoem in om te verken.",
+    "parks": "Parke & reservate",
+    "heritage": "Wêrelderfenis",
+    "businesses": "Besighede",
+    "note": "Liggings is benaderd. Bestuur jy ’n besigheid?",
+    "pinCta": "Premium- en Featured-inskrywings kry ’n speld op hierdie kaart →",
+    "viewEnquire": "Bekyk & vra navraag →",
+    "r22Title": "Route22 — Elephant Coast",
+    "r22Body": "Die R22 van Hluhluwe tot Kosibaai: parke, strande en reisplanne.",
+    "planRoute": "Beplan die roete ↗",
+    "national_park": "Nasionale park",
+    "reserve": "Wildreservaat",
+    "heritage_site": "UNESCO-wêrelderfenisgebied",
+    "loading": "Kaart word gelaai…"
+  },
+  "Card": {
+    "viewEnquire": "Bekyk & vra navraag →",
+    "viewDetails": "Bekyk besonderhede →",
+    "claimed": "Opgeëis",
+    "featured": "Uitgelig",
+    "premium": "Premium",
+    "ownerClaim": "Jou besigheid? Eis op of gradeer op",
+    "ownerUpgrade": "Jou besigheid? Gradeer hierdie inskrywing op",
+    "verified": "Geverifieer & bespreekbaar",
+    "liveAvailability": "Regstreekse beskikbaarheid"
+  },
+  "Listing": {
+    "directory": "Gids",
+    "stayDo": "Bly & doen",
+    "example": "Dit is ’n <b>voorbeeldinskrywing</b> vir uitlegdoeleindes — regte {brand}-vennote verskyn hier sodra hulle gepubliseer is.",
+    "about": "Oor",
+    "descZatours": "{name} is gelys in die ZAtours-gids van verblyf en aktiwiteite in Suider- & Oos-Afrika.",
+    "descRoute22": "{name} is deel van die Route22-gids van verblyf en aktiwiteite langs die Elephant Coast.",
+    "location": "Ligging",
+    "share": "Deel hierdie inskrywing",
+    "enquireWith": "Vra navraag by {name}",
+    "verifiedNote": "Geverifieerde operateur — jou navraag gaan direk na hul OpDesk-besprekingsinkassie.",
+    "replyNote": "Stuur jou datums en vrae; {name} sal per e-pos antwoord.",
+    "directoryNote": "ZAtours is ’n gids, nie ’n toeroperateur nie — jy handel direk met die besigheid.",
+    "back": "Terug na die gids",
+    "claimIt": "Is dit jou besigheid? Eis dit op",
+    "quickFacts": "Kort feite",
+    "category": "Kategorie",
+    "contact": "Kontak",
+    "website": "Besoek webwerf ↗",
+    "more": "Meer in die omgewing",
+    "moreRoute": "Meer langs die roete",
+    "memberOf": "Lid van {name}",
+    "listingMap": "Kaart word gelaai…"
+  },
+  "Enquiry": {
+    "name": "Jou naam",
+    "email": "E-pos",
+    "phone": "Telefoon (opsioneel)",
+    "guests": "Gaste",
+    "from": "Van",
+    "to": "Tot",
+    "message": "Boodskap",
+    "send": "Stuur navraag",
+    "sending": "Stuur tans…",
+    "sent": "Gestuur — {name} sal jou per e-pos antwoord.",
+    "error": "Iets het skeefgeloop. Probeer asseblief weer.",
+    "network": "Netwerkfout. Probeer asseblief weer.",
+    "purpose": "om my navraag aan {name} te stuur sodat hulle my kan antwoord"
+  },
+  "Consent": {
+    "text": "Ek stem in dat my besonderhede gebruik mag word {purpose}, soos beskryf in die <link>privaatheidskennisgewing</link>."
+  },
+  "Routes": {
+    "eyebrow": "Roetes & verenigings",
+    "title": "Toerismeroetes",
+    "lead": "Voëlkyk-, natuurlewe-, erfenis- en gemeenskapstoerismeroetes — verken elke roete en die lidbesighede langs die pad.",
+    "empty": "Die eerste roetes word nou opgestel.",
+    "runRoute": "Bestuur jy ’n roete of toerismevereniging? Plaas dit op {brand} →",
+    "route": "Toerismeroete",
+    "association": "Toerismevereniging",
+    "members": "{count, plural, one {# lidbesigheid} other {# lidbesighede}}",
+    "onMap": "Op die kaart",
+    "memberBusinesses": "Lidbesighede",
+    "beingAdded": "Lidbesighede word bygevoeg.",
+    "website": "Amptelike webwerf ↗",
+    "crumb": "Roetes",
+    "boxTitle": "Bestuur jy ’n roete of toerismevereniging?",
+    "boxBody": "Kry ’n roeteblad met jou kaart, storie en elke lidbesigheid, plus ’n “Lid van”-kenteken op hul inskrywings.",
+    "boxCta": "Sien Route Hub-pakkette →",
+    "metaTitle": "Toerismeroetes & verenigings",
+    "metaDescription": "Voëlkyk-, natuurlewe-, erfenis- en gemeenskapstoerismeroetes — verken elke roete en die lidbesighede langs die pad."
+  },
+  "Meta": {
+    "listingTitle": "{name} — {category} in {location}",
+    "listingDesc": "{name}, {category} in {location}. Kontak hulle direk op {brand}."
+  },
+  "R22": {
+    "hero": {
+      "eyebrow": "Die Elephant Coast • KwaZulu-Natal • Suid-Afrika",
+      "title": "Ry die wildste pad in Suid-Afrika.",
+      "lead": "Die R22 kronkel noordwaarts van die N2 by Hluhluwe tot by die Mosambiekse grens — verby Groot Vyf-reservate, vleilande met wêrelderfenisstatus, duikriwwe en die 400 jaar oue visvalle van Maputaland. Route22 is jou gids vir elke stop langs die pad.",
+      "explore": "Verken die roete",
+      "itins": "Sien reisplanne",
+      "stat1": "geteerde roete",
+      "stat2": "groot wildreservate",
+      "stat3": "Wêrelderfenisgebied"
+    },
+    "intro": {
+      "title": "Een pad. Elke rede om Zoeloeland toe te kom.",
+      "body": "Die Route22-korridor volg die R22 (die Lubombo-pad) as ruggraat en verbind dele van die N2, die P453 en die pad na St Lucia, tot by Kosibaai en verder na Pongola. Langs dié pad lê die digste konsentrasie natuurlewe, wildernis en kuslyn in die land — van Afrika se oudste wildpark tot Suid-Afrika se eerste Wêrelderfenisgebied."
+    },
+    "tours": {
+      "title": "Toere & safari’s",
+      "lead": "Safarimaatskappye en toeroperateurs met daguitstappies en meerdaagse belewenisse langs die roete.",
+      "example": "Ons wys <b>voorbeeld-toeroperateurs</b> — hier verskyn geverifieerde Route22-toervennote.",
+      "listTour": "Lys jou toermaatskappy →"
+    },
+    "route": {
+      "title": "Die roete",
+      "lead": "Tik op ’n stop om te sien wat daar is. Die roete word die beste oor 4–7 dae gery.",
+      "amenities": "Wys OTM’s, klinieke & kitskos"
+    },
+    "parks": {
+      "title": "Parke & reservate langs die pad",
+      "lead": "Elke groot stop aan die Elephant Coast, van suid na noord. Tik op ’n park om jou besoek te beplan.",
+      "explore": "Verken {name} →"
+    },
+    "itins": {
+      "title": "Voorbeeld-reisplanne",
+      "lead": "Beginpunte wat jy kan aanpas. Hoe verder noord, hoe langer, stadiger en wilder.",
+      "sponsored": "Geborg deur {name} →"
+    },
+    "listings": {
+      "title": "Waar om te bly & wat om te doen",
+      "lead": "Lodges, kampe, restaurante en belewenisse langs die roete.",
+      "example": "Ons wys <b>voorbeeldinskrywings</b> — hier verskyn geverifieerde Route22-vennote.",
+      "list": "Lys jou besigheid →",
+      "community": "Gratis gemeenskapsinskrywings — besighede langs die roete wat nog nie ’n volle Route22-blad het nie.",
+      "all": "Alles"
+    },
+    "more": {
+      "title": "Meer van Route22",
+      "explore": "Verken →",
+      "guidesT": "Gidse & bestuurders",
+      "guidesD": "Bespreek onafhanklike safari-, duik-, voëlkyk-, hengel- en kultuurgidse, of ’n oordragbestuurder.",
+      "industryT": "Bedryfsinligting",
+      "industryD": "Reisbeplanning, seisoenwenke, bewaringsagtergrond en hulpbronne vir operateurs.",
+      "oppsT": "Geleenthede",
+      "oppsD": "Werk, internskappe, vrywilligersposte, leerlingskappe en tenders langs die roete.",
+      "englishOnly": "(in Engels)",
+      "lead": "Meer as net die roete — mense, hulpbronne en inskrywings."
+    },
+    "stops": {
+      "st-lucia": {
+        "kind": "Poortdorp",
+        "blurb": "Die suidelike anker van die roete aan die rand van iSimangaliso. Seekoeie en krokodille in die riviermonding, bootvaarte en die afdraai na Kaap Vidal."
+      },
+      "hluhluwe-imfolozi": {
+        "kind": "Wildreservaat",
+        "blurb": "Afrika se oudste geproklameerde wildreservaat en die tuiste van renosterbewaring. Groot Vyf, selfry- en begeleide safari’s."
+      },
+      "hluhluwe-town": {
+        "kind": "N2-aansluiting",
+        "blurb": "Waar die roete die N2 ontmoet en die R22 sy pad noord begin. Lodges, voorrade en die wegspringplek na die reservate."
+      },
+      "mkuze": {
+        "kind": "Wildreservaat",
+        "blurb": "Een van die beste voëlkykreservate in Afrika, met beroemde skuilings, vyeboombosse en panne vol wild."
+      },
+      "sodwana": {
+        "kind": "Duik & oseaan",
+        "blurb": "Wêreldklas-skubaduik op die suidelikste koraalriwwe, diepseehengel en die mariene deel van iSimangaliso."
+      },
+      "mbazwana": {
+        "kind": "Roetedorp",
+        "blurb": "Die vernaamste diensdorp aan die noordelike R22 — brandstof, winkels en die kruispad na Sodwana en die Sibayameer."
+      },
+      "sibaya": {
+        "kind": "Vleiland",
+        "blurb": "Suid-Afrika se grootste varswatermeer, omring deur beboste duine — seekoeie, krokodille en volop voëllewe."
+      },
+      "rocktail": {
+        "kind": "Kus",
+        "blurb": "Afgeleë strande en neskusse vir seeskilpaaie — karetskilpaaie en leerrugskilpaaie kom in die somer aan wal."
+      },
+      "tembe": {
+        "kind": "Wildreservaat",
+        "blurb": "Tuiste van van Afrika se grootste olifante met slagtande, in sandwoud-wildernis aan die Mosambiekse grens."
+      },
+      "ndumo": {
+        "kind": "Voëlreservaat",
+        "blurb": "’n Voëlkyker se droom op die Pongola-vloedvlakte — meer as 400 spesies en panne vol wild."
+      },
+      "kosi-bay": {
+        "kind": "Riviermonding",
+        "blurb": "Die noordelike eindpunt naby die grens — verbinde mere, snorkel en 400 jaar oue tradisionele visvalle wat steeds gebruik word."
+      },
+      "pongola": {
+        "kind": "Westelike arm",
+        "blurb": "Die westelike poort — Pongolapoortdam, tiervishengel en Groot Vyf-reservate langs die Lebombo-berge."
+      }
+    },
+    "parkCards": {
+      "hluhluwe-imfolozi": {
+        "kind": "Groot Vyf-reservaat",
+        "region": "Suidelike poort",
+        "desc": "Groot Vyf-safari’s in Afrika se oudste geproklameerde wildreservaat, die geboorteplek van witrenosterbewaring."
+      },
+      "isimangaliso-wetland-park": {
+        "kind": "Wêrelderfenisgebied",
+        "region": "Die kusruggraat",
+        "desc": "Suid-Afrika se eerste Wêrelderfenisgebied — 21 ekosisteme, van die St Luciameer tot Kosibaai."
+      },
+      "st-lucia": {
+        "kind": "Poortdorp",
+        "region": "Suidelike anker",
+        "desc": "Die dorp aan die St Lucia-riviermonding — bootvaarte tussen seekoeie en krokodille en die pad na Kaap Vidal."
+      },
+      "sodwana-bay": {
+        "kind": "Duik & oseaan",
+        "region": "Noordelike kus",
+        "desc": "Wêreldklas-skubaduik op die suidelikste koraalriwwe, plus diepseehengel en strande."
+      },
+      "mkhuze-game-reserve": {
+        "kind": "Voël- & wildreservaat",
+        "region": "Middel van die roete",
+        "desc": "’n Legendariese voëlkykreservaat met beroemde skuilings, vyeboombosse en panne vol wild."
+      },
+      "tembe-elephant-park": {
+        "kind": "Groot slagtande",
+        "region": "Verre noorde",
+        "desc": "Sandwoud-wildernis wat van die grootste olifante wat in Afrika oor is, huisves."
+      },
+      "ndumo-game-reserve": {
+        "kind": "Voëlreservaat",
+        "region": "Verre noorde",
+        "desc": "’n Voëlparadys op die Pongola-vloedvlakte, met panne vol wild."
+      },
+      "kosi-bay": {
+        "kind": "Riviermonding & mere",
+        "region": "Noordelike eindpunt",
+        "desc": "Verbinde mere, snorkel by die monding en 400 jaar oue tradisionele visvalle wat steeds gebruik word."
+      },
+      "lake-sibaya": {
+        "kind": "Varswatermeer",
+        "region": "Noordelike kus",
+        "desc": "Die grootste natuurlike varswatermeer in Suid-Afrika — seekoeie, krokodille en volop voëllewe."
+      },
+      "pongola": {
+        "kind": "Westelike poort",
+        "region": "Westelike arm",
+        "desc": "Die westelike poort — Pongolapoortdam, tiervishengel en Groot Vyf-reservate onder die Lebombo-berge."
+      }
+    },
+    "itin": {
+      "i0": {
+        "days": "3 dae",
+        "title": "Groot Vyf & die riviermonding",
+        "s0": "St Lucia — bootvaart & Kaap Vidal",
+        "s1": "Hluhluwe-iMfolozi — heeldag-safari",
+        "s2": "Mkhuze — skuilings & panne op pad uit"
+      },
+      "i1": {
+        "days": "5 dae",
+        "title": "Op met die Elephant Coast",
+        "s0": "St Lucia & iSimangaliso",
+        "s1": "Safari in Hluhluwe-iMfolozi",
+        "s2": "Sodwanabaai — duik of snorkel",
+        "s3": "Sibayameer & Rocktail-strande",
+        "s4": "Kosibaai — visvalle & riviermonding"
+      },
+      "i2": {
+        "days": "7+ dae",
+        "title": "Die hele korridor",
+        "s0": "St Lucia → Hluhluwe-iMfolozi",
+        "s1": "Mkhuze & Sodwana",
+        "s2": "Sibaya, Rocktail & Kosibaai",
+        "s3": "Tembe & Ndumo in die verre noorde",
+        "s4": "Wes na Pongola & die dam"
+      }
+    }
+  }
+}

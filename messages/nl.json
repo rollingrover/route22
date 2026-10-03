@@ -8,7 +8,16 @@
     "listBusiness": "Uw bedrijf aanmelden",
     "menu": "Menu",
     "language": "Taal",
-    "currency": "Weergavevaluta"
+    "currency": "Weergavevaluta",
+    "r22Tours": "Tours",
+    "r22Route": "De route",
+    "r22Parks": "Parken",
+    "r22Itins": "Reisroutes",
+    "r22Stay": "Overnachten & doen",
+    "r22StayShort": "Overnachten & doen",
+    "r22Guides": "Gidsen & chauffeurs",
+    "r22Industry": "Branche-informatie",
+    "r22Opps": "Kansen"
   },
   "Footer": {
     "explore": "Ontdekken",
@@ -19,7 +28,9 @@
     "blurbZatours": "ZAtours is een gids van toerismebedrijven in Zuid-Afrika, zuidelijk en oostelijk Afrika. Wij verkopen geen tours — u boekt rechtstreeks bij de vermelde bedrijven.",
     "route22Link": "Route22 — Elephant Coast",
     "featuredBusinesses": "Uitgelichte bedrijven",
-    "regionLine": "Zuid-Afrika · Zuidelijk & Oostelijk Afrika"
+    "regionLine": "Zuid-Afrika · Zuidelijk & Oostelijk Afrika",
+    "r22Blurb": "Route22 Zululand — een gids voor de toerismeroute langs de Elephant Coast, van St Lucia tot Kosi Bay.",
+    "r22Region": "Elephant Coast · KwaZulu-Natal · Zuid-Afrika"
   },
   "Categories": {
     "stay": "Overnachten",
@@ -158,5 +169,191 @@
   "Meta": {
     "listingTitle": "{name} — {category} in {location}",
     "listingDesc": "{name}, {category} in {location}. Vraag rechtstreeks aan via {brand}."
+  },
+  "R22": {
+    "hero": {
+      "eyebrow": "De Elephant Coast • KwaZulu-Natal • Zuid-Afrika",
+      "title": "Rijd de wildste weg van Zuid-Afrika.",
+      "lead": "De R22 slingert vanaf de N2 bij Hluhluwe noordwaarts tot aan de grens met Mozambique — langs Big Five-reservaten, wetlands met werelderfgoedstatus, duikriffen en de 400 jaar oude visvallen van Maputaland. Route22 is uw gids voor elke stop onderweg.",
+      "explore": "Ontdek de route",
+      "itins": "Bekijk reisroutes",
+      "stat1": "asfaltweg",
+      "stat2": "grote wildreservaten",
+      "stat3": "UNESCO-werelderfgoed"
+    },
+    "intro": {
+      "title": "Eén weg. Alle redenen om naar Zululand te komen.",
+      "body": "De Route22-corridor volgt de R22 (de Lubombo-weg) als ruggengraat en verbindt stukken van de N2, de P453 en de weg naar St Lucia, helemaal tot aan Kosi Bay en verder richting Pongola. Langs deze weg ligt de grootste concentratie wild, wildernis en kust van het land — van het oudste wildpark van Afrika tot het eerste werelderfgoed van Zuid-Afrika."
+    },
+    "tours": {
+      "title": "Tours & safari’s",
+      "lead": "Safaribedrijven en touroperators met dagtochten en meerdaagse ervaringen langs de route.",
+      "example": "We tonen <b>voorbeeldaanbieders</b> — hier verschijnen geverifieerde Route22-tourpartners.",
+      "listTour": "Meld uw tourbedrijf aan →"
+    },
+    "route": {
+      "title": "De route",
+      "lead": "Tik op een stop om te zien wat er is. De route rijdt u het best in 4–7 dagen.",
+      "amenities": "Toon geldautomaten, klinieken & fastfood"
+    },
+    "parks": {
+      "title": "Parken & reservaten onderweg",
+      "lead": "Alle mooie stops aan de Elephant Coast, van zuid naar noord. Tik op een park om uw bezoek te plannen.",
+      "explore": "Ontdek {name} →"
+    },
+    "itins": {
+      "title": "Voorbeeldroutes",
+      "lead": "Vertrekpunten die u kunt aanpassen. Hoe verder naar het noorden, hoe langer, rustiger en wilder.",
+      "sponsored": "Gesponsord door {name} →"
+    },
+    "listings": {
+      "title": "Overnachten & te doen",
+      "lead": "Lodges, kampen, restaurants en ervaringen langs de route.",
+      "example": "We tonen <b>voorbeeldvermeldingen</b> — hier verschijnen geverifieerde Route22-partners.",
+      "list": "Uw bedrijf aanmelden →",
+      "community": "Gratis vermeldingen — bedrijven langs de route die nog geen volledige Route22-pagina hebben.",
+      "all": "Alle"
+    },
+    "more": {
+      "title": "Meer van Route22",
+      "explore": "Ontdek →",
+      "guidesT": "Gidsen & chauffeurs",
+      "guidesD": "Boek onafhankelijke safari-, duik-, vogel-, vis- en cultuurgidsen of een transferchauffeur.",
+      "industryT": "Branche-informatie",
+      "industryD": "Reisplanning, seizoenstips, achtergrond over natuurbehoud en informatie voor aanbieders.",
+      "oppsT": "Kansen",
+      "oppsD": "Banen, stages, vrijwilligerswerk, leerplaatsen en aanbestedingen langs de route.",
+      "englishOnly": "(in het Engels)",
+      "lead": "Meer dan de route alleen — mensen, informatie en vermeldingen."
+    },
+    "stops": {
+      "st-lucia": {
+        "kind": "Toegangsstadje",
+        "blurb": "Zuidelijk ankerpunt van de route aan de rand van iSimangaliso. Nijlpaarden en krokodillen in de riviermonding, boottochten en de afslag naar Cape Vidal."
+      },
+      "hluhluwe-imfolozi": {
+        "kind": "Wildreservaat",
+        "blurb": "Het oudste officiële wildreservaat van Afrika en de bakermat van neushoornbescherming. Big Five, zelfrijdend en begeleide safari’s."
+      },
+      "hluhluwe-town": {
+        "kind": "N2-kruising",
+        "blurb": "Hier komt de route samen met de N2 en begint de R22 zijn weg naar het noorden. Lodges, voorraden en uitvalsbasis voor de reservaten."
+      },
+      "mkuze": {
+        "kind": "Wildreservaat",
+        "blurb": "Een van de beste vogelreservaten van Afrika, met beroemde observatiehutten, vijgenbossen en drinkplaatsen vol wild."
+      },
+      "sodwana": {
+        "kind": "Duiken & oceaan",
+        "blurb": "Duiken van wereldklasse op de zuidelijkste koraalriffen, diepzeevissen en het mariene deel van iSimangaliso."
+      },
+      "mbazwana": {
+        "kind": "Plaats aan de route",
+        "blurb": "Belangrijkste dienstenplaats aan de noordelijke R22 — brandstof, winkels en het kruispunt naar Sodwana en Lake Sibaya."
+      },
+      "sibaya": {
+        "kind": "Wetland",
+        "blurb": "Het grootste zoetwatermeer van Zuid-Afrika, omringd door beboste duinen — nijlpaarden, krokodillen en een rijke vogelwereld."
+      },
+      "rocktail": {
+        "kind": "Kust",
+        "blurb": "Afgelegen stranden en nestplaatsen van zeeschildpadden — in de zomer komen dikkopschildpadden en lederschildpadden aan land."
+      },
+      "tembe": {
+        "kind": "Wildreservaat",
+        "blurb": "Thuis van enkele van de grootste olifanten met slagtanden van Afrika, in de zandbossen aan de grens met Mozambique."
+      },
+      "ndumo": {
+        "kind": "Vogelreservaat",
+        "blurb": "Een droom voor vogelaars in de uiterwaarden van de Pongola — meer dan 400 soorten en drinkplaatsen vol wild."
+      },
+      "kosi-bay": {
+        "kind": "Riviermonding",
+        "blurb": "Noordelijk eindpunt bij de grens — verbonden meren, snorkelen en 400 jaar oude traditionele visvallen die nog steeds worden gebruikt."
+      },
+      "pongola": {
+        "kind": "Westelijke tak",
+        "blurb": "De westelijke toegang — de Pongolapoort-dam, tijgervissen en Big Five-reservaten langs de Lebombo-bergen."
+      }
+    },
+    "parkCards": {
+      "hluhluwe-imfolozi": {
+        "kind": "Big Five-reservaat",
+        "region": "Zuidelijke toegang",
+        "desc": "Big Five-safari’s in het oudste officiële wildreservaat van Afrika, de bakermat van de bescherming van de witte neushoorn."
+      },
+      "isimangaliso-wetland-park": {
+        "kind": "UNESCO-werelderfgoed",
+        "region": "De kustlijn",
+        "desc": "Het eerste werelderfgoed van Zuid-Afrika — 21 ecosystemen, van Lake St Lucia tot Kosi Bay."
+      },
+      "st-lucia": {
+        "kind": "Toegangsstadje",
+        "region": "Zuidelijk ankerpunt",
+        "desc": "Het stadje aan de riviermonding van St Lucia — boottochten langs nijlpaarden en krokodillen en de weg naar Cape Vidal."
+      },
+      "sodwana-bay": {
+        "kind": "Duiken & oceaan",
+        "region": "Noordelijke kust",
+        "desc": "Duiken van wereldklasse op de zuidelijkste koraalriffen, plus diepzeevissen en stranden."
+      },
+      "mkhuze-game-reserve": {
+        "kind": "Vogel- & wildreservaat",
+        "region": "Midden van de route",
+        "desc": "Een legendarisch vogelreservaat met beroemde observatiehutten, vijgenbossen en drinkplaatsen vol wild."
+      },
+      "tembe-elephant-park": {
+        "kind": "Grote slagtanden",
+        "region": "Het verre noorden",
+        "desc": "Wildernis van zandbossen met enkele van de grootste olifanten die Afrika nog kent."
+      },
+      "ndumo-game-reserve": {
+        "kind": "Vogelreservaat",
+        "region": "Het verre noorden",
+        "desc": "Een vogelparadijs in de uiterwaarden van de Pongola, met drinkplaatsen vol wild."
+      },
+      "kosi-bay": {
+        "kind": "Riviermonding & meren",
+        "region": "Noordelijk eindpunt",
+        "desc": "Verbonden meren, snorkelen bij de monding en 400 jaar oude traditionele visvallen die nog worden gebruikt."
+      },
+      "lake-sibaya": {
+        "kind": "Zoetwatermeer",
+        "region": "Noordelijke kust",
+        "desc": "Het grootste natuurlijke zoetwatermeer van Zuid-Afrika — nijlpaarden, krokodillen en een rijke vogelwereld."
+      },
+      "pongola": {
+        "kind": "Westelijke toegang",
+        "region": "Westelijke tak",
+        "desc": "De westelijke toegang — de Pongolapoort-dam, tijgervissen en Big Five-reservaten aan de voet van de Lebombo-bergen."
+      }
+    },
+    "itin": {
+      "i0": {
+        "days": "3 dagen",
+        "title": "Big Five & de riviermonding",
+        "s0": "St Lucia — boottocht & Cape Vidal",
+        "s1": "Hluhluwe-iMfolozi — safari van een hele dag",
+        "s2": "Mkhuze — observatiehutten & drinkplaatsen op de terugweg"
+      },
+      "i1": {
+        "days": "5 dagen",
+        "title": "Langs de Elephant Coast omhoog",
+        "s0": "St Lucia & iSimangaliso",
+        "s1": "Safari in Hluhluwe-iMfolozi",
+        "s2": "Sodwana Bay — duiken of snorkelen",
+        "s3": "Lake Sibaya & de stranden van Rocktail",
+        "s4": "Kosi Bay — visvallen & riviermonding"
+      },
+      "i2": {
+        "days": "7+ dagen",
+        "title": "De hele corridor",
+        "s0": "St Lucia → Hluhluwe-iMfolozi",
+        "s1": "Mkhuze & Sodwana",
+        "s2": "Sibaya, Rocktail & Kosi Bay",
+        "s3": "Tembe & Ndumo in het verre noorden",
+        "s4": "Westwaarts naar Pongola & de dam"
+      }
+    }
   }
 }

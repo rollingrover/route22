@@ -6,6 +6,7 @@ import NextLink from "next/link";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import LanguageSwitcher from "./LanguageSwitcher";
+import { isLocalizedPath } from "@/lib/i18nPaths";
 import { BRAND } from "@/lib/brand";
 import { IS_ZATOURS } from "@/lib/site";
 import ZaLogo from "./ZaLogo";
@@ -55,7 +56,7 @@ export default function Header() {
         }`}
       >
         {BRAND.nav.map((l) =>
-          l.external ? (
+          l.external || !isLocalizedPath(l.href.split("#")[0] || "/") ? (
             <a
               key={l.href}
               href={l.href}
@@ -74,8 +75,7 @@ export default function Header() {
             </Link>
           )
         )}
-        <LanguageSwitcher />
-        <CurrencySwitcher />
+        <CurrencySwitcher className="sm:hidden" />
         {/* English-only business page: plain link, never locale-prefixed. */}
         <NextLink
           href="/list-your-business"
@@ -89,6 +89,13 @@ export default function Header() {
           {t("listBusiness")}
         </NextLink>
       </nav>
+
+      {/* Language + currency stay visible at every width (outside the
+          collapsible menu), so visitors can always find them. */}
+      <div className="ml-auto flex items-center gap-2 min-[1360px]:ml-0">
+        <LanguageSwitcher />
+        <CurrencySwitcher className="hidden sm:flex" />
+      </div>
 
       <button
         className={`cursor-pointer border-0 bg-transparent text-2xl text-ink min-[1360px]:hidden`}

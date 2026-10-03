@@ -16,14 +16,19 @@ import ZaHome from "@/components/ZaHome";
 import { getPrices, snapshot } from "@/lib/prices";
 import { IS_ZATOURS } from "@/lib/site";
 import type { Metadata } from "next";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { localeAlternates } from "@/lib/alternates";
 
 // Revalidate listings periodically so new Supabase partners appear without a redeploy.
 export const revalidate = 300;
 
-export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
-  return { alternates: localeAlternates("/", params.locale) };
+export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
+  const alternates = localeAlternates("/", params.locale);
+  if (params.locale === "en") return { alternates }; // English keeps the tuned default title/description
+  const t = await getTranslations({ locale: params.locale });
+  const title = IS_ZATOURS ? `${t("Home.title")} | ZAtours` : `${t("R22.hero.title")} | Route22 Zululand`;
+  const description = IS_ZATOURS ? t("Home.lead") : t("R22.hero.lead");
+  return { title, description, alternates, openGraph: { title, description, locale: params.locale } };
 }
 
 export default async function Home({ params }: { params: { locale: string } }) {

@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 import {
   MapContainer,
@@ -35,6 +36,7 @@ export default function MapInner({
   amenities: Amenity[];
   showAmenities: boolean;
 }) {
+  const t = useTranslations("R22");
   return (
     <MapContainer
       center={[-27.6, 32.4]}
@@ -69,9 +71,9 @@ export default function MapInner({
               <strong>{s.name}</strong>
               <br />
               <span style={{ color: "#2f5e3a", fontSize: "0.75rem", textTransform: "uppercase" }}>
-                {s.kind}
+                {t(`stops.${s.id}.kind`)}
               </span>
-              <p style={{ margin: "6px 0 0", fontSize: "0.85rem" }}>{s.blurb}</p>
+              <p style={{ margin: "6px 0 0", fontSize: "0.85rem" }}>{t(`stops.${s.id}.blurb`)}</p>
             </Popup>
           </CircleMarker>
         );

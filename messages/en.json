@@ -8,7 +8,16 @@
     "listBusiness": "List your business",
     "menu": "Menu",
     "language": "Language",
-    "currency": "Display currency"
+    "currency": "Display currency",
+    "r22Tours": "Tours",
+    "r22Route": "The Route",
+    "r22Parks": "Parks",
+    "r22Itins": "Itineraries",
+    "r22Stay": "Where to Stay & Do",
+    "r22StayShort": "Stay & Do",
+    "r22Guides": "Guides & Drivers",
+    "r22Industry": "Industry Info",
+    "r22Opps": "Opportunities"
   },
   "Footer": {
     "explore": "Explore",
@@ -19,7 +28,9 @@
     "blurbZatours": "ZAtours is a directory of tourism businesses in South Africa, Southern and East Africa. We don’t sell tours — you book directly with the businesses listed.",
     "route22Link": "Route22 — Elephant Coast",
     "featuredBusinesses": "Featured businesses",
-    "regionLine": "South Africa · Southern & East Africa"
+    "regionLine": "South Africa · Southern & East Africa",
+    "r22Blurb": "Route22 Zululand — a guide to the Elephant Coast tourism route, from St Lucia to Kosi Bay.",
+    "r22Region": "Elephant Coast · KwaZulu-Natal · South Africa"
   },
   "Categories": {
     "stay": "Stay",
@@ -158,5 +169,191 @@
   "Meta": {
     "listingTitle": "{name} — {category} in {location}",
     "listingDesc": "{name}, {category} in {location}. Enquire directly on {brand}."
+  },
+  "R22": {
+    "hero": {
+      "eyebrow": "The Elephant Coast • KwaZulu-Natal • South Africa",
+      "title": "Drive the wildest road in South Africa.",
+      "lead": "The R22 threads north from the N2 at Hluhluwe up to the Mozambique border — past the Big Five reserves, World Heritage wetlands, dive reefs and 400-year-old fish traps of Maputaland. Route22 is your guide to every stop along the way.",
+      "explore": "Explore the route",
+      "itins": "See itineraries",
+      "stat1": "of tarred route",
+      "stat2": "major game reserves",
+      "stat3": "World Heritage Site"
+    },
+    "intro": {
+      "title": "One road. Every reason to come to Zululand.",
+      "body": "The Route22 corridor follows the R22 (the Lubombo road) as its spine, linking stretches of the N2, the P453 and the road to St Lucia, then running all the way up to Kosi Bay and round toward Pongola. Along it sits the densest concentration of wildlife, wilderness and coastline in the country — from Africa’s oldest game park to its first World Heritage Site."
+    },
+    "tours": {
+      "title": "Tours & safaris",
+      "lead": "Safari companies and tour operators running day trips and multi-day experiences along the route.",
+      "example": "Showing <b>example tour operators</b> — this is where verified Route22 tour partners appear.",
+      "listTour": "List your tour company →"
+    },
+    "route": {
+      "title": "The Route",
+      "lead": "Tap a stop to see what’s there. The route is best driven over 4–7 days.",
+      "amenities": "Show ATMs, clinics & fast food"
+    },
+    "parks": {
+      "title": "Parks & reserves along the way",
+      "lead": "Every great stop on the Elephant Coast, south to north. Tap any park to plan your visit.",
+      "explore": "Explore {name} →"
+    },
+    "itins": {
+      "title": "Sample itineraries",
+      "lead": "Starting points you can tailor. Longer, slower and wilder the further north you go.",
+      "sponsored": "Sponsored by {name} →"
+    },
+    "listings": {
+      "title": "Where to stay & what to do",
+      "lead": "Lodges, camps, restaurants and experiences along the route.",
+      "example": "Showing <b>example listings</b> — this is where verified Route22 partners appear.",
+      "list": "List your business →",
+      "community": "Free community listings — businesses on the route that haven’t yet taken a full Route22 page.",
+      "all": "All"
+    },
+    "more": {
+      "title": "More from Route22",
+      "explore": "Explore →",
+      "guidesT": "Guides & drivers",
+      "guidesD": "Book independent safari, dive, birding, fishing and cultural guides, or a transfer driver.",
+      "industryT": "Industry info",
+      "industryD": "Trip-planning guides, seasonal tips, conservation background and operator resources.",
+      "oppsT": "Opportunities",
+      "oppsD": "Jobs, internships, volunteer roles, learnerships and tenders along the route.",
+      "englishOnly": "(in English)",
+      "lead": "Beyond the route itself — people, resources and listings."
+    },
+    "stops": {
+      "st-lucia": {
+        "kind": "Gateway town",
+        "blurb": "Southern anchor of the route on the edge of iSimangaliso. Hippos and crocs in the estuary, boat cruises, and the turn-off toward Cape Vidal."
+      },
+      "hluhluwe-imfolozi": {
+        "kind": "Game reserve",
+        "blurb": "Africa’s oldest proclaimed game reserve and the home of rhino conservation. Big Five, self-drive and guided safaris."
+      },
+      "hluhluwe-town": {
+        "kind": "N2 junction",
+        "blurb": "Where the route meets the N2 and the R22 begins its run north. Lodges, supplies and the springboard for the reserves."
+      },
+      "mkuze": {
+        "kind": "Game reserve",
+        "blurb": "One of the finest birding reserves in Africa, with famous hides, fig forests and pans full of game."
+      },
+      "sodwana": {
+        "kind": "Diving & ocean",
+        "blurb": "World-class scuba diving on the southernmost coral reefs, deep-sea fishing and the iSimangaliso marine section."
+      },
+      "mbazwana": {
+        "kind": "Route town",
+        "blurb": "Main service town on the northern R22 — fuel, shops and the crossroads for Sodwana and Lake Sibaya."
+      },
+      "sibaya": {
+        "kind": "Wetland",
+        "blurb": "South Africa’s largest freshwater lake, ringed by forested dunes — hippos, crocs and prolific birdlife."
+      },
+      "rocktail": {
+        "kind": "Coast",
+        "blurb": "Remote beaches and turtle-nesting shores — loggerhead and leatherback turtles come ashore in summer."
+      },
+      "tembe": {
+        "kind": "Game reserve",
+        "blurb": "Home to some of Africa’s biggest tuskers, in sand-forest wilderness on the Mozambique border."
+      },
+      "ndumo": {
+        "kind": "Birding reserve",
+        "blurb": "A birder’s holy grail on the Pongola floodplain — over 400 species and pans crowded with wildlife."
+      },
+      "kosi-bay": {
+        "kind": "Estuary",
+        "blurb": "Northern terminus near the border — interlinked lakes, snorkelling, and 400-year-old traditional fish traps still in use."
+      },
+      "pongola": {
+        "kind": "Western arm",
+        "blurb": "The western gateway — Pongolapoort Dam, tiger-fishing and Big Five reserves along the Lebombo mountains."
+      }
+    },
+    "parkCards": {
+      "hluhluwe-imfolozi": {
+        "kind": "Big Five reserve",
+        "region": "Southern gateway",
+        "desc": "Big Five safaris in the oldest proclaimed game reserve in Africa, birthplace of white-rhino conservation."
+      },
+      "isimangaliso-wetland-park": {
+        "kind": "World Heritage Site",
+        "region": "The coastal spine",
+        "desc": "South Africa’s first World Heritage Site — 21 ecosystems, from Lake St Lucia to Kosi Bay."
+      },
+      "st-lucia": {
+        "kind": "Gateway town",
+        "region": "Southern anchor",
+        "desc": "The gateway town on the St Lucia estuary — hippo & croc boat cruises and the road to Cape Vidal."
+      },
+      "sodwana-bay": {
+        "kind": "Diving & ocean",
+        "region": "Northern coast",
+        "desc": "World-class scuba diving on the southernmost coral reefs, plus deep-sea fishing and beaches."
+      },
+      "mkhuze-game-reserve": {
+        "kind": "Birding & game reserve",
+        "region": "Central route",
+        "desc": "A legendary birding reserve with famous hides, fig forests and pans full of game."
+      },
+      "tembe-elephant-park": {
+        "kind": "Big tuskers",
+        "region": "Far north",
+        "desc": "Sand-forest wilderness sheltering some of the largest elephants left in Africa."
+      },
+      "ndumo-game-reserve": {
+        "kind": "Birding reserve",
+        "region": "Far north",
+        "desc": "A birding paradise on the Pongola floodplain, with pans crowded with wildlife."
+      },
+      "kosi-bay": {
+        "kind": "Estuary & lakes",
+        "region": "Northern terminus",
+        "desc": "Interlinked lakes, snorkelling at the mouth, and 400-year-old traditional fish traps still in use."
+      },
+      "lake-sibaya": {
+        "kind": "Freshwater lake",
+        "region": "Northern coast",
+        "desc": "The largest natural freshwater lake in South Africa — hippos, crocs and prolific birdlife."
+      },
+      "pongola": {
+        "kind": "Western gateway",
+        "region": "Western arm",
+        "desc": "The western gateway — Pongolapoort Dam, tiger-fishing and Big Five reserves under the Lebombo range."
+      }
+    },
+    "itin": {
+      "i0": {
+        "days": "3 days",
+        "title": "Big Five & the estuary",
+        "s0": "St Lucia — estuary cruise & Cape Vidal",
+        "s1": "Hluhluwe-iMfolozi — full-day safari",
+        "s2": "Mkhuze — hides & pans on the way out"
+      },
+      "i1": {
+        "days": "5 days",
+        "title": "Up the Elephant Coast",
+        "s0": "St Lucia & iSimangaliso",
+        "s1": "Hluhluwe-iMfolozi safari",
+        "s2": "Sodwana Bay — dive or snorkel",
+        "s3": "Lake Sibaya & Rocktail beaches",
+        "s4": "Kosi Bay — fish traps & estuary"
+      },
+      "i2": {
+        "days": "7+ days",
+        "title": "The full corridor",
+        "s0": "St Lucia → Hluhluwe-iMfolozi",
+        "s1": "Mkhuze & Sodwana",
+        "s2": "Sibaya, Rocktail & Kosi Bay",
+        "s3": "Tembe & Ndumo in the far north",
+        "s4": "West to Pongola & the dam"
+      }
+    }
   }
 }

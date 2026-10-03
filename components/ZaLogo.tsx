@@ -14,7 +14,7 @@ export default function ZaLogo({ inverted = false }: { inverted?: boolean }) {
           <span className="text-clay">ZA</span>tours
         </span>
         <span
-          className={`mt-0.5 text-[0.6rem] uppercase tracking-[2px] ${
+          className={`mt-0.5 text-[0.6rem] uppercase tracking-[2px] ${inverted ? "" : "hidden sm:block"} ${
             inverted ? "text-foot-text" : "text-ink-soft"
           }`}
         >

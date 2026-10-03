@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { Listing } from "@/lib/data";
 import { ListingCard } from "./ListingCard";
 import OwnerLink from "./OwnerLink";
@@ -9,6 +10,7 @@ export default function ToursSection({
   tours: Listing[];
   isExample: boolean;
 }) {
+  const tr = useTranslations("R22");
   const shown = tours.filter((t) => t.tier !== "community");
   const community = tours.filter((t) => t.tier === "community");
 
@@ -18,19 +20,17 @@ export default function ToursSection({
     <section id="tours" className="border-b border-line bg-sand py-16">
       <div className="mx-auto max-w-[1120px] px-5">
         <div className="mb-8 max-w-[720px]">
-          <h2>Tours &amp; safaris</h2>
+          <h2>{tr("tours.title")}</h2>
           <p className="text-ink-soft">
-            Safari companies and tour operators running day trips and multi-day experiences along
-            the route.
+            {tr("tours.lead")}
           </p>
         </div>
 
         {isExample && (
           <div className="mb-5 rounded-xl border border-dashed border-clay bg-[#fff6e9] px-4 py-3 text-[0.9rem] text-ink-soft">
-            Showing <strong>example tour operators</strong> — this is where verified Route22 tour
-            partners appear.{" "}
+            {tr.rich("tours.example", { b: (c) => <strong>{c}</strong> })}{" "}
             <a href="/list-your-business" className="whitespace-nowrap font-semibold text-clay no-underline">
-              List your tour company →
+              {tr("tours.listTour")}
             </a>
           </div>
         )}

@@ -5,13 +5,15 @@ import { BRAND } from "@/lib/brand";
 import { IS_ZATOURS, ZATOURS_URL } from "@/lib/site";
 import ZaLogo from "./ZaLogo";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
+import { isLocalizedPath } from "@/lib/i18nPaths";
 
 export default function Footer() {
   const year = new Date().getFullYear();
   const t = useTranslations("Footer");
   const tn = useTranslations("Nav");
   const label = (l: { label: string; key?: string }) =>
-    !l.key ? l.label : l.key === "browse" ? tn("browse") : t(l.key);
+    !l.key ? l.label : l.key === "browse" || l.key.startsWith("r22") ? tn(l.key) : t(l.key);
   // Cross-link the sister site (only when its URL is known).
   // (ZAtours already links Route22 under "Explore".)
   const sister = IS_ZATOURS
@@ -35,14 +37,20 @@ export default function Footer() {
               className="h-14 w-auto brightness-0 invert"
             />
           )}
-          <p className="mt-3.5 max-w-[40ch] text-[0.9rem]">{IS_ZATOURS ? t("blurbZatours") : BRAND.footerBlurb}</p>
+          <p className="mt-3.5 max-w-[40ch] text-[0.9rem]">{IS_ZATOURS ? t("blurbZatours") : t("r22Blurb")}</p>
         </div>
         <div>
           <h4 className="font-sans text-[0.8rem] uppercase tracking-[1.5px] text-white">{t("explore")}</h4>
           {BRAND.footerExplore.map((l) => (
-            <a key={l.href} href={l.href} className="mb-2 block text-[0.9rem] no-underline hover:text-clay">
-              {label(l)}
-            </a>
+            l.external || !isLocalizedPath(l.href.split("#")[0] || "/") ? (
+              <a key={l.href} href={l.href} className="mb-2 block text-[0.9rem] no-underline hover:text-clay">
+                {label(l)}
+              </a>
+            ) : (
+              <Link key={l.href} href={l.href} className="mb-2 block text-[0.9rem] no-underline hover:text-clay">
+                {label(l)}
+              </Link>
+            )
           ))}
         </div>
         <div>
@@ -71,7 +79,7 @@ export default function Footer() {
             {t("privacy")}
           </a>
         </span>
-        <span>{IS_ZATOURS ? t("regionLine") : BRAND.regionLine}</span>
+        <span>{IS_ZATOURS ? t("regionLine") : t("r22Region")}</span>
       </div>
     </footer>
   );
