@@ -25,11 +25,8 @@ export default function ZaHome({ listings, isExample, prices }: { listings: List
             "radial-gradient(circle at 85% 20%, rgba(245,158,11,0.22), transparent 45%), linear-gradient(135deg, #1f2a44 0%, #141c30 60%, #10283a 100%)",
         }}
       >
-        {/* No hero photo yet — real photography coming. Subtle horizon line only. */}
-        <svg aria-hidden="true" viewBox="0 0 1440 120" preserveAspectRatio="none" className="absolute bottom-0 left-0 -z-10 h-[70px] w-full">
-          <path d="M0 80c240-40 480-50 720-30s480 30 720-10v80H0z" fill="rgb(var(--c-sand))" />
-        </svg>
-        <div className="relative mx-auto max-w-[1120px] px-5 pb-16 pt-16 md:pb-24 md:pt-20">
+        <div className="relative mx-auto grid max-w-[1120px] items-center gap-10 px-5 pb-16 pt-16 md:pb-24 md:pt-20 lg:grid-cols-[1.2fr_0.8fr]">
+          <div>
           <p className="mb-3 text-[0.72rem] font-semibold uppercase tracking-[3px] text-gold">
             {t("eyebrow")}
           </p>
@@ -59,6 +56,19 @@ export default function ZaHome({ listings, isExample, prices }: { listings: List
               {provinces > 1 ? t("acrossProvinces", { count: provinces }) : ""}
             </p>
           )}
+          </div>
+          {/* Own photography: elephant crossing in front of the game vehicle at sunrise. */}
+          <figure className="relative m-0">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/hero/zatours-desktop.webp"
+              alt={t("photoAlt")}
+              width={1080}
+              height={810}
+              fetchPriority="high"
+              className="w-full -rotate-1 rounded-2xl border-4 border-white/90 object-cover shadow-2xl"
+            />
+          </figure>
         </div>
       </section>
 

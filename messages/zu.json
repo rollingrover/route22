@@ -59,7 +59,8 @@
     "bizTitle": "Uqhuba ibhizinisi lezokuvakasha?",
     "bizBody": "Bhalisa mahhala, noma uthuthukise kusukela ku-{price}/ngenyanga ukuze uthole ikhasi eliphelele nemibuzo ize ngqo ku-imeyili yakho. Ayikho ikhomishini, nanini. Abasebenzisi be-OpDesk baboniswa njengabaqinisekisiwe futhi abangabhukwa.",
     "bizFounding": "Intengo yabasunguli, engashintshi iminyaka engu-{years} uma ujoyina ngaphambi kuka-{deadline}.",
-    "bizCta": "Bheka amaphakheji"
+    "bizCta": "Bheka amaphakheji",
+    "photoAlt": "Indlovu iwela umgwaqo phambi kwemoto ye-safari ekuseni"
   },
   "Directory": {
     "title": "Bheka uhlu lwamabhizinisi",
@@ -180,7 +181,8 @@
       "itins": "Bheka izinhlelo zohambo",
       "stat1": "womgwaqo onetiyela",
       "stat2": "izindawo ezinkulu zezilwane",
-      "stat3": "Igugu lomhlaba"
+      "stat3": "Igugu lomhlaba",
+      "photoAlt": "Indlovu iwela umgwaqo onetiyela endaweni egodliwe"
     },
     "intro": {
       "title": "Umgwaqo owodwa. Zonke izizathu zokuza kwaZulu.",

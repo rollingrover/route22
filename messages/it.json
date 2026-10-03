@@ -59,7 +59,8 @@
     "bizTitle": "Gestisci un’attività turistica?",
     "bizBody": "Iscriviti gratis, oppure passa a un piano da {price}/mese per una pagina completa e richieste nella tua casella email. Mai commissioni. Gli utenti OpDesk appaiono come verificati & prenotabili.",
     "bizFounding": "Prezzo fondatori, bloccato per {years} anni se ti iscrivi entro il {deadline}.",
-    "bizCta": "Vedi i piani"
+    "bizCta": "Vedi i piani",
+    "photoAlt": "Un elefante attraversa la pista davanti a un veicolo da safari all’alba"
   },
   "Directory": {
     "title": "Sfoglia la guida",
@@ -180,7 +181,8 @@
       "itins": "Vedi gli itinerari",
       "stat1": "di strada asfaltata",
       "stat2": "grandi riserve faunistiche",
-      "stat3": "sito Patrimonio dell’Umanità"
+      "stat3": "sito Patrimonio dell’Umanità",
+      "photoAlt": "Un elefante attraversa la strada asfaltata nella riserva"
     },
     "intro": {
       "title": "Una strada. Tutte le ragioni per venire nello Zululand.",

@@ -59,7 +59,8 @@
     "bizTitle": "Vous gérez une entreprise touristique ?",
     "bizBody": "Inscription gratuite, ou passez à une formule dès {price}/mois pour une page complète et des demandes dans votre boîte mail. Jamais de commission. Les utilisateurs d’OpDesk apparaissent comme vérifiés & réservables.",
     "bizFounding": "Tarif fondateur, bloqué {years} ans si vous nous rejoignez avant le {deadline}.",
-    "bizCta": "Voir les formules"
+    "bizCta": "Voir les formules",
+    "photoAlt": "Un éléphant traverse la piste devant un véhicule de safari au lever du soleil"
   },
   "Directory": {
     "title": "Parcourir l’annuaire",
@@ -180,7 +181,8 @@
       "itins": "Voir les itinéraires",
       "stat1": "de route goudronnée",
       "stat2": "grandes réserves animalières",
-      "stat3": "site du patrimoine mondial"
+      "stat3": "site du patrimoine mondial",
+      "photoAlt": "Un éléphant traverse la route goudronnée de la réserve"
     },
     "intro": {
       "title": "Une route. Toutes les raisons de venir au Zululand.",

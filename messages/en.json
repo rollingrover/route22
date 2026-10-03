@@ -59,7 +59,8 @@
     "bizTitle": "Run a tourism business?",
     "bizBody": "List free, or upgrade from {price}/month for a full page and enquiries to your inbox. No commission, ever. OpDesk users show as verified & bookable.",
     "bizFounding": "Founding-member price, locked for {years} years if you join by {deadline}.",
-    "bizCta": "See plans"
+    "bizCta": "See plans",
+    "photoAlt": "An elephant crosses the track in front of a safari vehicle at sunrise"
   },
   "Directory": {
     "title": "Browse the directory",
@@ -180,7 +181,8 @@
       "itins": "See itineraries",
       "stat1": "of tarred route",
       "stat2": "major game reserves",
-      "stat3": "World Heritage Site"
+      "stat3": "World Heritage Site",
+      "photoAlt": "An elephant crossing the tarred road through the reserve"
     },
     "intro": {
       "title": "One road. Every reason to come to Zululand.",

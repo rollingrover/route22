@@ -59,7 +59,8 @@
     "bizTitle": "Heeft u een toerismebedrijf?",
     "bizBody": "Meld u gratis aan of upgrade vanaf {price}/maand voor een eigen pagina en aanvragen in uw inbox. Nooit commissie. OpDesk-gebruikers staan vermeld als geverifieerd & boekbaar.",
     "bizFounding": "Oprichtersprijs, {years} jaar vast als u zich vóór {deadline} aanmeldt.",
-    "bizCta": "Bekijk pakketten"
+    "bizCta": "Bekijk pakketten",
+    "photoAlt": "Een olifant steekt bij zonsopgang het pad over vóór een safarivoertuig"
   },
   "Directory": {
     "title": "Bekijk de gids",
@@ -180,7 +181,8 @@
       "itins": "Bekijk reisroutes",
       "stat1": "asfaltweg",
       "stat2": "grote wildreservaten",
-      "stat3": "UNESCO-werelderfgoed"
+      "stat3": "UNESCO-werelderfgoed",
+      "photoAlt": "Een olifant steekt de asfaltweg door het reservaat over"
     },
     "intro": {
       "title": "Eén weg. Alle redenen om naar Zululand te komen.",

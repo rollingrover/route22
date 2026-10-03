@@ -59,7 +59,8 @@
     "bizTitle": "Sie führen einen Tourismusbetrieb?",
     "bizBody": "Kostenlos eintragen oder ab {price}/Monat upgraden — mit eigener Seite und Anfragen direkt in Ihr Postfach. Niemals Provision. OpDesk-Nutzer erscheinen als verifiziert & buchbar.",
     "bizFounding": "Gründungspreis, {years} Jahre garantiert, wenn Sie bis {deadline} beitreten.",
-    "bizCta": "Tarife ansehen"
+    "bizCta": "Tarife ansehen",
+    "photoAlt": "Ein Elefant überquert bei Sonnenaufgang den Weg vor einem Safarifahrzeug"
   },
   "Directory": {
     "title": "Verzeichnis durchsuchen",
@@ -180,7 +181,8 @@
       "itins": "Reiserouten ansehen",
       "stat1": "asphaltierte Strecke",
       "stat2": "große Wildreservate",
-      "stat3": "UNESCO-Welterbe"
+      "stat3": "UNESCO-Welterbe",
+      "photoAlt": "Ein Elefant überquert die asphaltierte Straße im Reservat"
     },
     "intro": {
       "title": "Eine Straße. Jeder Grund, ins Zululand zu reisen.",

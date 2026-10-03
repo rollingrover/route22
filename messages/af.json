@@ -59,7 +59,8 @@
     "bizTitle": "Bestuur jy ’n toerismebesigheid?",
     "bizBody": "Lys gratis, of gradeer op vanaf {price}/maand vir ’n volle blad en navrae in jou inkassie. Nooit kommissie nie. OpDesk-gebruikers word as geverifieer & bespreekbaar gewys.",
     "bizFounding": "Stigterprys, {years} jaar vas as jy voor {deadline} aansluit.",
-    "bizCta": "Sien pakkette"
+    "bizCta": "Sien pakkette",
+    "photoAlt": "’n Olifant steek die pad oor voor ’n safarivoertuig met sonop"
   },
   "Directory": {
     "title": "Blaai deur die gids",
@@ -180,7 +181,8 @@
       "itins": "Sien reisplanne",
       "stat1": "geteerde roete",
       "stat2": "groot wildreservate",
-      "stat3": "Wêrelderfenisgebied"
+      "stat3": "Wêrelderfenisgebied",
+      "photoAlt": "’n Olifant steek die teerpad deur die reservaat oor"
     },
     "intro": {
       "title": "Een pad. Elke rede om Zoeloeland toe te kom.",
