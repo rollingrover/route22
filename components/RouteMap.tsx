@@ -1,10 +1,12 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import dynamic from "next/dynamic";
-import { stops } from "@/lib/data";
-import { Amenity } from "@/lib/amenities";
+import { stops, type Listing } from "@/lib/data";
+import { pinnable } from "@/lib/mapLayers";
+import MapKey, { type KeyGroup } from "./map/MapKey";
+import { useListingAndServiceGroups } from "./map/useKeyGroups";
 
 // Leaflet touches `window`, so the actual map is loaded client-only.
 const MapInner = dynamic(() => import("./MapInner"), {
@@ -16,10 +18,18 @@ const MapInner = dynamic(() => import("./MapInner"), {
   ),
 });
 
-export default function RouteMap({ amenities }: { amenities: Amenity[] }) {
+export default function RouteMap({ listings = [] }: { listings?: Listing[] }) {
   const [selected, setSelected] = useState<string | null>(null);
-  const [showAmenities, setShowAmenities] = useState(false);
+  const [hidden, setHidden] = useState<Set<string>>(() => new Set());
+  const [zoomedIn, setZoomedIn] = useState(false);
   const t = useTranslations("R22");
+  const tk = useTranslations("MapKey");
+  const pinned = useMemo(() => listings.filter(pinnable), [listings]);
+  const base = useListingAndServiceGroups(pinned, zoomedIn);
+  const groups: KeyGroup[] = [
+    { id: "route", title: tk("route"), items: [{ key: "stops", label: tk("stops"), icon: "/route22-icon.png", count: stops.length }] },
+    ...base,
+  ];
 
   return (
     <section id="route" className="bg-sand-2 py-16">
@@ -31,25 +41,17 @@ export default function RouteMap({ amenities }: { amenities: Amenity[] }) {
               {t("route.lead")}
             </p>
           </div>
-          {amenities.length > 0 && (
-            <label className="mb-1 flex items-center gap-2 text-[0.85rem] font-medium text-ink-soft">
-              <input
-                type="checkbox"
-                checked={showAmenities}
-                onChange={(e) => setShowAmenities(e.target.checked)}
-                className="h-4 w-4 accent-clay"
-              />
-              {t("route.amenities")}
-            </label>
-          )}
         </div>
+
+        <MapKey groups={groups} hidden={hidden} setHidden={setHidden} />
 
         <div className="grid grid-cols-1 gap-[22px] md:grid-cols-[1.6fr_1fr]">
           <MapInner
             selected={selected}
             onSelect={setSelected}
-            amenities={amenities}
-            showAmenities={showAmenities}
+            listings={pinned}
+            hidden={hidden}
+            onZoomState={setZoomedIn}
           />
 
           <aside className="flex max-h-none flex-col gap-2.5 overflow-y-auto pr-1 md:max-h-[520px]">

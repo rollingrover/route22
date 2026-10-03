@@ -315,6 +315,7 @@ export type Listing = {
   categories?: Category[];
   country?: string; // ISO code, default ZA
   photoUrls?: string[]; // gallery (shown on paid tiers)
+  subtype?: string; // stay sub-type: bnb | guesthouse | lodge | hotel | campsite | self_catering | backpackers
   opensOn?: string; // ISO date — shows an "Opening <month year>" badge until then
   // Route Hubs this listing belongs to ("Member of …").
   routes?: { slug: string; name: string; kind: "route" | "association" }[];

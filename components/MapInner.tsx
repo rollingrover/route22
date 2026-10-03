@@ -12,7 +12,9 @@ import {
 } from "react-leaflet";
 import { TILES } from "@/lib/tiles";
 import { stops, routeLine } from "@/lib/data";
-import { Amenity, amenityCategoryLabel } from "@/lib/amenities";
+import type { Listing } from "@/lib/data";
+import ListingMarkers from "./map/ListingMarkers";
+import ServiceLayer from "./map/ServiceLayer";
 
 // Flies the map to the selected stop when it changes.
 function FlyTo({ selected }: { selected: string | null }) {
@@ -28,13 +30,15 @@ function FlyTo({ selected }: { selected: string | null }) {
 export default function MapInner({
   selected,
   onSelect,
-  amenities,
-  showAmenities,
+  listings,
+  hidden,
+  onZoomState,
 }: {
   selected: string | null;
   onSelect: (id: string) => void;
-  amenities: Amenity[];
-  showAmenities: boolean;
+  listings: Listing[];
+  hidden: Set<string>;
+  onZoomState: (zoomedIn: boolean) => void;
 }) {
   const t = useTranslations("R22");
   return (
@@ -52,7 +56,7 @@ export default function MapInner({
         positions={routeLine}
         pathOptions={{ color: "#c1622d", weight: 4, opacity: 0.85, dashArray: "1 8" }}
       />
-      {stops.map((s) => {
+      {!hidden.has("stops") && stops.map((s) => {
         const active = selected === s.id;
         return (
           <CircleMarker
@@ -78,23 +82,8 @@ export default function MapInner({
           </CircleMarker>
         );
       })}
-      {showAmenities &&
-        amenities.map((a) => (
-          <CircleMarker
-            key={a.id}
-            center={[a.lat, a.lng]}
-            radius={4}
-            pathOptions={{ color: "#7a7568", weight: 1, fillColor: "#a9a394", fillOpacity: 0.85 }}
-          >
-            <Popup>
-              <strong>{a.name}</strong>
-              <br />
-              <span style={{ color: "#7a7568", fontSize: "0.72rem", textTransform: "uppercase" }}>
-                {amenityCategoryLabel[a.category]}
-              </span>
-            </Popup>
-          </CircleMarker>
-        ))}
+      <ListingMarkers listings={listings} hidden={hidden} />
+      <ServiceLayer hidden={hidden} onZoomState={onZoomState} />
       <FlyTo selected={selected} />
     </MapContainer>
   );

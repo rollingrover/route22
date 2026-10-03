@@ -11,7 +11,6 @@ import MoreResources from "@/components/MoreResources";
 import Partner from "@/components/Partner";
 import Footer from "@/components/Footer";
 import { getListings } from "@/lib/listings";
-import { getAmenities } from "@/lib/amenities";
 import ZaHome from "@/components/ZaHome";
 import PhotoStrip from "@/components/PhotoStrip";
 import PlanTripBand from "@/components/PlanTripBand";
@@ -48,9 +47,8 @@ export default async function Home({ params }: { params: { locale: string } }) {
     );
   }
 
-  const [{ listings, isExample }, { amenities }, prices] = await Promise.all([
+  const [{ listings, isExample }, prices] = await Promise.all([
     getListings(),
-    getAmenities(),
     getPrices(),
   ]);
 
@@ -64,7 +62,7 @@ export default async function Home({ params }: { params: { locale: string } }) {
         <Intro />
         <PhotoStrip />
         <ToursSection tours={tours} isExample={isExample} />
-        <RouteMap amenities={amenities} />
+        <RouteMap listings={isExample ? [] : listings} />
         <Highlights />
         <Itineraries listings={listings} />
         <Listings listings={listings} isExample={isExample} />

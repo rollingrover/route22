@@ -21,6 +21,8 @@ export default function ZaDirectory({
   const [cat, setCat] = useState<"all" | Category>("all");
   const [prov, setProv] = useState("all");
   const [country, setCountry] = useState("all");
+  const [sub, setSub] = useState("all");
+  const tk = useTranslations("MapKey");
   const locale = useLocale();
   const [route, setRoute] = useState("all");
 
@@ -57,6 +59,7 @@ export default function ZaDirectory({
     return listings.filter(
       (l) =>
         (cat === "all" || hasCategory(l, cat)) &&
+        (cat !== "stay" || sub === "all" || (l.subtype || "other") === sub) &&
         (country === "all" || (l.country || "ZA") === country) &&
         (prov === "all" || l.province === prov) &&
         (route === "all" || Boolean(l.routes?.some((r) => r.slug === route))) &&
@@ -65,7 +68,11 @@ export default function ZaDirectory({
             .filter(Boolean)
             .some((v) => String(v).toLowerCase().includes(needle)))
     );
-  }, [listings, q, cat, prov, route, country]);
+  }, [listings, q, cat, prov, route, country, sub]);
+  const subtypes = useMemo(
+    () => Array.from(new Set(listings.filter((l) => hasCategory(l, "stay")).map((l) => l.subtype || "other"))),
+    [listings]
+  );
 
   const full = filtered.filter((l) => l.tier !== "community");
   const community = filtered.filter((l) => l.tier === "community");
@@ -159,7 +166,7 @@ export default function ZaDirectory({
             return (
               <button
                 key={c.key}
-                onClick={() => setCat(on ? "all" : c.key)}
+                onClick={() => { setCat(on ? "all" : c.key); setSub("all"); }}
                 aria-pressed={on}
                 className={`flex flex-col items-center gap-1.5 rounded-xl2 border p-3 text-center transition ${
                   on
@@ -177,6 +184,16 @@ export default function ZaDirectory({
             );
           })}
         </div>
+        {cat === "stay" && subtypes.length > 1 && (
+          <div className="-mt-4 mb-6 flex flex-wrap gap-2">
+            {["all", ...subtypes].map((s) => (
+              <button key={s} type="button" onClick={() => setSub(s)}
+                className={`rounded-full border px-3 py-1 text-[0.82rem] ${sub === s ? "border-bush bg-bush text-white" : "border-line bg-paper text-ink-soft hover:border-bush"}`}>
+                {s === "all" ? t("showAll") : tk(`sub_${s}`)}
+              </button>
+            ))}
+          </div>
+        )}
         {cat !== "all" && (
           <p className="-mt-4 mb-6 text-[0.85rem] text-ink-soft">
             {t("showing", { category: tc(cat) })} ·{" "}

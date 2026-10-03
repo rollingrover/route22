@@ -18,6 +18,7 @@ function useCardText() {
     try { return new Intl.DisplayNames([locale], { type: "region" }).of(code) ?? code; } catch { return code; }
   };
   const tc = useTranslations("Categories");
+  const tk = useTranslations("MapKey");
   const badge = (b: string | null) =>
     b === "Verified & bookable" ? t("verified") : b === "Live availability" ? t("liveAvailability") : b;
   // "Opening December 2026" — month + year in the visitor's language.
@@ -26,11 +27,14 @@ function useCardText() {
     const date = new Date(iso).toLocaleDateString(locale, { month: "long", year: "numeric" });
     return t("opening", { date });
   };
-  return { t, cat: (c: Category) => tc(c), badge, countryName, opening };
+  // Stays show their type ("Campsite", "Lodge") instead of the generic "Stay".
+  const catFor = (l: Listing) => (c: Category) => (c === "stay" && l.subtype ? tk(`sub_${l.subtype}`) : tc(c));
+  return { t, cat: (c: Category) => tc(c), catFor, badge, countryName, opening };
 }
 
 export function ListingCard({ l, showProvince = false }: { l: Listing; showProvince?: boolean }) {
-  const { t, cat, badge, countryName, opening } = useCardText();
+  const { t, catFor, badge, countryName, opening } = useCardText();
+  const cat = catFor(l);
   const place =
     showProvince && l.province && l.province !== l.location
       ? `${l.location} · ${l.province}`
@@ -125,7 +129,8 @@ export function ListingCard({ l, showProvince = false }: { l: Listing; showProvi
 
 // Free "community" entry — no page of its own.
 export function CommunityCard({ l, showProvince = false }: { l: Listing; showProvince?: boolean }) {
-  const { cat, countryName } = useCardText();
+  const { catFor, countryName } = useCardText();
+  const cat = catFor(l);
   const place =
     showProvince && l.province && l.province !== l.location
       ? `${l.location} · ${l.province}`

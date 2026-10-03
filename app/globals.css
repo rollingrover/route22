@@ -4,6 +4,7 @@
 
 /* Leaflet map styles */
 @import "leaflet/dist/leaflet.css";
+@import "leaflet.markercluster/dist/MarkerCluster.css";
 
 /* ---- Per-site theme (see tailwind.config.ts) ----
    Route22: earthy R22 corridor — bush green, clay, sand, Georgia headings. */
@@ -84,3 +85,9 @@ h1, h2, h3, h4 {
 
 /* Ensure Leaflet controls sit below the sticky header */
 .leaflet-top { z-index: 400; }
+
+/* Map clusters (both sites): brand-coloured bubbles with a count. */
+.dir-cluster { display: grid; place-items: center; border-radius: 9999px; color: #fff; font-weight: 800;
+  background: rgb(var(--c-bush)); border: 3px solid #fff; box-shadow: 0 4px 12px rgba(0,0,0,.3); font-size: 13px; }
+.dir-cluster--svc { background: #475569; }
+.dir-cluster--park { background: #14532d; }
