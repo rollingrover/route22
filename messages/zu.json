@@ -17,7 +17,8 @@
     "r22StayShort": "Ukuhlala nokwenza",
     "r22Guides": "Abaqondisi nabashayeli",
     "r22Industry": "Ulwazi lwemboni",
-    "r22Opps": "Amathuba"
+    "r22Opps": "Amathuba",
+    "plan": "Hlela uhambo lwami"
   },
   "Footer": {
     "explore": "Hlola",
@@ -364,5 +365,43 @@
   "Strip": {
     "title": "Izikhathi ezivela e-Elephant Coast",
     "lead": "Kuthwetshulwe ngabantu abahlala futhi abasebenza lapha."
+  },
+  "Plan": {
+    "nav": "Hlela uhambo lwami",
+    "metaTitle": "Hlela uhambo lwami — amabhizinisi endawo azokuthinta",
+    "metaDescription": "Sitshele kanye izinsuku nezinto ozithandayo — amabhizinisi endawo afanele angafika ku-3 azokuthinta ngemibono namanani. Mahhala, ayikho ikhomishini.",
+    "eyebrow": "Mahhala · ayikho ikhomishini",
+    "title": "Sitshele ngohambo lwakho",
+    "lead": "Chaza kanye lokho okufunayo — amabhizinisi endawo afanele angafika ku-3 azokuthinta ngqo ngemibono namanani.",
+    "name": "Igama lakho",
+    "email": "I-imeyili",
+    "phone": "Ucingo / WhatsApp (uma uthanda)",
+    "from": "Kusukela",
+    "to": "Kuze kube",
+    "flexible": "Izinsuku zami ziyashintsheka",
+    "adults": "Abantu abadala",
+    "children": "Izingane",
+    "area": "Ungathanda ukuya kuphi?",
+    "areaPh": "isb. Hluhluwe, St Lucia, Kruger, Okavango…",
+    "interests": "Yini okuthandayo?",
+    "budget": "Isabelomali",
+    "budget_budget": "Okungabizi kakhulu",
+    "budget_mid": "Okuphakathi",
+    "budget_luxury": "Okunethezekile",
+    "budget_unsure": "Angikaqiniseki",
+    "message": "Kukhona okunye?",
+    "messagePh": "Imicimbi ekhethekile, ukufinyeleleka, izindawo okumele uzibone…",
+    "consent": "Ngiyavuma ukuthi isicelo sami nemininingwane yami yokuxhumana kungabelwa amabhizinisi endawo afanele angafika ku-3 ukuze angithinte, njengoba kuchazwe <link>esaziso sobumfihlo</link>.",
+    "send": "Thumela isicelo sami sohambo",
+    "sending": "Kuyathunyelwa…",
+    "sent": "Siyabonga! Isicelo sakho sabeliwe — lindela izimpendulo zingakapheli izinsuku ezimbili. Sicela ubheke ibhokisi lakho le-imeyili (nogaxekile) ukuze uthole isiqinisekiso sethu.",
+    "error": "Kukhona okungahambanga kahle. Sicela uzame futhi.",
+    "network": "Iphutha lenethiwekhi. Sicela uzame futhi.",
+    "bandTitle": "Awazi ukuthi uqalaphi?",
+    "bandBody": "Sitshele izinsuku nezinto ozithandayo — amabhizinisi endawo angafika ku-3 azokuthumelela imibono namanani. Mahhala, ayikho ikhomishini.",
+    "howTitle": "Kusebenza kanjani",
+    "how1": "Sitshele kanye ngohambo lwakho",
+    "how2": "Amabhizinisi endawo angafika ku-3 ayalithatha",
+    "how3": "Bakuthinta ngqo — ubhuka nabo"
   }
 }

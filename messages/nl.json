@@ -17,7 +17,8 @@
     "r22StayShort": "Overnachten & doen",
     "r22Guides": "Gidsen & chauffeurs",
     "r22Industry": "Branche-informatie",
-    "r22Opps": "Kansen"
+    "r22Opps": "Kansen",
+    "plan": "Plan mijn reis"
   },
   "Footer": {
     "explore": "Ontdekken",
@@ -364,5 +365,43 @@
   "Strip": {
     "title": "Momenten van de Elephant Coast",
     "lead": "Gefotografeerd door de mensen die hier wonen en werken."
+  },
+  "Plan": {
+    "nav": "Plan mijn reis",
+    "metaTitle": "Plan mijn reis — lokale bedrijven komen naar u",
+    "metaDescription": "Vertel ons één keer uw data en interesses — tot 3 passende lokale toerismebedrijven nemen contact op met ideeën en offertes. Gratis, zonder commissie.",
+    "eyebrow": "Gratis · zonder commissie",
+    "title": "Vertel ons over uw reis",
+    "lead": "Beschrijf één keer wat u zoekt — tot 3 passende lokale bedrijven nemen rechtstreeks contact met u op met ideeën en offertes.",
+    "name": "Uw naam",
+    "email": "E-mail",
+    "phone": "Telefoon / WhatsApp (optioneel)",
+    "from": "Van",
+    "to": "Tot",
+    "flexible": "Mijn data zijn flexibel",
+    "adults": "Volwassenen",
+    "children": "Kinderen",
+    "area": "Waar wilt u naartoe?",
+    "areaPh": "bijv. Hluhluwe, St Lucia, Kruger, Okavango…",
+    "interests": "Waar bent u in geïnteresseerd?",
+    "budget": "Budget",
+    "budget_budget": "Voordelig",
+    "budget_mid": "Middenklasse",
+    "budget_luxury": "Luxe",
+    "budget_unsure": "Nog niet zeker",
+    "message": "Nog iets?",
+    "messagePh": "Speciale gelegenheden, toegankelijkheid, must-sees…",
+    "consent": "Ik ga ermee akkoord dat mijn aanvraag en contactgegevens worden gedeeld met tot 3 passende lokale bedrijven zodat zij contact met mij kunnen opnemen, zoals beschreven in de <link>privacyverklaring</link>.",
+    "send": "Verstuur mijn reisaanvraag",
+    "sending": "Versturen…",
+    "sent": "Bedankt! Uw aanvraag is gedeeld — verwacht binnen een à twee dagen reacties. Controleer uw inbox (en spammap) voor onze bevestiging.",
+    "error": "Er ging iets mis. Probeer het opnieuw.",
+    "network": "Netwerkfout. Probeer het opnieuw.",
+    "bandTitle": "Weet u niet waar te beginnen?",
+    "bandBody": "Vertel ons uw data en interesses — tot 3 lokale bedrijven sturen u ideeën en offertes. Gratis, zonder commissie.",
+    "howTitle": "Zo werkt het",
+    "how1": "Vertel ons één keer over uw reis",
+    "how2": "Tot 3 lokale bedrijven pakken het op",
+    "how3": "Zij nemen direct contact op — u boekt bij hen"
   }
 }

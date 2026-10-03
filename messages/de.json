@@ -17,7 +17,8 @@
     "r22StayShort": "Übernachten & Erleben",
     "r22Guides": "Guides & Fahrer",
     "r22Industry": "Branchen-Infos",
-    "r22Opps": "Möglichkeiten"
+    "r22Opps": "Möglichkeiten",
+    "plan": "Reise planen"
   },
   "Footer": {
     "explore": "Entdecken",
@@ -364,5 +365,43 @@
   "Strip": {
     "title": "Momente von der Elephant Coast",
     "lead": "Fotografiert von den Menschen, die hier leben und arbeiten."
+  },
+  "Plan": {
+    "nav": "Reise planen",
+    "metaTitle": "Reise planen — lokale Anbieter melden sich bei Ihnen",
+    "metaDescription": "Nennen Sie uns einmal Reisedaten und Interessen — bis zu 3 passende lokale Tourismusbetriebe melden sich mit Ideen und Angeboten. Kostenlos, ohne Provision.",
+    "eyebrow": "Kostenlos · ohne Provision",
+    "title": "Erzählen Sie uns von Ihrer Reise",
+    "lead": "Beschreiben Sie einmal, was Sie suchen — bis zu 3 passende lokale Betriebe melden sich direkt mit Ideen und Angeboten.",
+    "name": "Ihr Name",
+    "email": "E-Mail",
+    "phone": "Telefon / WhatsApp (optional)",
+    "from": "Von",
+    "to": "Bis",
+    "flexible": "Meine Reisedaten sind flexibel",
+    "adults": "Erwachsene",
+    "children": "Kinder",
+    "area": "Wohin möchten Sie reisen?",
+    "areaPh": "z. B. Hluhluwe, St Lucia, Kruger, Okavango…",
+    "interests": "Was interessiert Sie?",
+    "budget": "Budget",
+    "budget_budget": "Günstig",
+    "budget_mid": "Mittelklasse",
+    "budget_luxury": "Luxus",
+    "budget_unsure": "Noch unsicher",
+    "message": "Sonst noch etwas?",
+    "messagePh": "Besondere Anlässe, Barrierefreiheit, Must-sees…",
+    "consent": "Ich bin einverstanden, dass meine Anfrage und Kontaktdaten an bis zu 3 passende lokale Betriebe weitergegeben werden, damit diese mich kontaktieren können, wie in der <link>Datenschutzerklärung</link> beschrieben.",
+    "send": "Reiseanfrage senden",
+    "sending": "Wird gesendet…",
+    "sent": "Vielen Dank! Ihre Anfrage wurde weitergegeben — Antworten erhalten Sie meist innerhalb von ein bis zwei Tagen. Bitte prüfen Sie Ihr Postfach (und den Spam-Ordner) auf unsere Bestätigung.",
+    "error": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+    "network": "Netzwerkfehler. Bitte versuchen Sie es erneut.",
+    "bandTitle": "Sie wissen nicht, wo Sie anfangen sollen?",
+    "bandBody": "Nennen Sie uns Reisedaten und Interessen — bis zu 3 lokale Betriebe schicken Ihnen Ideen und Angebote. Kostenlos, ohne Provision.",
+    "howTitle": "So funktioniert’s",
+    "how1": "Einmal Ihre Reise beschreiben",
+    "how2": "Bis zu 3 lokale Betriebe übernehmen sie",
+    "how3": "Sie melden sich direkt — Sie buchen bei ihnen"
   }
 }

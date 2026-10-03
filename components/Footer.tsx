@@ -13,7 +13,7 @@ export default function Footer() {
   const t = useTranslations("Footer");
   const tn = useTranslations("Nav");
   const label = (l: { label: string; key?: string }) =>
-    !l.key ? l.label : l.key === "browse" || l.key.startsWith("r22") ? tn(l.key) : t(l.key);
+    !l.key ? l.label : l.key === "browse" || l.key === "plan" || l.key.startsWith("r22") ? tn(l.key) : t(l.key);
   // Cross-link the sister site (only when its URL is known).
   // (ZAtours already links Route22 under "Explore".)
   const sister = IS_ZATOURS

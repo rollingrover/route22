@@ -14,6 +14,7 @@ import { getListings } from "@/lib/listings";
 import { getAmenities } from "@/lib/amenities";
 import ZaHome from "@/components/ZaHome";
 import PhotoStrip from "@/components/PhotoStrip";
+import PlanTripBand from "@/components/PlanTripBand";
 import { getPrices, snapshot } from "@/lib/prices";
 import { IS_ZATOURS } from "@/lib/site";
 import type { Metadata } from "next";
@@ -67,6 +68,7 @@ export default async function Home({ params }: { params: { locale: string } }) {
         <Highlights />
         <Itineraries listings={listings} />
         <Listings listings={listings} isExample={isExample} />
+        <PlanTripBand />
         <MoreResources />
         <Partner prices={snapshot(prices)} />
       </main>

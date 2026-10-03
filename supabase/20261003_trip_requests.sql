@@ -1,0 +1,8 @@
+-- Already applied to opdeskver2 (3 Oct 2026): dir_trip_requests,
+-- dir_trip_request_claims (RLS: superadmin-only direct access; claimants may
+-- update their own claim), and security-definer functions
+-- dir_company_can_claim / dir_open_trip_requests / dir_claim_trip_request /
+-- dir_my_trip_requests. Contact details are only returned by
+-- dir_claim_trip_request and dir_my_trip_requests (i.e. to claimants), max 3
+-- claims per request, paid/comped active members only. Also: dir_listings
+-- .opens_on (+ view column). See the live definitions in Supabase.

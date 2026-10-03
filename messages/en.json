@@ -17,7 +17,8 @@
     "r22StayShort": "Stay & Do",
     "r22Guides": "Guides & Drivers",
     "r22Industry": "Industry Info",
-    "r22Opps": "Opportunities"
+    "r22Opps": "Opportunities",
+    "plan": "Plan my trip"
   },
   "Footer": {
     "explore": "Explore",
@@ -364,5 +365,43 @@
   "Strip": {
     "title": "Moments from the Elephant Coast",
     "lead": "Photographed by the people who live and work here."
+  },
+  "Plan": {
+    "nav": "Plan my trip",
+    "metaTitle": "Plan my trip — let local businesses come to you",
+    "metaDescription": "Tell us your dates and interests once — up to 3 suitable local tourism businesses will contact you with ideas and quotes. Free, no commission.",
+    "eyebrow": "Free · no commission",
+    "title": "Tell us about your trip",
+    "lead": "Describe what you’re looking for once — up to 3 suitable local businesses will contact you directly with ideas and quotes.",
+    "name": "Your name",
+    "email": "Email",
+    "phone": "Phone / WhatsApp (optional)",
+    "from": "From",
+    "to": "To",
+    "flexible": "My dates are flexible",
+    "adults": "Adults",
+    "children": "Children",
+    "area": "Where would you like to go?",
+    "areaPh": "e.g. Hluhluwe, St Lucia, Kruger, Okavango…",
+    "interests": "What are you interested in?",
+    "budget": "Budget",
+    "budget_budget": "Budget-friendly",
+    "budget_mid": "Mid-range",
+    "budget_luxury": "Luxury",
+    "budget_unsure": "Not sure yet",
+    "message": "Anything else?",
+    "messagePh": "Special occasions, accessibility, must-sees…",
+    "consent": "I agree that my request and contact details may be shared with up to 3 suitable local businesses so they can contact me, as described in the <link>privacy notice</link>.",
+    "send": "Send my trip request",
+    "sending": "Sending…",
+    "sent": "Thank you! Your request has been shared — expect replies within a day or two. Please check your inbox (and spam folder) for our confirmation.",
+    "error": "Something went wrong. Please try again.",
+    "network": "Network error. Please try again.",
+    "bandTitle": "Not sure where to start?",
+    "bandBody": "Tell us your dates and interests — up to 3 local businesses will send you ideas and quotes. Free, no commission.",
+    "howTitle": "How it works",
+    "how1": "Tell us your trip once",
+    "how2": "Up to 3 local businesses pick it up",
+    "how3": "They contact you directly — you book with them"
   }
 }

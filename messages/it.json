@@ -17,7 +17,8 @@
     "r22StayShort": "Dormire & fare",
     "r22Guides": "Guide & autisti",
     "r22Industry": "Info utili",
-    "r22Opps": "Opportunità"
+    "r22Opps": "Opportunità",
+    "plan": "Pianifica il viaggio"
   },
   "Footer": {
     "explore": "Esplora",
@@ -364,5 +365,43 @@
   "Strip": {
     "title": "Momenti dalla Elephant Coast",
     "lead": "Fotografati da chi vive e lavora qui."
+  },
+  "Plan": {
+    "nav": "Pianifica il viaggio",
+    "metaTitle": "Pianifica il viaggio — le attività locali ti contattano",
+    "metaDescription": "Indicaci una sola volta date e interessi — fino a 3 attività turistiche locali ti contatteranno con idee e preventivi. Gratis, senza commissioni.",
+    "eyebrow": "Gratis · senza commissioni",
+    "title": "Raccontaci il tuo viaggio",
+    "lead": "Descrivi una sola volta ciò che cerchi — fino a 3 attività locali adatte ti contatteranno direttamente con idee e preventivi.",
+    "name": "Il tuo nome",
+    "email": "Email",
+    "phone": "Telefono / WhatsApp (facoltativo)",
+    "from": "Dal",
+    "to": "Al",
+    "flexible": "Le mie date sono flessibili",
+    "adults": "Adulti",
+    "children": "Bambini",
+    "area": "Dove vorresti andare?",
+    "areaPh": "es. Hluhluwe, St Lucia, Kruger, Okavango…",
+    "interests": "Cosa ti interessa?",
+    "budget": "Budget",
+    "budget_budget": "Economico",
+    "budget_mid": "Fascia media",
+    "budget_luxury": "Lusso",
+    "budget_unsure": "Non lo so ancora",
+    "message": "Altro?",
+    "messagePh": "Occasioni speciali, accessibilità, cose da non perdere…",
+    "consent": "Acconsento che la mia richiesta e i miei contatti vengano condivisi con fino a 3 attività locali adatte affinché possano contattarmi, come descritto nell’<link>informativa sulla privacy</link>.",
+    "send": "Invia la mia richiesta",
+    "sending": "Invio in corso…",
+    "sent": "Grazie! La tua richiesta è stata condivisa — riceverai risposte entro uno o due giorni. Controlla la posta (e lo spam) per la nostra conferma.",
+    "error": "Qualcosa è andato storto. Riprova.",
+    "network": "Errore di rete. Riprova.",
+    "bandTitle": "Non sai da dove iniziare?",
+    "bandBody": "Indicaci date e interessi — fino a 3 attività locali ti invieranno idee e preventivi. Gratis, senza commissioni.",
+    "howTitle": "Come funziona",
+    "how1": "Racconta il tuo viaggio una volta",
+    "how2": "Fino a 3 attività locali lo prendono in carico",
+    "how3": "Ti contattano direttamente — prenoti con loro"
   }
 }

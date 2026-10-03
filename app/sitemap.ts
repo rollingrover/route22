@@ -39,6 +39,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const common: MetadataRoute.Sitemap = [
     ...localized("/", "weekly", 1),
     ...localized("/routes", "weekly", 0.7),
+    ...localized("/plan", "monthly", 0.6),
     ...routes.flatMap((r) => localized(`/routes/${r.slug}`, "weekly", 0.7)),
     { url: `${SITE_URL}/list-your-business`, changeFrequency: "monthly", priority: 0.5 },
   ];

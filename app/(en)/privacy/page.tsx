@@ -63,6 +63,18 @@ export default function PrivacyPage() {
               protect it.
             </p>
 
+            <h2 className="mt-8 text-[1.2rem]">Trip requests (“Plan my trip”)</h2>
+            <p>
+              If you send a trip request, we share your request <strong>and your name, email and phone
+              number</strong> with up to three suitable tourism businesses that are paying members of our
+              directory, so they can contact you with ideas and quotes. We only do this with your explicit
+              consent on the form. Member businesses see the trip details first and receive your contact
+              details only when they take up your request; at most three can do so. Each business then
+              handles your details as a responsible party in its own right. Trip requests are no longer
+              offered to businesses after 45 days or once your travel dates have passed. You can withdraw
+              your request at any time by replying to our confirmation email.
+            </p>
+
             <h2 className="mt-8 text-[1.2rem]">How long we keep it</h2>
             <p>
               Enquiries and leads are kept for up to 24 months, then deleted, unless a longer period

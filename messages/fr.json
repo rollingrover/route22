@@ -17,7 +17,8 @@
     "r22StayShort": "Dormir & découvrir",
     "r22Guides": "Guides & chauffeurs",
     "r22Industry": "Infos pratiques",
-    "r22Opps": "Opportunités"
+    "r22Opps": "Opportunités",
+    "plan": "Préparer mon voyage"
   },
   "Footer": {
     "explore": "Explorer",
@@ -364,5 +365,43 @@
   "Strip": {
     "title": "Instants de l’Elephant Coast",
     "lead": "Photographiés par ceux qui vivent et travaillent ici."
+  },
+  "Plan": {
+    "nav": "Préparer mon voyage",
+    "metaTitle": "Préparer mon voyage — les prestataires locaux viennent à vous",
+    "metaDescription": "Indiquez une seule fois vos dates et vos envies — jusqu’à 3 entreprises touristiques locales vous contactent avec des idées et des devis. Gratuit, sans commission.",
+    "eyebrow": "Gratuit · sans commission",
+    "title": "Parlez-nous de votre voyage",
+    "lead": "Décrivez une seule fois ce que vous recherchez — jusqu’à 3 entreprises locales adaptées vous contactent directement avec des idées et des devis.",
+    "name": "Votre nom",
+    "email": "E-mail",
+    "phone": "Téléphone / WhatsApp (facultatif)",
+    "from": "Du",
+    "to": "Au",
+    "flexible": "Mes dates sont flexibles",
+    "adults": "Adultes",
+    "children": "Enfants",
+    "area": "Où souhaitez-vous aller ?",
+    "areaPh": "ex. Hluhluwe, St Lucia, Kruger, Okavango…",
+    "interests": "Qu’est-ce qui vous intéresse ?",
+    "budget": "Budget",
+    "budget_budget": "Économique",
+    "budget_mid": "Milieu de gamme",
+    "budget_luxury": "Luxe",
+    "budget_unsure": "Je ne sais pas encore",
+    "message": "Autre chose ?",
+    "messagePh": "Occasion spéciale, accessibilité, incontournables…",
+    "consent": "J’accepte que ma demande et mes coordonnées soient partagées avec jusqu’à 3 entreprises locales adaptées afin qu’elles puissent me contacter, comme décrit dans la <link>politique de confidentialité</link>.",
+    "send": "Envoyer ma demande",
+    "sending": "Envoi…",
+    "sent": "Merci ! Votre demande a été transmise — attendez-vous à des réponses sous un ou deux jours. Vérifiez votre boîte mail (et vos spams) pour notre confirmation.",
+    "error": "Une erreur s’est produite. Veuillez réessayer.",
+    "network": "Erreur réseau. Veuillez réessayer.",
+    "bandTitle": "Vous ne savez pas par où commencer ?",
+    "bandBody": "Indiquez vos dates et vos envies — jusqu’à 3 entreprises locales vous envoient des idées et des devis. Gratuit, sans commission.",
+    "howTitle": "Comment ça marche",
+    "how1": "Décrivez votre voyage une seule fois",
+    "how2": "Jusqu’à 3 entreprises locales le prennent en charge",
+    "how3": "Elles vous contactent — vous réservez directement"
   }
 }

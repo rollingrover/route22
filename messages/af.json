@@ -17,7 +17,8 @@
     "r22StayShort": "Bly & doen",
     "r22Guides": "Gidse & bestuurders",
     "r22Industry": "Bedryfsinligting",
-    "r22Opps": "Geleenthede"
+    "r22Opps": "Geleenthede",
+    "plan": "Beplan my reis"
   },
   "Footer": {
     "explore": "Verken",
@@ -364,5 +365,43 @@
   "Strip": {
     "title": "Oomblikke van die Elephant Coast",
     "lead": "Afgeneem deur die mense wat hier woon en werk."
+  },
+  "Plan": {
+    "nav": "Beplan my reis",
+    "metaTitle": "Beplan my reis — laat plaaslike besighede na jou kom",
+    "metaDescription": "Vertel ons een keer jou datums en belangstellings — tot 3 geskikte plaaslike toerismebesighede kontak jou met idees en kwotasies. Gratis, geen kommissie nie.",
+    "eyebrow": "Gratis · geen kommissie",
+    "title": "Vertel ons van jou reis",
+    "lead": "Beskryf een keer wat jy soek — tot 3 geskikte plaaslike besighede kontak jou direk met idees en kwotasies.",
+    "name": "Jou naam",
+    "email": "E-pos",
+    "phone": "Telefoon / WhatsApp (opsioneel)",
+    "from": "Van",
+    "to": "Tot",
+    "flexible": "My datums is buigsaam",
+    "adults": "Volwassenes",
+    "children": "Kinders",
+    "area": "Waarheen wil jy gaan?",
+    "areaPh": "bv. Hluhluwe, St Lucia, Kruger, Okavango…",
+    "interests": "Waarin stel jy belang?",
+    "budget": "Begroting",
+    "budget_budget": "Bekostigbaar",
+    "budget_mid": "Middelklas",
+    "budget_luxury": "Luuks",
+    "budget_unsure": "Nog nie seker nie",
+    "message": "Enigiets anders?",
+    "messagePh": "Spesiale geleenthede, toeganklikheid, moet-sien plekke…",
+    "consent": "Ek stem in dat my versoek en kontakbesonderhede met tot 3 geskikte plaaslike besighede gedeel mag word sodat hulle my kan kontak, soos beskryf in die <link>privaatheidskennisgewing</link>.",
+    "send": "Stuur my reisversoek",
+    "sending": "Stuur tans…",
+    "sent": "Dankie! Jou versoek is gedeel — verwag antwoorde binne een of twee dae. Kyk asseblief in jou inkassie (en strooiposmap) vir ons bevestiging.",
+    "error": "Iets het skeefgeloop. Probeer asseblief weer.",
+    "network": "Netwerkfout. Probeer asseblief weer.",
+    "bandTitle": "Weet nie waar om te begin nie?",
+    "bandBody": "Vertel ons jou datums en belangstellings — tot 3 plaaslike besighede stuur vir jou idees en kwotasies. Gratis, geen kommissie nie.",
+    "howTitle": "Hoe dit werk",
+    "how1": "Vertel ons een keer van jou reis",
+    "how2": "Tot 3 plaaslike besighede neem dit op",
+    "how3": "Hulle kontak jou direk — jy bespreek by hulle"
   }
 }

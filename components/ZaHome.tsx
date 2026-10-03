@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import ZaDirectory from "./ZaDirectory";
 import ZaMap from "./ZaMap";
 import PhotoStrip from "./PhotoStrip";
+import PlanTripBand from "./PlanTripBand";
 import { ListingCard } from "./ListingCard";
 import { Listing } from "@/lib/data";
 import { ROUTE22_URL } from "@/lib/site";
@@ -100,6 +101,8 @@ export default function ZaHome({ listings, isExample, prices }: { listings: List
       <ZaMap listings={real} route22Url={ROUTE22_URL} />
 
       <ZaDirectory listings={listings} isExample={isExample} />
+
+      <PlanTripBand />
 
       <section className="bg-sand-2 py-14">
         <div className="mx-auto grid max-w-[1120px] items-center gap-8 px-5 md:grid-cols-2">
