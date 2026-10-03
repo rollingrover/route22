@@ -156,6 +156,11 @@ export default async function ListingPage({ params }: { params: { slug: string; 
                   Owner verified
                 </span>
               )}
+              {listing.opensOn && new Date(listing.opensOn) > new Date() && (
+                <span className="mt-4 inline-block rounded-full bg-gold px-3 py-1 text-[0.75rem] font-bold uppercase tracking-wide text-ink">
+                  {tcard("opening", { date: new Date(listing.opensOn).toLocaleDateString(params.locale, { month: "long", year: "numeric" }) })}
+                </span>
+              )}
               <h1 className="mb-3 mt-4 max-w-[18ch] text-[clamp(2rem,5vw,3.2rem)]">{listing.name}</h1>
               <p className="max-w-[60ch] text-[clamp(1rem,2.2vw,1.15rem)] text-white/90">
                 {IS_ZATOURS
@@ -190,12 +195,27 @@ export default async function ListingPage({ params }: { params: { slug: string; 
 
           <div className="grid gap-10 md:grid-cols-[1fr_300px]">
             <article>
-              <p className="text-[1.12rem] leading-relaxed text-ink-soft">
+              <p className="whitespace-pre-line text-[1.12rem] leading-relaxed text-ink-soft">
                 {listing.desc ||
                   (IS_ZATOURS
                     ? t("descZatours", { name: listing.name })
                     : t("descRoute22", { name: listing.name }))}
               </p>
+
+              {/* Photo gallery — paid tiers (Premium / Featured). */}
+              {!isFreeTier(listing.tier) && listing.photoUrls && listing.photoUrls.length > 0 && (
+                <div className="mt-9">
+                  <h2 className="mb-3 text-[1.1rem]">{t("photos")}</h2>
+                  <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
+                    {listing.photoUrls.slice(0, 9).map((src, i) => (
+                      <a key={src} href={src} target="_blank" rel="noopener" className="block overflow-hidden rounded-xl">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={src} alt={`${listing.name} — ${i + 1}`} loading="lazy" className="aspect-[4/3] w-full object-cover transition hover:scale-105" />
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Map location is a paid perk (Premium / Featured). */}
               {listing.lat && listing.lng && !isFreeTier(listing.tier) && (

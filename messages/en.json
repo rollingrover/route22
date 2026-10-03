@@ -104,7 +104,8 @@
     "ownerClaim": "Own this business? Claim or upgrade",
     "ownerUpgrade": "Your business? Upgrade this listing",
     "verified": "Verified & bookable",
-    "liveAvailability": "Live availability"
+    "liveAvailability": "Live availability",
+    "opening": "Opening {date}"
   },
   "Listing": {
     "directory": "Directory",
@@ -128,7 +129,8 @@
     "more": "More nearby",
     "moreRoute": "More along the route",
     "memberOf": "Member of {name}",
-    "listingMap": "Loading map…"
+    "listingMap": "Loading map…",
+    "photos": "Photos"
   },
   "Enquiry": {
     "name": "Your name",
@@ -358,5 +360,9 @@
         "s4": "West to Pongola & the dam"
       }
     }
+  },
+  "Strip": {
+    "title": "Moments from the Elephant Coast",
+    "lead": "Photographed by the people who live and work here."
   }
 }

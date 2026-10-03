@@ -20,11 +20,17 @@ function useCardText() {
   const tc = useTranslations("Categories");
   const badge = (b: string | null) =>
     b === "Verified & bookable" ? t("verified") : b === "Live availability" ? t("liveAvailability") : b;
-  return { t, cat: (c: Category) => tc(c), badge, countryName };
+  // "Opening December 2026" — month + year in the visitor's language.
+  const opening = (iso?: string) => {
+    if (!iso || new Date(iso) <= new Date()) return null;
+    const date = new Date(iso).toLocaleDateString(locale, { month: "long", year: "numeric" });
+    return t("opening", { date });
+  };
+  return { t, cat: (c: Category) => tc(c), badge, countryName, opening };
 }
 
 export function ListingCard({ l, showProvince = false }: { l: Listing; showProvince?: boolean }) {
-  const { t, cat, badge, countryName } = useCardText();
+  const { t, cat, badge, countryName, opening } = useCardText();
   const place =
     showProvince && l.province && l.province !== l.location
       ? `${l.location} · ${l.province}`
@@ -70,6 +76,11 @@ export function ListingCard({ l, showProvince = false }: { l: Listing; showProvi
               }`}
             >
               {l.tier === "featured" ? t("featured") : t("premium")}
+            </span>
+          )}
+          {opening(l.opensOn) && (
+            <span className="absolute bottom-2.5 left-2.5 rounded-full bg-gold px-2.5 py-1 text-[0.68rem] font-bold uppercase tracking-wide text-ink">
+              {opening(l.opensOn)}
             </span>
           )}
           {(l.claimed || partnerBadge(l)) && (

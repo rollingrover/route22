@@ -104,7 +104,8 @@
     "ownerClaim": "C’est votre établissement ? Revendiquer ou améliorer",
     "ownerUpgrade": "Votre établissement ? Améliorer cette annonce",
     "verified": "Vérifié & réservable",
-    "liveAvailability": "Disponibilités en direct"
+    "liveAvailability": "Disponibilités en direct",
+    "opening": "Ouverture {date}"
   },
   "Listing": {
     "directory": "Annuaire",
@@ -128,7 +129,8 @@
     "more": "À proximité",
     "moreRoute": "Le long de la route",
     "memberOf": "Membre de {name}",
-    "listingMap": "Chargement de la carte…"
+    "listingMap": "Chargement de la carte…",
+    "photos": "Photos"
   },
   "Enquiry": {
     "name": "Votre nom",
@@ -358,5 +360,9 @@
         "s4": "Vers l’ouest : Pongola & le barrage"
       }
     }
+  },
+  "Strip": {
+    "title": "Instants de l’Elephant Coast",
+    "lead": "Photographiés par ceux qui vivent et travaillent ici."
   }
 }

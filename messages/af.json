@@ -104,7 +104,8 @@
     "ownerClaim": "Jou besigheid? Eis op of gradeer op",
     "ownerUpgrade": "Jou besigheid? Gradeer hierdie inskrywing op",
     "verified": "Geverifieer & bespreekbaar",
-    "liveAvailability": "Regstreekse beskikbaarheid"
+    "liveAvailability": "Regstreekse beskikbaarheid",
+    "opening": "Open {date}"
   },
   "Listing": {
     "directory": "Gids",
@@ -128,7 +129,8 @@
     "more": "Meer in die omgewing",
     "moreRoute": "Meer langs die roete",
     "memberOf": "Lid van {name}",
-    "listingMap": "Kaart word gelaai…"
+    "listingMap": "Kaart word gelaai…",
+    "photos": "Foto’s"
   },
   "Enquiry": {
     "name": "Jou naam",
@@ -358,5 +360,9 @@
         "s4": "Wes na Pongola & die dam"
       }
     }
+  },
+  "Strip": {
+    "title": "Oomblikke van die Elephant Coast",
+    "lead": "Afgeneem deur die mense wat hier woon en werk."
   }
 }

@@ -104,7 +104,8 @@
     "ownerClaim": "È la tua attività? Rivendica o migliora",
     "ownerUpgrade": "La tua attività? Migliora questo annuncio",
     "verified": "Verificato & prenotabile",
-    "liveAvailability": "Disponibilità in tempo reale"
+    "liveAvailability": "Disponibilità in tempo reale",
+    "opening": "Apertura {date}"
   },
   "Listing": {
     "directory": "Guida",
@@ -128,7 +129,8 @@
     "more": "Altro nei dintorni",
     "moreRoute": "Altro lungo il percorso",
     "memberOf": "Membro di {name}",
-    "listingMap": "Caricamento mappa…"
+    "listingMap": "Caricamento mappa…",
+    "photos": "Foto"
   },
   "Enquiry": {
     "name": "Il tuo nome",
@@ -358,5 +360,9 @@
         "s4": "A ovest verso Pongola & la diga"
       }
     }
+  },
+  "Strip": {
+    "title": "Momenti dalla Elephant Coast",
+    "lead": "Fotografati da chi vive e lavora qui."
   }
 }

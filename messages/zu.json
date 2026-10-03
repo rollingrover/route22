@@ -104,7 +104,8 @@
     "ownerClaim": "Yibhizinisi lakho? Lithathe noma ulithuthukise",
     "ownerUpgrade": "Yibhizinisi lakho? Thuthukisa lokhu kubhaliswa",
     "verified": "Kuqinisekisiwe futhi kungabhukwa",
-    "liveAvailability": "Ukutholakala okubukhoma"
+    "liveAvailability": "Ukutholakala okubukhoma",
+    "opening": "Kuvulwa ngo-{date}"
   },
   "Listing": {
     "directory": "Uhlu",
@@ -128,7 +129,8 @@
     "more": "Okunye okuseduze",
     "moreRoute": "Okunye emzileni",
     "memberOf": "Ilungu le-{name}",
-    "listingMap": "Imephu iyalayisha…"
+    "listingMap": "Imephu iyalayisha…",
+    "photos": "Izithombe"
   },
   "Enquiry": {
     "name": "Igama lakho",
@@ -358,5 +360,9 @@
         "s4": "Entshonalanga uye ePhongolo nasedamini"
       }
     }
+  },
+  "Strip": {
+    "title": "Izikhathi ezivela e-Elephant Coast",
+    "lead": "Kuthwetshulwe ngabantu abahlala futhi abasebenza lapha."
   }
 }

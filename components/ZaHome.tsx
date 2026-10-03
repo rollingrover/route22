@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import ZaDirectory from "./ZaDirectory";
 import ZaMap from "./ZaMap";
+import PhotoStrip from "./PhotoStrip";
 import { ListingCard } from "./ListingCard";
 import { Listing } from "@/lib/data";
 import { ROUTE22_URL } from "@/lib/site";
@@ -93,6 +94,8 @@ export default function ZaHome({ listings, isExample, prices }: { listings: List
           </div>
         </section>
       )}
+
+      <PhotoStrip />
 
       <ZaMap listings={real} route22Url={ROUTE22_URL} />
 

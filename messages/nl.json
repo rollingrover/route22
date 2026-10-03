@@ -104,7 +104,8 @@
     "ownerClaim": "Uw bedrijf? Claim of upgrade",
     "ownerUpgrade": "Uw bedrijf? Upgrade deze vermelding",
     "verified": "Geverifieerd & boekbaar",
-    "liveAvailability": "Live beschikbaarheid"
+    "liveAvailability": "Live beschikbaarheid",
+    "opening": "Opent {date}"
   },
   "Listing": {
     "directory": "Gids",
@@ -128,7 +129,8 @@
     "more": "Meer in de buurt",
     "moreRoute": "Meer langs de route",
     "memberOf": "Lid van {name}",
-    "listingMap": "Kaart laden…"
+    "listingMap": "Kaart laden…",
+    "photos": "Foto’s"
   },
   "Enquiry": {
     "name": "Uw naam",
@@ -358,5 +360,9 @@
         "s4": "Westwaarts naar Pongola & de dam"
       }
     }
+  },
+  "Strip": {
+    "title": "Momenten van de Elephant Coast",
+    "lead": "Gefotografeerd door de mensen die hier wonen en werken."
   }
 }

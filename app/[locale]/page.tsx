@@ -13,6 +13,7 @@ import Footer from "@/components/Footer";
 import { getListings } from "@/lib/listings";
 import { getAmenities } from "@/lib/amenities";
 import ZaHome from "@/components/ZaHome";
+import PhotoStrip from "@/components/PhotoStrip";
 import { getPrices, snapshot } from "@/lib/prices";
 import { IS_ZATOURS } from "@/lib/site";
 import type { Metadata } from "next";
@@ -60,6 +61,7 @@ export default async function Home({ params }: { params: { locale: string } }) {
       <main>
         <Hero />
         <Intro />
+        <PhotoStrip />
         <ToursSection tours={tours} isExample={isExample} />
         <RouteMap amenities={amenities} />
         <Highlights />

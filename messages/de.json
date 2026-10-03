@@ -104,7 +104,8 @@
     "ownerClaim": "Ihr Betrieb? Eintrag übernehmen oder upgraden",
     "ownerUpgrade": "Ihr Betrieb? Eintrag upgraden",
     "verified": "Verifiziert & buchbar",
-    "liveAvailability": "Live-Verfügbarkeit"
+    "liveAvailability": "Live-Verfügbarkeit",
+    "opening": "Eröffnung {date}"
   },
   "Listing": {
     "directory": "Verzeichnis",
@@ -128,7 +129,8 @@
     "more": "Mehr in der Nähe",
     "moreRoute": "Mehr entlang der Route",
     "memberOf": "Mitglied von {name}",
-    "listingMap": "Karte wird geladen…"
+    "listingMap": "Karte wird geladen…",
+    "photos": "Fotos"
   },
   "Enquiry": {
     "name": "Ihr Name",
@@ -358,5 +360,9 @@
         "s4": "Westwärts nach Pongola & zum Damm"
       }
     }
+  },
+  "Strip": {
+    "title": "Momente von der Elephant Coast",
+    "lead": "Fotografiert von den Menschen, die hier leben und arbeiten."
   }
 }
