@@ -74,7 +74,8 @@
     "showAll": "show all",
     "none": "Nothing matches that yet — try a different search, or check back soon as new businesses are added.",
     "more": "More businesses",
-    "moreLead": "Free directory entries for businesses that haven’t set up a full page yet."
+    "moreLead": "Free directory entries for businesses that haven’t set up a full page yet.",
+    "allCountries": "All countries"
   },
   "Map": {
     "title": "Explore Southern & East Africa",

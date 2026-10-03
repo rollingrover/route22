@@ -103,7 +103,7 @@ export default async function ListingPage({ params }: { params: { slug: string; 
       "@type": "PostalAddress",
       addressLocality: listing.location,
       addressRegion: listing.province || "KwaZulu-Natal",
-      addressCountry: "ZA",
+      addressCountry: listing.country || "ZA",
     },
     ...(listing.lat && listing.lng
       ? { geo: { "@type": "GeoCoordinates", latitude: listing.lat, longitude: listing.lng } }
@@ -158,7 +158,12 @@ export default async function ListingPage({ params }: { params: { slug: string; 
               )}
               <h1 className="mb-3 mt-4 max-w-[18ch] text-[clamp(2rem,5vw,3.2rem)]">{listing.name}</h1>
               <p className="max-w-[60ch] text-[clamp(1rem,2.2vw,1.15rem)] text-white/90">
-                {BRAND.listingContext(listing)}
+                {IS_ZATOURS
+                  ? [listing.location, listing.province && listing.province !== listing.location ? listing.province : null,
+                      new Intl.DisplayNames([params.locale], { type: "region" }).of(listing.country || "ZA")]
+                      .filter(Boolean)
+                      .join(" · ")
+                  : BRAND.listingContext(listing)}
               </p>
               {memberOf.length > 0 && (
                 <p className="m-0 mt-2 flex flex-wrap gap-2">

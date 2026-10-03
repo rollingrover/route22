@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Category, categoryLabel, hasCategory, Listing, listingCategories } from "@/lib/data";
 import { CommunityCard, ListingCard } from "./ListingCard";
 import { ZA_CATEGORY_ICON } from "@/lib/za-assets";
@@ -20,6 +20,8 @@ export default function ZaDirectory({
   const [q, setQ] = useState("");
   const [cat, setCat] = useState<"all" | Category>("all");
   const [prov, setProv] = useState("all");
+  const [country, setCountry] = useState("all");
+  const locale = useLocale();
   const [route, setRoute] = useState("all");
 
   const categories = useMemo(() => {
@@ -32,8 +34,8 @@ export default function ZaDirectory({
 
   const provinces = useMemo(
     () =>
-      Array.from(new Set(listings.map((l) => l.province).filter(Boolean) as string[])).sort(),
-    [listings]
+      Array.from(new Set(listings.filter((l) => country === "all" || (l.country || "ZA") === country).map((l) => l.province).filter(Boolean) as string[])).sort(),
+    [listings, country]
   );
 
   const routeOptions = useMemo(() => {
@@ -42,11 +44,20 @@ export default function ZaDirectory({
     return Array.from(m.entries()).sort((a, b) => a[1].localeCompare(b[1]));
   }, [listings]);
 
+  const countries = useMemo(() => {
+    const codes = Array.from(new Set(listings.map((l) => l.country || "ZA")));
+    const name = (c: string) => {
+      try { return new Intl.DisplayNames([locale], { type: "region" }).of(c) ?? c; } catch { return c; }
+    };
+    return codes.map((c) => [c, name(c)] as const).sort((a, b) => a[1].localeCompare(b[1]));
+  }, [listings, locale]);
+
   const filtered = useMemo(() => {
     const needle = q.trim().toLowerCase();
     return listings.filter(
       (l) =>
         (cat === "all" || hasCategory(l, cat)) &&
+        (country === "all" || (l.country || "ZA") === country) &&
         (prov === "all" || l.province === prov) &&
         (route === "all" || Boolean(l.routes?.some((r) => r.slug === route))) &&
         (!needle ||
@@ -54,7 +65,7 @@ export default function ZaDirectory({
             .filter(Boolean)
             .some((v) => String(v).toLowerCase().includes(needle)))
     );
-  }, [listings, q, cat, prov, route]);
+  }, [listings, q, cat, prov, route, country]);
 
   const full = filtered.filter((l) => l.tier !== "community");
   const community = filtered.filter((l) => l.tier === "community");
@@ -92,6 +103,21 @@ export default function ZaDirectory({
               className="w-full border-0 bg-transparent py-3 text-ink outline-none"
             />
           </label>
+          {countries.length > 1 && (
+            <label className="flex items-center">
+              <span className="sr-only">{t("allCountries")}</span>
+              <select
+                value={country}
+                onChange={(e) => { setCountry(e.target.value); setProv("all"); }}
+                className="w-full rounded-[10px] border border-line bg-sand px-3 py-3 text-ink sm:w-auto"
+              >
+                <option value="all">{t("allCountries")}</option>
+                {countries.map(([code, name]) => (
+                  <option key={code} value={code}>{name}</option>
+                ))}
+              </select>
+            </label>
+          )}
           {routeOptions.length > 0 && (
             <label className="flex items-center">
               <span className="sr-only">Route</span>

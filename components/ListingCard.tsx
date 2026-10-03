@@ -1,7 +1,7 @@
 "use client";
 
 import { Link } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { categoryHue, categoryLabels, isFreeTier, Listing, partnerBadge, type Category } from "@/lib/data";
 import OwnerLink from "./OwnerLink";
 import { IS_ZATOURS } from "@/lib/site";
@@ -12,18 +12,24 @@ import { ZA_CATEGORY_ICON } from "@/lib/za-assets";
 // card's own <Link>, since anchors can't nest.
 function useCardText() {
   const t = useTranslations("Card");
+  const locale = useLocale();
+  const countryName = (code?: string) => {
+    if (!code || code === "ZA") return null;
+    try { return new Intl.DisplayNames([locale], { type: "region" }).of(code) ?? code; } catch { return code; }
+  };
   const tc = useTranslations("Categories");
   const badge = (b: string | null) =>
     b === "Verified & bookable" ? t("verified") : b === "Live availability" ? t("liveAvailability") : b;
-  return { t, cat: (c: Category) => tc(c), badge };
+  return { t, cat: (c: Category) => tc(c), badge, countryName };
 }
 
 export function ListingCard({ l, showProvince = false }: { l: Listing; showProvince?: boolean }) {
-  const { t, cat, badge } = useCardText();
+  const { t, cat, badge, countryName } = useCardText();
   const place =
     showProvince && l.province && l.province !== l.location
       ? `${l.location} · ${l.province}`
       : l.location;
+  const placeLine = [place, countryName(l.country)].filter(Boolean).join(" · ");
   return (
     <div
       className={`group flex flex-col overflow-hidden rounded-xl2 bg-paper shadow-card transition duration-200 hover:-translate-y-1 hover:shadow-lg ${
@@ -86,7 +92,7 @@ export function ListingCard({ l, showProvince = false }: { l: Listing; showProvi
             {categoryLabels(l, 2, cat)}
           </span>
           <h3 className="m-0 text-[1.1rem] text-ink group-hover:text-clay">{l.name}</h3>
-          <span className="text-[0.82rem] text-ink-soft">{place}</span>
+          <span className="text-[0.82rem] text-ink-soft">{placeLine}</span>
           <p className="m-0 text-[0.88rem] text-ink-soft">{l.desc}</p>
           <span
             className={`mt-auto pt-2.5 text-[0.85rem] font-semibold ${
@@ -108,11 +114,12 @@ export function ListingCard({ l, showProvince = false }: { l: Listing; showProvi
 
 // Free "community" entry — no page of its own.
 export function CommunityCard({ l, showProvince = false }: { l: Listing; showProvince?: boolean }) {
-  const { cat } = useCardText();
+  const { cat, countryName } = useCardText();
   const place =
     showProvince && l.province && l.province !== l.location
       ? `${l.location} · ${l.province}`
       : l.location;
+  const placeLine = [place, countryName(l.country)].filter(Boolean).join(" · ");
   return (
     <div className="flex flex-col overflow-hidden rounded-xl2 border border-dashed border-line bg-sand">
       <div
@@ -128,7 +135,7 @@ export function CommunityCard({ l, showProvince = false }: { l: Listing; showPro
           {categoryLabels(l, 2, cat)}
         </span>
         <h4 className="m-0 text-[0.95rem] text-ink">{l.name}</h4>
-        <span className="text-[0.78rem] text-ink-soft">{place}</span>
+        <span className="text-[0.78rem] text-ink-soft">{placeLine}</span>
         <OwnerLink slug={l.slug} claimed={l.claimed} className="mt-1.5" />
       </div>
     </div>

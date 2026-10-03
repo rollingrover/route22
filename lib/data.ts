@@ -313,6 +313,7 @@ export type Listing = {
   category: Category;
   location: string;
   categories?: Category[];
+  country?: string; // ISO code, default ZA
   // Route Hubs this listing belongs to ("Member of …").
   routes?: { slug: string; name: string; kind: "route" | "association" }[];
   province?: string;

@@ -74,7 +74,8 @@
     "showAll": "tout afficher",
     "none": "Aucun résultat pour l’instant — essayez une autre recherche ou revenez bientôt.",
     "more": "Autres établissements",
-    "moreLead": "Annonces gratuites d’établissements qui n’ont pas encore de page complète."
+    "moreLead": "Annonces gratuites d’établissements qui n’ont pas encore de page complète.",
+    "allCountries": "Tous les pays"
   },
   "Map": {
     "title": "Explorer l’Afrique australe & de l’Est",
