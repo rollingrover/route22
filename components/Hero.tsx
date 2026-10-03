@@ -23,13 +23,11 @@ export default function Hero() {
         aria-hidden="true"
         className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,38,26,0.88)_0%,rgba(20,38,26,0.6)_55%,rgba(20,38,26,0.25)_100%)] lg:hidden"
       />
-      <div
-        className="pointer-events-none absolute inset-0 hidden opacity-60 lg:block"
-        style={{
-          background:
-            "repeating-linear-gradient(115deg, rgba(255,255,255,0.03) 0 2px, transparent 2px 26px)",
-        }}
-      />
+      {/* Desktop: own photography — sunrise over the bush and coastal plain. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/hero/route22-sunrise-bg.webp" alt="" className="absolute inset-0 hidden h-full w-full object-cover object-[50%_60%] lg:block" />
+      <div aria-hidden="true" className="absolute inset-0 hidden lg:block"
+        style={{ background: "linear-gradient(90deg, rgba(20,38,26,0.85) 0%, rgba(20,38,26,0.5) 48%, rgba(20,38,26,0.08) 100%)" }} />
       <div className="relative mx-auto grid w-full max-w-[1120px] items-center gap-12 px-5 py-24 lg:grid-cols-[1.25fr_0.75fr]">
         <div>
         <p className="mb-3.5 text-[0.72rem] uppercase tracking-[3px] text-[#e9c9a6]">

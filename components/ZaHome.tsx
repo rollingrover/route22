@@ -20,13 +20,13 @@ export default function ZaHome({ listings, isExample, prices }: { listings: List
 
   return (
     <>
-      <section
-        className="relative isolate overflow-hidden text-white"
-        style={{
-          background:
-            "radial-gradient(circle at 85% 20%, rgba(245,158,11,0.22), transparent 45%), linear-gradient(135deg, #1f2a44 0%, #141c30 60%, #10283a 100%)",
-        }}
-      >
+      <section className="relative isolate overflow-hidden bg-bush-dk text-white">
+        {/* Own photography: dawn over the Hluhluwe coastal plain, behind the framed photo. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/hero/zatours-dawn-bg.webp" alt="" fetchPriority="high"
+          className="absolute inset-0 -z-10 h-full w-full object-cover object-[50%_70%]" />
+        <div aria-hidden="true" className="absolute inset-0 -z-10"
+          style={{ background: "linear-gradient(90deg, rgba(20,28,48,0.82) 0%, rgba(20,28,48,0.5) 48%, rgba(20,28,48,0.1) 100%)" }} />
         <div className="relative mx-auto grid max-w-[1120px] items-center gap-10 px-5 pb-16 pt-16 md:pb-24 md:pt-20 lg:grid-cols-[1.2fr_0.8fr]">
           <div>
           <p className="mb-3 text-[0.72rem] font-semibold uppercase tracking-[3px] text-gold">
