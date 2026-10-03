@@ -3,7 +3,7 @@
 // components stay shared.
 import { SITE_ID, ROUTE22_URL } from "./site";
 
-type NavLink = { href: string; label: string; external?: boolean };
+type NavLink = { href: string; label: string; external?: boolean; key?: string };
 
 type Brand = {
   name: string; // short display name
@@ -105,16 +105,16 @@ const zatours: Brand = {
   footerBlurb:
     "ZAtours is a directory of tourism businesses in South Africa, Southern and East Africa. We don't sell tours — you book directly with the businesses listed.",
   nav: [
-    { href: "/#directory", label: "Browse the directory" },
-    { href: "/#featured", label: "Featured" },
-    { href: "/#map", label: "Map" },
-    { href: "/routes", label: "Routes" },
-    { href: ROUTE22_URL, label: "Elephant Coast route", external: true },
+    { href: "/#directory", label: "Browse the directory", key: "browse" },
+    { href: "/#featured", label: "Featured", key: "featured" },
+    { href: "/#map", label: "Map", key: "map" },
+    { href: "/routes", label: "Routes", key: "routes" },
+    { href: ROUTE22_URL, label: "Elephant Coast route", external: true, key: "elephantCoast" },
   ],
   footerExplore: [
-    { href: "/#directory", label: "Browse the directory" },
-    { href: "/#featured", label: "Featured businesses" },
-    { href: ROUTE22_URL, label: "Route22 — Elephant Coast", external: true },
+    { href: "/#directory", label: "Browse the directory", key: "browse" },
+    { href: "/#featured", label: "Featured businesses", key: "featuredBusinesses" },
+    { href: ROUTE22_URL, label: "Route22 — Elephant Coast", external: true, key: "route22Link" },
   ],
   directoryHref: "/#directory",
   listingContext: (l) =>

@@ -4,10 +4,24 @@ import { parks } from "@/lib/parks";
 import { industryPosts } from "@/lib/industry";
 import { getListings } from "@/lib/listings";
 import { getRoutes } from "@/lib/routes";
+import { SITE_LOCALES } from "@/i18n/routing";
+import { localePath } from "@/lib/alternates";
 import { getAllGuideSlugs } from "@/lib/guides";
 import { getAllOpportunitySlugs } from "@/lib/opportunities";
 
 export const revalidate = 300;
+
+// Translated pages: one entry per language, each listing every language
+// version as an alternate (reciprocal hreflang, as on ethlathini.co.za).
+function localized(path: string, changeFrequency: "daily" | "weekly" | "monthly", priority: number): MetadataRoute.Sitemap {
+  const languages = Object.fromEntries(SITE_LOCALES.map((l) => [l, `${SITE_URL}${localePath(path, l)}`]));
+  return SITE_LOCALES.map((l) => ({
+    url: `${SITE_URL}${localePath(path, l)}`,
+    changeFrequency,
+    priority: l === "en" ? priority : Math.max(0.3, priority - 0.1),
+    ...(SITE_LOCALES.length > 1 ? { alternates: { languages } } : {}),
+  }));
+}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const { listings, isExample } = await getListings();
@@ -19,17 +33,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     : listings
         .filter((l) => l.tier !== "community")
         .filter((l) => canonicalListingUrl(l) === `${SITE_URL}/listings/${l.slug}`)
-        .map((l) => ({
-          url: `${SITE_URL}/listings/${l.slug}`,
-          changeFrequency: "weekly",
-          priority: 0.7,
-        }));
+        .flatMap((l) => localized(`/listings/${l.slug}`, "weekly", 0.7));
 
   const routes = await getRoutes();
   const common: MetadataRoute.Sitemap = [
-    { url: `${SITE_URL}/`, changeFrequency: "weekly", priority: 1 },
-    { url: `${SITE_URL}/routes`, changeFrequency: "weekly", priority: 0.7 },
-    ...routes.map((r) => ({ url: `${SITE_URL}/routes/${r.slug}`, changeFrequency: "weekly" as const, priority: 0.7 })),
+    ...localized("/", "weekly", 1),
+    ...localized("/routes", "weekly", 0.7),
+    ...routes.flatMap((r) => localized(`/routes/${r.slug}`, "weekly", 0.7)),
     { url: `${SITE_URL}/list-your-business`, changeFrequency: "monthly", priority: 0.5 },
   ];
 

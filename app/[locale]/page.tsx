@@ -15,11 +15,19 @@ import { getAmenities } from "@/lib/amenities";
 import ZaHome from "@/components/ZaHome";
 import { getPrices, snapshot } from "@/lib/prices";
 import { IS_ZATOURS } from "@/lib/site";
+import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
+import { localeAlternates } from "@/lib/alternates";
 
 // Revalidate listings periodically so new Supabase partners appear without a redeploy.
 export const revalidate = 300;
 
-export default async function Home() {
+export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
+  return { alternates: localeAlternates("/", params.locale) };
+}
+
+export default async function Home({ params }: { params: { locale: string } }) {
+  setRequestLocale(params.locale);
   if (IS_ZATOURS) {
     const [{ listings, isExample }, prices] = await Promise.all([getListings(), getPrices()]);
     return (

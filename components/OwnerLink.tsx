@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 // Small, owner-facing "Claim or upgrade" link for FREE listings only
 // (community/basic). Deliberately quiet — it's for business owners browsing
@@ -16,13 +19,14 @@ export default function OwnerLink({
   claimed?: boolean;
   className?: string;
 }) {
+  const t = useTranslations("Card");
   return (
     <Link
       href={ownerUpgradeHref(slug)}
       rel="nofollow"
       className={`text-[0.75rem] text-ink-soft underline decoration-line underline-offset-2 hover:text-clay ${className}`}
     >
-      {claimed ? "Your business? Upgrade this listing" : "Own this business? Claim or upgrade"}
+      {claimed ? t("ownerUpgrade") : t("ownerClaim")}
     </Link>
   );
 }

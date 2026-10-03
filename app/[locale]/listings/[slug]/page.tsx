@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import NextLink from "next/link";
+import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -13,6 +14,9 @@ import { categoryHue, categoryLabel, categoryLabels, hasCategory, isFreeTier, li
 import { absoluteUrl, canonicalListingUrl, IS_ZATOURS } from "@/lib/site";
 import { BRAND } from "@/lib/brand";
 import OwnerLink from "@/components/OwnerLink";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { localeAlternates } from "@/lib/alternates";
+import type { Category } from "@/lib/data";
 import { getRouteMemberships } from "@/lib/routes";
 
 export const revalidate = 300;
@@ -25,14 +29,18 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: { slug: string; locale: string };
 }): Promise<Metadata> {
   const result = await getListing(params.slug);
+  const tm = await getTranslations({ locale: params.locale, namespace: "Meta" });
+  const tcm = await getTranslations({ locale: params.locale, namespace: "Categories" });
   if (!result) return { title: `Not found — ${BRAND.fullName}` };
   const { listing, isExample } = result;
-  const title = `${listing.name} — ${categoryLabels(listing)} in ${listing.location} | ${BRAND.name}`;
+  const catText = categoryLabels(listing, 2, (c: Category) => tcm(c));
+  const title = `${tm("listingTitle", { name: listing.name, category: catText, location: listing.location })} | ${BRAND.name}`;
   const description =
     listing.desc ||
+    (params.locale !== "en" ? tm("listingDesc", { name: listing.name, category: catText, location: listing.location, brand: BRAND.name }) : null) ||
     (IS_ZATOURS
       ? `${listing.name}, a ${categoryLabel[listing.category].toLowerCase()} listing in ${listing.location}, ${listing.province ?? "South Africa"}. Enquire directly on ZAtours.`
       : `${listing.name}, a ${categoryLabel[listing.category].toLowerCase()} listing in ${listing.location} on the Route22 Elephant Coast route.`);
@@ -42,7 +50,8 @@ export async function generateMetadata({
   return {
     title,
     description,
-    alternates: { canonical },
+    // English keeps the cross-site canonical (ZAtours is home); translations self-canonicalise.
+    alternates: localeAlternates(`/listings/${listing.slug}`, params.locale, params.locale === "en" ? canonical : undefined),
     ...(isExample ? { robots: { index: false, follow: true } } : {}),
     openGraph: {
       title,
@@ -60,7 +69,13 @@ export async function generateMetadata({
   };
 }
 
-export default async function ListingPage({ params }: { params: { slug: string } }) {
+export default async function ListingPage({ params }: { params: { slug: string; locale: string } }) {
+  setRequestLocale(params.locale);
+  const t = await getTranslations("Listing");
+  const tc = await getTranslations("Categories");
+  const tcard = await getTranslations("Card");
+  const tdir = await getTranslations("Directory");
+  const cat = (c: Category) => tc(c);
   const result = await getListing(params.slug);
   if (!result) notFound();
   const { listing, isExample } = result;
@@ -118,7 +133,7 @@ export default async function ListingPage({ params }: { params: { slug: string }
                 </Link>{" "}
                 <span className="opacity-60">/</span>{" "}
                 <Link href={BRAND.directoryHref} className="text-white/80 no-underline hover:text-white">
-                  {IS_ZATOURS ? "Directory" : "Stay & Do"}
+                  {IS_ZATOURS ? t("directory") : t("stayDo")}
                 </Link>{" "}
                 <span className="opacity-60">/</span>{" "}
                 <span className="text-white">{listing.name}</span>
@@ -129,11 +144,11 @@ export default async function ListingPage({ params }: { params: { slug: string }
                 </span>
               )}
               <span className="mr-2 inline-block rounded-full bg-black/25 px-3 py-1 text-[0.68rem] font-bold uppercase tracking-wide backdrop-blur">
-                {categoryLabels(listing)}
+                {categoryLabels(listing, 3, cat)}
               </span>
               {partnerBadge(listing) && (
                 <span className="mr-2 inline-block rounded-full bg-ocean px-3 py-1 text-[0.68rem] font-bold uppercase tracking-wide backdrop-blur">
-                  {partnerBadge(listing)}
+                  {partnerBadge(listing) === "Verified & bookable" ? tcard("verified") : partnerBadge(listing)}
                 </span>
               )}
               {listing.claimed && (
@@ -149,7 +164,7 @@ export default async function ListingPage({ params }: { params: { slug: string }
                 <p className="m-0 mt-2 flex flex-wrap gap-2">
                   {memberOf.map((r) => (
                     <Link key={r.slug} href={`/routes/${r.slug}`} className="rounded-full bg-white/15 px-3 py-1 text-[0.75rem] font-semibold text-white no-underline backdrop-blur hover:bg-white/25">
-                      Member of {r.name}
+                      {t("memberOf", { name: r.name })}
                     </Link>
                   ))}
                 </p>
@@ -161,11 +176,10 @@ export default async function ListingPage({ params }: { params: { slug: string }
         <div className="mx-auto max-w-[1120px] px-5 py-14">
           {isExample && (
             <div className="mb-8 rounded-xl border border-dashed border-clay bg-[#fff6e9] px-4 py-3 text-[0.9rem] text-ink-soft">
-              This is an <strong>example listing</strong> shown for layout purposes — real {BRAND.name}
-              partners appear here once published.{" "}
-              <Link href="/list-your-business" className="whitespace-nowrap font-semibold text-clay no-underline">
-                List your business →
-              </Link>
+              {t.rich("example", { b: (c) => <strong>{c}</strong>, brand: BRAND.name })}{" "}
+              <NextLink href="/list-your-business" className="whitespace-nowrap font-semibold text-clay no-underline">
+                {tdir("listBusiness")}
+              </NextLink>
             </div>
           )}
 
@@ -174,20 +188,20 @@ export default async function ListingPage({ params }: { params: { slug: string }
               <p className="text-[1.12rem] leading-relaxed text-ink-soft">
                 {listing.desc ||
                   (IS_ZATOURS
-                    ? `${listing.name} is listed in the ZAtours directory of places to stay and things to do in South Africa.`
-                    : `${listing.name} is part of the Route22 directory of places to stay and things to do along the Elephant Coast.`)}
+                    ? t("descZatours", { name: listing.name })
+                    : t("descRoute22", { name: listing.name }))}
               </p>
 
               {/* Map location is a paid perk (Premium / Featured). */}
               {listing.lat && listing.lng && !isFreeTier(listing.tier) && (
                 <div className="mt-9">
-                  <h2 className="mb-3 text-[1.1rem]">Location</h2>
+                  <h2 className="mb-3 text-[1.1rem]">{t("location")}</h2>
                   <ListingMap lat={listing.lat} lng={listing.lng} name={listing.name} />
                 </div>
               )}
 
               <div className="mt-9">
-                <h2 className="mb-3 text-[1.1rem]">Share this listing</h2>
+                <h2 className="mb-3 text-[1.1rem]">{t("share")}</h2>
                 <ShareButtons url={url} title={listing.name} summary={listing.desc} />
               </div>
 
@@ -198,13 +212,13 @@ export default async function ListingPage({ params }: { params: { slug: string }
               )}
 
               <div className="mt-12 rounded-xl2 border border-line bg-sand p-6">
-                <h3 id="enquire" className="mb-1 text-[1.25rem]">Enquire with {listing.name}</h3>
+                <h3 id="enquire" className="mb-1 text-[1.25rem]">{t("enquireWith", { name: listing.name })}</h3>
                 <p className="mb-0 text-[0.95rem] text-ink-soft">
                   {listing.verified
-                    ? "Verified operator — your enquiry goes straight into their OpDesk bookings inbox."
-                    : `Send your dates and questions and ${listing.name} will reply by email.`}
+                    ? t("verifiedNote")
+                    : t("replyNote", { name: listing.name })}
                   {IS_ZATOURS &&
-                    " ZAtours is a directory, not a tour operator — you deal with the business directly."}
+                    ` ${t("directoryNote")}`}
                 </p>
                 {!isExample && <ListingEnquiryForm slug={listing.slug} name={listing.name} />}
                 <div className="mt-6 flex flex-wrap gap-3">
@@ -212,7 +226,7 @@ export default async function ListingPage({ params }: { params: { slug: string }
                     href={BRAND.directoryHref}
                     className="rounded-full border-2 border-bush px-5 py-2.5 font-semibold text-bush no-underline hover:bg-bush hover:text-white"
                   >
-                    Back to the directory
+                    {t("back")}
                   </Link>
                 </div>
                 {!isExample && isFreeTier(listing.tier) ? (
@@ -222,13 +236,13 @@ export default async function ListingPage({ params }: { params: { slug: string }
                 ) : (
                   !listing.claimed && (
                     <p className="mb-0 mt-5 text-[0.8rem]">
-                      <Link
+                      <NextLink
                         href={`/claim?slug=${listing.slug}`}
                         rel="nofollow"
                         className="text-ink-soft underline decoration-line underline-offset-2 hover:text-clay"
                       >
-                        Is this your business? Claim it
-                      </Link>
+                        {t("claimIt")}
+                      </NextLink>
                     </p>
                   )
                 )}
@@ -238,26 +252,20 @@ export default async function ListingPage({ params }: { params: { slug: string }
             <aside className="md:pt-1">
               <div className="rounded-xl2 border border-line bg-paper p-5 shadow-card">
                 <h3 className="mb-3 text-[0.8rem] uppercase tracking-[1.5px] text-bush">
-                  Quick facts
+                  {t("quickFacts")}
                 </h3>
                 <dl className="m-0">
                   <div className="mb-3 border-b border-line pb-3">
                     <dt className="text-[0.72rem] font-bold uppercase tracking-wide text-ink-soft">
-                      Category
+                      {t("category")}
                     </dt>
-                    <dd className="m-0 text-[0.95rem] text-ink">{categoryLabels(listing)}</dd>
+                    <dd className="m-0 text-[0.95rem] text-ink">{categoryLabels(listing, 3, cat)}</dd>
                   </div>
-                  <div className="mb-3 border-b border-line pb-3">
+                  <div className="mb-0">
                     <dt className="text-[0.72rem] font-bold uppercase tracking-wide text-ink-soft">
-                      Location
+                      {t("location")}
                     </dt>
                     <dd className="m-0 text-[0.95rem] text-ink">{listing.location}</dd>
-                  </div>
-                  <div className="mb-3 last:border-0 last:pb-0">
-                    <dt className="text-[0.72rem] font-bold uppercase tracking-wide text-ink-soft">
-                      Tier
-                    </dt>
-                    <dd className="m-0 text-[0.95rem] capitalize text-ink">{listing.tier}</dd>
                   </div>
                 </dl>
               </div>
@@ -265,7 +273,7 @@ export default async function ListingPage({ params }: { params: { slug: string }
               {(listing.phone || listing.websiteUrl) && (
                 <div className="mt-4 rounded-xl2 border border-line bg-paper p-5 shadow-card">
                   <h3 className="mb-3 text-[0.8rem] uppercase tracking-[1.5px] text-bush">
-                    Contact
+                    {t("contact")}
                   </h3>
                   <div className="flex flex-col gap-2">
                     {listing.phone && (
@@ -283,7 +291,7 @@ export default async function ListingPage({ params }: { params: { slug: string }
                         rel="noopener noreferrer"
                         className="text-[0.9rem] font-semibold text-clay no-underline"
                       >
-                        Visit website ↗
+                        {t("website")}
                       </a>
                     )}
                   </div>
@@ -294,7 +302,7 @@ export default async function ListingPage({ params }: { params: { slug: string }
 
           {nearby.length > 0 && (
             <div className="mt-16 border-t border-line pt-10">
-              <h2 className="mb-5 text-[1.4rem]">{BRAND.moreHeading}</h2>
+              <h2 className="mb-5 text-[1.4rem]">{IS_ZATOURS ? t("more") : t("moreRoute")}</h2>
               <div className="grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-4">
                 {nearby.map((l) => (
                   <Link

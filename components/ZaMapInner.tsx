@@ -2,8 +2,9 @@
 
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
+import { useLocale, useTranslations } from "next-intl";
 import { TILES } from "@/lib/tiles";
-import { COUNTRIES, places, placeTypeLabel, type PlaceType } from "@/lib/places";
+import { COUNTRIES, places, type PlaceType } from "@/lib/places";
 import { categoryLabels, type Listing } from "@/lib/data";
 
 const iconCache = new Map<string, L.Icon | L.DivIcon>();
@@ -31,6 +32,10 @@ export default function ZaMapInner({
   layers: MapLayers;
   route22Url: string;
 }) {
+  const t = useTranslations("Map");
+  const locale = useLocale();
+  const prefix = locale === "en" ? "" : `/${locale}`; // Leaflet popups render outside the router
+  const tc = useTranslations("Categories");
   const shownPlaces = places.filter((p) =>
     p.type === "heritage_site" ? layers.heritage : layers.parks
   );
@@ -48,7 +53,7 @@ export default function ZaMapInner({
         <Marker key={p.id} position={[p.lat, p.lng]} icon={imgIcon(ICON[p.type], p.type === "heritage_site" ? 30 : 28)}>
           <Popup>
             <span style={{ fontSize: "0.7rem", textTransform: "uppercase", letterSpacing: 0.5, color: "#9a3412", fontWeight: 700 }}>
-              {placeTypeLabel[p.type]}
+              {t(p.type)}
             </span>
             <br />
             <strong>{p.name}</strong>
@@ -62,11 +67,11 @@ export default function ZaMapInner({
       {/* Route22 — the Elephant Coast guide (sister site) */}
       <Marker position={[-27.55, 32.35]} icon={imgIcon("/route22-icon.png", 34)}>
         <Popup>
-          <strong>Route22 — Elephant Coast</strong>
+          <strong>{t("r22Title")}</strong>
           <p style={{ margin: "6px 0" , fontSize: "0.85rem" }}>
-            The R22 from Hluhluwe to Kosi Bay: parks, beaches and itineraries.
+            {t("r22Body")}
           </p>
-          <a href={route22Url}>Plan the route ↗</a>
+          <a href={route22Url}>{t("planRoute")}</a>
         </Popup>
       </Marker>
 
@@ -75,14 +80,14 @@ export default function ZaMapInner({
           <Marker key={l.id} position={[l.lat!, l.lng!]} icon={imgIcon("/za/mark.svg", l.tier === "featured" ? 40 : 34)}>
             <Popup>
               <span style={{ fontSize: "0.7rem", textTransform: "uppercase", letterSpacing: 0.5, color: "#0e7490", fontWeight: 700 }}>
-                {categoryLabels(l, 2)}
+                {categoryLabels(l, 2, (c) => tc(c))}
               </span>
               <br />
               <strong>{l.name}</strong>
               <br />
               <span style={{ fontSize: "0.75rem", color: "#57534e" }}>{l.location}</span>
               <p style={{ margin: "6px 0 0" }}>
-                <a href={`/listings/${l.slug}`}>View &amp; enquire →</a>
+                <a href={`${prefix}/listings/${l.slug}`}>{t("viewEnquire")}</a>
               </p>
             </Popup>
           </Marker>

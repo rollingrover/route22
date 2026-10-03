@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Category, categoryLabel, hasCategory, Listing, listingCategories } from "@/lib/data";
 import { CommunityCard, ListingCard } from "./ListingCard";
 import { ZA_CATEGORY_ICON } from "@/lib/za-assets";
@@ -14,6 +15,8 @@ export default function ZaDirectory({
   listings: Listing[];
   isExample: boolean;
 }) {
+  const t = useTranslations("Directory");
+  const tc = useTranslations("Categories");
   const [q, setQ] = useState("");
   const [cat, setCat] = useState<"all" | Category>("all");
   const [prov, setProv] = useState("all");
@@ -24,7 +27,7 @@ export default function ZaDirectory({
     listings.forEach((l) => listingCategories(l).forEach((c) => counts.set(c, (counts.get(c) ?? 0) + 1)));
     return (Object.keys(categoryLabel) as Category[])
       .filter((c) => counts.has(c))
-      .map((c) => ({ key: c, label: categoryLabel[c], count: counts.get(c) ?? 0 }));
+      .map((c) => ({ key: c, label: tc(c), count: counts.get(c) ?? 0 }));
   }, [listings]);
 
   const provinces = useMemo(
@@ -47,7 +50,7 @@ export default function ZaDirectory({
         (prov === "all" || l.province === prov) &&
         (route === "all" || Boolean(l.routes?.some((r) => r.slug === route))) &&
         (!needle ||
-          [l.name, l.location, l.province, l.desc, ...listingCategories(l).map((c) => categoryLabel[c])]
+          [l.name, l.location, l.province, l.desc, ...listingCategories(l).map((c) => tc(c)), ...listingCategories(l).map((c) => categoryLabel[c])]
             .filter(Boolean)
             .some((v) => String(v).toLowerCase().includes(needle)))
     );
@@ -61,19 +64,16 @@ export default function ZaDirectory({
       <div className="mx-auto max-w-[1120px] px-5">
         <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
           <div className="max-w-[640px]">
-            <h2 className="mb-1">Browse the directory</h2>
-            <p className="m-0 text-ink-soft">
-              Places to stay, tours, safaris, transfers and experiences — contact each business
-              directly.
-            </p>
+            <h2 className="mb-1">{t("title")}</h2>
+            <p className="m-0 text-ink-soft">{t("lead")}</p>
           </div>
         </div>
 
         {isExample && (
           <div className="mb-5 rounded-xl border border-dashed border-clay bg-sand-2 px-4 py-3 text-[0.9rem] text-ink-soft">
-            Showing <strong>example listings</strong> while the directory fills up.{" "}
+            {t.rich("example", { b: (c) => <strong>{c}</strong> })}{" "}
             <a href="/list-your-business" className="whitespace-nowrap font-semibold text-clay no-underline">
-              List your business →
+              {t("listBusiness")}
             </a>
           </div>
         )}
@@ -83,12 +83,12 @@ export default function ZaDirectory({
             <span aria-hidden="true" className="text-ink-soft">
               ⌕
             </span>
-            <span className="sr-only">Search</span>
+            <span className="sr-only">{t("searchLabel")}</span>
             <input
               type="search"
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              placeholder="Search by name, town or activity"
+              placeholder={t("searchPlaceholder")}
               className="w-full border-0 bg-transparent py-3 text-ink outline-none"
             />
           </label>
@@ -100,7 +100,7 @@ export default function ZaDirectory({
                 onChange={(e) => setRoute(e.target.value)}
                 className="w-full rounded-[10px] border border-line bg-sand px-3 py-3 text-ink sm:w-auto"
               >
-                <option value="all">All routes</option>
+                <option value="all">{t("allRoutes")}</option>
                 {routeOptions.map(([slug, name]) => (
                   <option key={slug} value={slug}>{name}</option>
                 ))}
@@ -115,7 +115,7 @@ export default function ZaDirectory({
                 onChange={(e) => setProv(e.target.value)}
                 className="w-full rounded-[10px] border border-line bg-sand px-3 py-3 text-ink sm:w-auto"
               >
-                <option value="all">All provinces</option>
+                <option value="all">{t("allProvinces")}</option>
                 {provinces.map((p) => (
                   <option key={p} value={p}>
                     {p}
@@ -153,17 +153,16 @@ export default function ZaDirectory({
         </div>
         {cat !== "all" && (
           <p className="-mt-4 mb-6 text-[0.85rem] text-ink-soft">
-            Showing {categoryLabel[cat]} ·{" "}
+            {t("showing", { category: tc(cat) })} ·{" "}
             <button onClick={() => setCat("all")} className="font-semibold text-clay underline">
-              show all
+              {t("showAll")}
             </button>
           </p>
         )}
 
         {filtered.length === 0 ? (
           <p className="rounded-xl2 border border-line bg-paper p-6 text-ink-soft">
-            Nothing matches that yet — try a different search, or check back soon as new businesses
-            are added.
+            {t("none")}
           </p>
         ) : (
           <>
@@ -174,10 +173,8 @@ export default function ZaDirectory({
             </div>
             {community.length > 0 && (
               <div className="mt-12 border-t border-line pt-10">
-                <h3 className="mb-1.5 text-[1.15rem]">More businesses</h3>
-                <p className="mb-5 max-w-[65ch] text-[0.88rem] text-ink-soft">
-                  Free directory entries for businesses that haven&apos;t set up a full page yet.
-                </p>
+                <h3 className="mb-1.5 text-[1.15rem]">{t("more")}</h3>
+                <p className="mb-5 max-w-[65ch] text-[0.88rem] text-ink-soft">{t("moreLead")}</p>
                 <div className="grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-3">
                   {community.map((l) => (
                     <CommunityCard key={l.id} l={l} showProvince />

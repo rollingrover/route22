@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { localeAlternates } from "@/lib/alternates";
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -12,16 +14,19 @@ import { absoluteUrl } from "@/lib/site";
 
 export const revalidate = 300;
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { slug: string; locale: string } }): Promise<Metadata> {
   const route = await getRoute(params.slug);
   if (!route) return { title: `Not found — ${BRAND.fullName}` };
-  const title = `${route.name} — ${route.kind === "association" ? "tourism association" : "tourism route"} | ${BRAND.name}`;
+  const tm = await getTranslations({ locale: params.locale, namespace: "Routes" });
+  const title = `${route.name} — ${route.kind === "association" ? tm("association") : tm("route")} | ${BRAND.name}`;
   const description = route.summary || `${route.name}: the route and its member businesses on ${BRAND.name}.`;
   const url = absoluteUrl(`/routes/${route.slug}`);
-  return { title, description, alternates: { canonical: url }, openGraph: { title, description, url, type: "website" } };
+  return { title, description, alternates: localeAlternates(`/routes/${route.slug}`, params.locale), openGraph: { title, description, url, type: "website" } };
 }
 
-export default async function RoutePage({ params }: { params: { slug: string } }) {
+export default async function RoutePage({ params }: { params: { slug: string; locale: string } }) {
+  setRequestLocale(params.locale);
+  const t = await getTranslations("Routes");
   const route = await getRoute(params.slug);
   if (!route) notFound();
   const { listings, isExample } = await getListings();
@@ -40,7 +45,7 @@ export default async function RoutePage({ params }: { params: { slug: string } }
         <section className="bg-bush-dk py-14 text-white">
           <div className="mx-auto max-w-[1120px] px-5">
             <p className="mb-2 text-[0.8rem]">
-              <Link href="/routes" className="text-white/80 no-underline hover:text-white">Routes</Link>
+              <Link href="/routes" className="text-white/80 no-underline hover:text-white">{t("crumb")}</Link>
               <span className="opacity-60"> / </span>
               <span className="text-white/80">{route.name}</span>
             </p>
@@ -51,7 +56,7 @@ export default async function RoutePage({ params }: { params: { slug: string } }
               )}
               <div>
                 <p className="m-0 text-[0.75rem] font-bold uppercase tracking-[2px] text-gold">
-                  {route.kind === "association" ? "Tourism association" : "Tourism route"}
+                  {route.kind === "association" ? t("association") : t("route")}
                   {route.region ? ` · ${route.region}` : ""}
                 </p>
                 <h1 className="m-0 text-[clamp(1.9rem,4.5vw,2.8rem)] text-white">{route.name}</h1>
@@ -60,7 +65,7 @@ export default async function RoutePage({ params }: { params: { slug: string } }
             {route.summary && <p className="mt-4 max-w-[62ch] text-white/85">{route.summary}</p>}
             {route.websiteUrl && (
               <a href={route.websiteUrl} target="_blank" rel="noopener noreferrer" className="mt-4 inline-block font-semibold text-gold">
-                Official website ↗
+                {t("website")}
               </a>
             )}
           </div>
@@ -72,16 +77,16 @@ export default async function RoutePage({ params }: { params: { slug: string } }
           )}
           {(pinned.length > 0 || route.path.length > 1) && (
             <div className="mb-12">
-              <h2 className="mb-4 text-[1.4rem]">On the map</h2>
+              <h2 className="mb-4 text-[1.4rem]">{t("onMap")}</h2>
               <RouteHubMap path={route.path} members={pinned} />
             </div>
           )}
 
           <h2 className="mb-5 text-[1.4rem]">
-            Member businesses <span className="text-ink-soft">({members.length})</span>
+            {t("memberBusinesses")} <span className="text-ink-soft">({members.length})</span>
           </h2>
           {members.length === 0 ? (
-            <p className="text-ink-soft">Member businesses are being added.</p>
+            <p className="text-ink-soft">{t("beingAdded")}</p>
           ) : (
             <>
               <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-[18px]">

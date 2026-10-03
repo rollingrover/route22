@@ -298,8 +298,12 @@ export function listingCategories(l: { category: Category; categories?: Category
 export function hasCategory(l: { category: Category; categories?: Category[] }, c: Category): boolean {
   return listingCategories(l).includes(c);
 }
-export function categoryLabels(l: { category: Category; categories?: Category[] }, max = 3): string {
-  return listingCategories(l).slice(0, max).map((c) => categoryLabel[c]).join(" · ");
+export function categoryLabels(
+  l: { category: Category; categories?: Category[] },
+  max = 3,
+  label: (c: Category) => string = (c) => categoryLabel[c]
+): string {
+  return listingCategories(l).slice(0, max).map(label).join(" · ");
 }
 
 export type Listing = {

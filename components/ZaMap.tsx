@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import type { Listing } from "@/lib/data";
 import { places } from "@/lib/places";
 import type { MapLayers } from "./ZaMapInner";
@@ -19,6 +20,7 @@ const ZaMapInner = dynamic(() => import("./ZaMapInner"), {
 // plus business pins. Pins are a paid perk — only Premium / Featured listings
 // with a location appear (free listings never show on the map).
 export default function ZaMap({ listings, route22Url }: { listings: Listing[]; route22Url: string }) {
+  const t = useTranslations("Map");
   const [layers, setLayers] = useState<MapLayers>({ parks: true, heritage: true, businesses: true });
   const pinned = listings.filter(
     (l) => (l.tier === "premium" || l.tier === "featured") && typeof l.lat === "number" && typeof l.lng === "number"
@@ -49,23 +51,20 @@ export default function ZaMap({ listings, route22Url }: { listings: Listing[]; r
       <div className="mx-auto max-w-[1120px] px-5">
         <div className="mb-5 flex flex-wrap items-end justify-between gap-4">
           <div className="max-w-[640px]">
-            <h2 className="mb-1">Explore Southern &amp; East Africa</h2>
-            <p className="m-0 text-ink-soft">
-              National parks, game reserves and World Heritage Sites — from the Cape to Kenya — with
-              the businesses near them. Listings start in South Africa; zoom in to explore.
-            </p>
+            <h2 className="mb-1">{t("title")}</h2>
+            <p className="m-0 text-ink-soft">{t("lead")}</p>
           </div>
           <div className="flex flex-wrap gap-2">
-            {toggle("parks", "Parks & reserves", parks, "/za/marker-park.svg")}
-            {toggle("heritage", "World Heritage", heritage, "/za/marker-heritage.svg")}
-            {toggle("businesses", "Businesses", pinned.length, "/za/mark.svg")}
+            {toggle("parks", t("parks"), parks, "/za/marker-park.svg")}
+            {toggle("heritage", t("heritage"), heritage, "/za/marker-heritage.svg")}
+            {toggle("businesses", t("businesses"), pinned.length, "/za/mark.svg")}
           </div>
         </div>
         <ZaMapInner listings={pinned} layers={layers} route22Url={route22Url} />
         <p className="mb-0 mt-3 text-[0.8rem] text-ink-soft">
-          Locations are approximate. Run a business?{" "}
+          {t("note")}{" "}
           <a href="/list-your-business" className="font-semibold text-clay">
-            Premium and Featured listings get a pin on this map →
+            {t("pinCta")}
           </a>
         </p>
       </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import ConsentCheckbox from "./ConsentCheckbox";
 
 type Status = "idle" | "sending" | "ok" | "error";
@@ -10,6 +11,7 @@ const inputCls =
 const labelCls = "flex flex-col gap-1.5 text-[0.85rem] font-semibold text-ink-soft";
 
 export default function ListingEnquiryForm({ slug, name }: { slug: string; name: string }) {
+  const t = useTranslations("Enquiry");
   const [status, setStatus] = useState<Status>("idle");
   const [msg, setMsg] = useState("");
   const [consent, setConsent] = useState(false);
@@ -33,16 +35,16 @@ export default function ListingEnquiryForm({ slug, name }: { slug: string; name:
       const json = await res.json();
       if (res.ok && json.ok) {
         setStatus("ok");
-        setMsg(`Sent — ${name} will reply to you by email.`);
+        setMsg(t("sent", { name }));
         form.reset();
         setConsent(false);
       } else {
         setStatus("error");
-        setMsg(json.error || "Something went wrong. Please try again.");
+        setMsg(json.error || t("error"));
       }
     } catch {
       setStatus("error");
-      setMsg("Network error. Please try again.");
+      setMsg(t("network"));
     }
   }
 
@@ -57,45 +59,45 @@ export default function ListingEnquiryForm({ slug, name }: { slug: string; name:
       </div>
       <div className="mb-3.5 grid gap-3.5 sm:grid-cols-2">
         <label className={labelCls}>
-          Your name
+          {t("name")}
           <input name="name" required maxLength={120} className={inputCls} />
         </label>
         <label className={labelCls}>
-          Email
+          {t("email")}
           <input name="email" type="email" required className={inputCls} />
         </label>
         <label className={labelCls}>
-          Phone (optional)
+          {t("phone")}
           <input name="phone" type="tel" className={inputCls} />
         </label>
         <label className={labelCls}>
-          Guests
+          {t("guests")}
           <input name="guests" type="number" min={1} max={500} className={inputCls} />
         </label>
         <label className={labelCls}>
-          From
+          {t("from")}
           <input name="dateFrom" type="date" min={today} className={inputCls} />
         </label>
         <label className={labelCls}>
-          To
+          {t("to")}
           <input name="dateTo" type="date" min={today} className={inputCls} />
         </label>
       </div>
       <label className={`${labelCls} mb-3.5`}>
-        Message
+        {t("message")}
         <textarea name="message" rows={4} maxLength={3000} className={inputCls} />
       </label>
       <ConsentCheckbox
         checked={consent}
         onChange={setConsent}
-        purpose={`to send my enquiry to ${name} so they can reply to me`}
+        purpose={t("purpose", { name })}
       />
       <button
         type="submit"
         disabled={status === "sending"}
         className="rounded-full bg-clay px-6 py-3 font-semibold text-white hover:bg-clay-dk disabled:opacity-60"
       >
-        {status === "sending" ? "Sending…" : "Send enquiry"}
+        {status === "sending" ? t("sending") : t("send")}
       </button>
       {msg && (
         <p

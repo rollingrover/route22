@@ -1,5 +1,7 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 // POPIA consent checkbox, shared by every form that collects personal info.
 export default function ConsentCheckbox({
   checked,
@@ -10,6 +12,7 @@ export default function ConsentCheckbox({
   onChange: (v: boolean) => void;
   purpose: string;
 }) {
+  const t = useTranslations("Consent");
   return (
     <label className="mb-4 flex items-start gap-2.5 text-[0.82rem] leading-snug text-ink-soft">
       <input
@@ -20,11 +23,14 @@ export default function ConsentCheckbox({
         className="mt-0.5 h-4 w-4 shrink-0 accent-clay"
       />
       <span>
-        I agree that my details may be used {purpose}, as described in the{" "}
-        <a href="/privacy" target="_blank" className="font-semibold text-clay underline">
-          privacy notice
-        </a>
-        .
+        {t.rich("text", {
+          purpose,
+          link: (chunks) => (
+            <a href="/privacy" target="_blank" className="font-semibold text-clay underline">
+              {chunks}
+            </a>
+          ),
+        })}
       </span>
     </label>
   );

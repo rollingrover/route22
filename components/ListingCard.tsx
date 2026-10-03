@@ -1,5 +1,8 @@
-import Link from "next/link";
-import { categoryHue, categoryLabel, categoryLabels, isFreeTier, Listing, partnerBadge } from "@/lib/data";
+"use client";
+
+import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
+import { categoryHue, categoryLabels, isFreeTier, Listing, partnerBadge, type Category } from "@/lib/data";
 import OwnerLink from "./OwnerLink";
 import { IS_ZATOURS } from "@/lib/site";
 import { ZA_CATEGORY_ICON } from "@/lib/za-assets";
@@ -7,7 +10,16 @@ import { ZA_CATEGORY_ICON } from "@/lib/za-assets";
 // Card for listings that have their own page (basic / premium / featured).
 // Free (basic) cards get a quiet owner link under the card body — outside the
 // card's own <Link>, since anchors can't nest.
+function useCardText() {
+  const t = useTranslations("Card");
+  const tc = useTranslations("Categories");
+  const badge = (b: string | null) =>
+    b === "Verified & bookable" ? t("verified") : b === "Live availability" ? t("liveAvailability") : b;
+  return { t, cat: (c: Category) => tc(c), badge };
+}
+
 export function ListingCard({ l, showProvince = false }: { l: Listing; showProvince?: boolean }) {
+  const { t, cat, badge } = useCardText();
   const place =
     showProvince && l.province && l.province !== l.location
       ? `${l.location} · ${l.province}`
@@ -51,19 +63,19 @@ export function ListingCard({ l, showProvince = false }: { l: Listing; showProvi
                 l.tier === "featured" ? "bg-bush" : "bg-clay"
               }`}
             >
-              {l.tier}
+              {l.tier === "featured" ? t("featured") : t("premium")}
             </span>
           )}
           {(l.claimed || partnerBadge(l)) && (
             <div className="absolute right-2.5 top-2.5 flex flex-col items-end gap-1">
               {partnerBadge(l) && (
                 <span className="rounded-full bg-ocean px-2.5 py-1 text-[0.65rem] font-bold uppercase tracking-wide text-white backdrop-blur">
-                  {partnerBadge(l)}
+                  {badge(partnerBadge(l))}
                 </span>
               )}
               {l.claimed && (
                 <span className="rounded-full bg-black/35 px-2.5 py-1 text-[0.65rem] font-bold uppercase tracking-wide text-white backdrop-blur">
-                  Claimed
+                  {t("claimed")}
                 </span>
               )}
             </div>
@@ -71,7 +83,7 @@ export function ListingCard({ l, showProvince = false }: { l: Listing; showProvi
         </div>
         <div className="flex flex-1 flex-col gap-1.5 p-4">
           <span className="text-[0.7rem] font-bold uppercase tracking-wide text-ocean">
-            {categoryLabels(l, 2)}
+            {categoryLabels(l, 2, cat)}
           </span>
           <h3 className="m-0 text-[1.1rem] text-ink group-hover:text-clay">{l.name}</h3>
           <span className="text-[0.82rem] text-ink-soft">{place}</span>
@@ -81,7 +93,7 @@ export function ListingCard({ l, showProvince = false }: { l: Listing; showProvi
               l.tier === "basic" ? "text-ink-soft" : "text-clay"
             }`}
           >
-            {l.tier === "basic" ? "View details →" : "View & enquire →"}
+            {l.tier === "basic" ? t("viewDetails") : t("viewEnquire")}
           </span>
         </div>
       </Link>
@@ -96,6 +108,7 @@ export function ListingCard({ l, showProvince = false }: { l: Listing; showProvi
 
 // Free "community" entry — no page of its own.
 export function CommunityCard({ l, showProvince = false }: { l: Listing; showProvince?: boolean }) {
+  const { cat } = useCardText();
   const place =
     showProvince && l.province && l.province !== l.location
       ? `${l.location} · ${l.province}`
@@ -112,7 +125,7 @@ export function CommunityCard({ l, showProvince = false }: { l: Listing; showPro
       />
       <div className="flex flex-col gap-1 p-3.5">
         <span className="text-[0.68rem] font-bold uppercase tracking-wide text-ink-soft">
-          {categoryLabels(l, 2)}
+          {categoryLabels(l, 2, cat)}
         </span>
         <h4 className="m-0 text-[0.95rem] text-ink">{l.name}</h4>
         <span className="text-[0.78rem] text-ink-soft">{place}</span>

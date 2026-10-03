@@ -1,10 +1,17 @@
+"use client";
+
 import Image from "next/image";
 import { BRAND } from "@/lib/brand";
 import { IS_ZATOURS, ZATOURS_URL } from "@/lib/site";
 import ZaLogo from "./ZaLogo";
+import { useTranslations } from "next-intl";
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const t = useTranslations("Footer");
+  const tn = useTranslations("Nav");
+  const label = (l: { label: string; key?: string }) =>
+    !l.key ? l.label : l.key === "browse" ? tn("browse") : t(l.key);
   // Cross-link the sister site (only when its URL is known).
   // (ZAtours already links Route22 under "Explore".)
   const sister = IS_ZATOURS
@@ -28,23 +35,23 @@ export default function Footer() {
               className="h-14 w-auto brightness-0 invert"
             />
           )}
-          <p className="mt-3.5 max-w-[40ch] text-[0.9rem]">{BRAND.footerBlurb}</p>
+          <p className="mt-3.5 max-w-[40ch] text-[0.9rem]">{IS_ZATOURS ? t("blurbZatours") : BRAND.footerBlurb}</p>
         </div>
         <div>
-          <h4 className="font-sans text-[0.8rem] uppercase tracking-[1.5px] text-white">Explore</h4>
+          <h4 className="font-sans text-[0.8rem] uppercase tracking-[1.5px] text-white">{t("explore")}</h4>
           {BRAND.footerExplore.map((l) => (
             <a key={l.href} href={l.href} className="mb-2 block text-[0.9rem] no-underline hover:text-clay">
-              {l.label}
+              {label(l)}
             </a>
           ))}
         </div>
         <div>
           <h4 className="font-sans text-[0.8rem] uppercase tracking-[1.5px] text-white">
-            For business
+            {t("forBusiness")}
           </h4>
           {[
-            ["/list-your-business", "List your business"],
-            ["/list-your-business#lead", "Plans & pricing"],
+            ["/list-your-business", tn("listBusiness")],
+            ["/list-your-business#lead", t("plans")],
           ].map(([href, label]) => (
             <a key={label} href={href} className="mb-2 block text-[0.9rem] no-underline hover:text-clay">
               {label}
@@ -59,12 +66,12 @@ export default function Footer() {
       </div>
       <div className="mx-auto mt-8 flex max-w-[1120px] flex-wrap justify-between gap-2.5 border-t border-foot-line px-5 pt-5 text-[0.8rem]">
         <span>
-          © {year} {BRAND.fullName}, a trading line of OpDesk (Pty) Ltd ·{" "}
+          © {year} {t("tradingLine", { brand: BRAND.fullName })} ·{" "}
           <a href="/privacy" className="no-underline hover:text-clay">
-            Privacy
+            {t("privacy")}
           </a>
         </span>
-        <span>{BRAND.regionLine}</span>
+        <span>{IS_ZATOURS ? t("regionLine") : BRAND.regionLine}</span>
       </div>
     </footer>
   );

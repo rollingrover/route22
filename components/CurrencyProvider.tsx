@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { getSupabase } from "@/lib/supabase";
 import { CURRENCIES, type CurrencyCode } from "@/lib/currency";
 
@@ -78,9 +79,10 @@ export function Approx({ zar, className = "" }: { zar: number; className?: strin
 
 export function CurrencySwitcher({ className = "" }: { className?: string }) {
   const { currency, setCurrency } = useCurrency();
+  const t = useTranslations("Nav");
   return (
     <label className={`flex items-center ${className}`}>
-      <span className="sr-only">Display currency</span>
+      <span className="sr-only">{t("currency")}</span>
       <select
         value={currency}
         onChange={(e) => setCurrency(e.target.value as CurrencyCode)}

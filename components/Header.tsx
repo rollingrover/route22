@@ -2,7 +2,10 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import NextLink from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
+import LanguageSwitcher from "./LanguageSwitcher";
 import { BRAND } from "@/lib/brand";
 import { IS_ZATOURS } from "@/lib/site";
 import ZaLogo from "./ZaLogo";
@@ -10,6 +13,8 @@ import { CurrencySwitcher } from "./CurrencyProvider";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const t = useTranslations("Nav");
+  const label = (l: { label: string; key?: string }) => (l.key ? t(l.key) : l.label);
 
   return (
     <header className="sticky top-0 z-[1000] flex items-center justify-between gap-4 border-b border-line bg-paper/90 px-5 py-2 backdrop-blur">
@@ -38,13 +43,14 @@ export default function Header() {
         )}
       </Link>
 
-      {/* Route22 has 8 nav links + currency, so it collapses to the menu below 1360px;
+      {/* Both sites collapse to the menu below 1360px: nav links + language +
+          currency selectors don’t fit narrower (German labels are long).
           ZAtours (3 links) only below md. Class strings are static so
           Tailwind keeps them. */}
       <nav
         className={`${open ? "flex" : "hidden"} absolute left-0 right-0 top-[60px] flex-col gap-4 border-b border-line bg-paper px-5 py-4 ${
           IS_ZATOURS
-            ? "md:static md:flex md:flex-row md:items-center md:gap-6 md:border-0 md:bg-transparent md:p-0"
+            ? "min-[1360px]:static min-[1360px]:flex min-[1360px]:flex-row min-[1360px]:items-center min-[1360px]:gap-5 min-[1360px]:border-0 min-[1360px]:bg-transparent min-[1360px]:p-0"
             : "min-[1360px]:static min-[1360px]:flex min-[1360px]:flex-row min-[1360px]:items-center min-[1360px]:gap-4 min-[1360px]:border-0 min-[1360px]:bg-transparent min-[1360px]:p-0"
         }`}
       >
@@ -55,7 +61,7 @@ export default function Header() {
               href={l.href}
               className="whitespace-nowrap text-[0.9rem] font-medium text-ink-soft no-underline hover:text-clay"
             >
-              {l.label}
+              {label(l)}
             </a>
           ) : (
             <Link
@@ -64,12 +70,14 @@ export default function Header() {
               onClick={() => setOpen(false)}
               className="whitespace-nowrap text-[0.9rem] font-medium text-ink-soft no-underline hover:text-clay"
             >
-              {l.label}
+              {label(l)}
             </Link>
           )
         )}
+        <LanguageSwitcher />
         <CurrencySwitcher />
-        <Link
+        {/* English-only business page: plain link, never locale-prefixed. */}
+        <NextLink
           href="/list-your-business"
           onClick={() => setOpen(false)}
           className={
@@ -78,13 +86,13 @@ export default function Header() {
               : "whitespace-nowrap rounded-full bg-bush px-4 py-2 font-semibold text-white no-underline hover:bg-bush-dk"
           }
         >
-          List your business
-        </Link>
+          {t("listBusiness")}
+        </NextLink>
       </nav>
 
       <button
-        className={`cursor-pointer border-0 bg-transparent text-2xl text-ink ${IS_ZATOURS ? "md:hidden" : "min-[1360px]:hidden"}`}
-        aria-label="Menu"
+        className={`cursor-pointer border-0 bg-transparent text-2xl text-ink min-[1360px]:hidden`}
+        aria-label={t("menu")}
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
       >
